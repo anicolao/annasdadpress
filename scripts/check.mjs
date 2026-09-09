@@ -13,6 +13,7 @@ async function walk(dir) {
   return files;
 }
 const files = (await walk("dist")).filter((p) => p.endsWith(".html"));
+const base = (process.env.BASE_PATH || "").replace(/\/$/, "");
 const titles = new Set();
 let links = 0;
 for (const file of files) {
@@ -25,7 +26,7 @@ for (const file of files) {
   JSON.parse(html.match(/application\/ld\+json">(.*?)<\/script>/)[1]);
   for (const [, href] of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     if (!href.startsWith("/")) continue;
-    const target = path.join("dist", href.split("#")[0]);
+    const target = path.join("dist", href.slice(base.length).split("#")[0]);
     assert(
       await stat(target).catch(() => false),
       `Broken link in ${file}: ${href}`,
@@ -79,11 +80,18 @@ try {
         0,
         `${route} @ ${width}: ${JSON.stringify(results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })))}`,
       );
-      if (route === "/" && width !== 320)
+      if (route === "/" && width !== 320) {
+        await page.evaluate(async () => {
+          for (const img of document.images) {
+            img.loading = "eager";
+            await img.decode();
+          }
+        });
         await page.screenshot({
           path: `artifacts/home-${width}.png`,
           fullPage: true,
         });
+      }
     }
     console.log(
       `All ${files.length} pages passed layout and accessibility checks at ${width}px.`,

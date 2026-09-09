@@ -26,7 +26,7 @@ jobs:
       - run: npm test
         env:
           STATIC_ONLY: "1"
-        if: ${{ vars.BASE_PATH == '' }}
+          BASE_PATH: ${{ vars.BASE_PATH }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
