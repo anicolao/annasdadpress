@@ -48,6 +48,32 @@ export const books = [
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
     family: "guide",
     cover: "guide",
+    sampleSpreads: [
+      {
+        title: "See the pattern. Find the next step.",
+        description:
+          "An X-Wing example from Chapter 3: Advanced Pattern Recognition. Follow the highlighted candidates from the first deduction to the next placement.",
+        caption:
+          "Draft interior · Printed pages 82–83 · Layout and content may change before publication.",
+        pdf: "/assets/samples/sudoku-learners-guide-x-wing-sample.pdf",
+        pages: [
+          {
+            image: "guide-x-wing-82",
+            label: "Page 82 — Recognise the X-Wing",
+            alt: "Draft page 82: candidate 8 highlighted at the four corners of an X-Wing in rows 3 and 5, columns 5 and 6.",
+          },
+          {
+            image: "guide-x-wing-83",
+            label: "Page 83 — Eliminate and place",
+            alt: "Draft page 83: the X-Wing removes candidate 8 from row 2, column 6, leaving a green-highlighted 1.",
+          },
+        ],
+        explanation: [
+          "On page 82, candidate 8 has exactly two possible positions in each of rows 3 and 5: columns 5 and 6. These four positions form an X-Wing. The two rows must place their 8s in opposite corners, so each of those columns receives an 8 from the pattern.",
+          "On page 83, that means no other cell in columns 5 and 6 can contain an 8. Remove candidate 8 from row 2, column 6. Its candidates were 1 and 8; now only 1 remains. Place 1, then rescan the crossing row, column, and box.",
+        ],
+      },
+    ],
     description:
       "A complete course in seeing the logic. Learn the rules, understand the techniques, and build your confidence one well-explained step at a time.",
     bestFor:

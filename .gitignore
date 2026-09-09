@@ -5,3 +5,6 @@ dist/
 !.env.example
 .DS_Store
 artifacts/
+
+# Local manuscript reference; only selected sample pages are published.
+sample_covers/*.pdf

@@ -20,6 +20,7 @@ http
           css: "text/css",
           svg: "image/svg+xml",
           webp: "image/webp",
+          pdf: "application/pdf",
           png: "image/png",
           xml: "application/xml",
           txt: "text/plain",
