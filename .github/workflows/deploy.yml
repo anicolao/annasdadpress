@@ -41,3 +41,26 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+  https:
+    name: Verify and enforce HTTPS
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: ${{ vars.BASE_PATH == '' }}
+    timeout-minutes: 65
+    steps:
+      - name: Wait for the custom-domain certificate and enforce HTTPS
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent --show-error --head --max-time 15 https://annasdadpress.com/ > /dev/null 2>&1; then
+              gh api --method PUT "repos/$REPOSITORY/pages" -F https_enforced=true
+              echo "Custom-domain HTTPS is live and enforced."
+              exit 0
+            fi
+            echo "Waiting for GitHub's custom-domain certificate (attempt $attempt/60)."
+            sleep 60
+          done
+          echo "Certificate provisioning is still pending. Check GitHub Pages settings and rerun this workflow."
+          exit 1
