@@ -46,9 +46,9 @@ Configure DNS for the .com apex using GitHub Pages A records:
 
 Set `www` as a CNAME to `anicolao.github.io`. Set the GitHub Pages custom domain to `annasdadpress.com`, wait for the certificate, and enable HTTPS. Preserve unrelated records, especially mail and domain verification records. Verify the domain in GitHub account settings using GitHub’s supplied TXT challenge when available.
 
-For .ca, configure proxied DNS in Cloudflare and a 301 Single Redirect for both `annasdadpress.ca` and `www.annasdadpress.ca`. Target expression: `concat("https://annasdadpress.com", http.request.uri.path)` with query strings preserved. This keeps printed paths useful. Preserve any existing unrelated redirect rules. API tokens should have zone read, DNS edit, and redirect rules edit access for these domains and must never be committed.
+The .ca domain uses two active Cloudflare Page Rules: `annasdadpress.ca/*` and `www.annasdadpress.ca/*`, each forwarding permanently (301) to `https://annasdadpress.com/$1`. The wildcard preserves paths and query strings. Both hostnames have proxied A records pointing to the documentation address `192.0.2.1`; Cloudflare handles the redirect without contacting an origin. The supplied token supports DNS and Page Rules; the newer Rulesets API is not available with its current permissions. Preserve existing unrelated rules when updating these. API credentials live only in the ignored `.env` file and must never be committed.
 
-Official setup references: [GitHub custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site), [Cloudflare redirect API](https://developers.cloudflare.com/rules/url-forwarding/single-redirects/create-api/).
+Official setup references: [GitHub custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site), [Cloudflare Page Rules forwarding](https://developers.cloudflare.com/rules/page-rules/how-to/url-forwarding/).
 
 ## Publishing checklist
 
