@@ -1,0 +1,17 @@
+{
+  "name": "annas-dad-press",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "test": "node scripts/check.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "playwright": "^1.55.0",
+    "prettier": "^3.9.6",
+    "sharp": "^0.35.4"
+  }
+}

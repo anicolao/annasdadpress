@@ -1,0 +1,228 @@
+import { mkdir, rm, cp, writeFile } from "node:fs/promises";
+import sharp from "sharp";
+import { books, families } from "../src/catalog.mjs";
+const origin = "https://annasdadpress.com";
+const base = (process.env.BASE_PATH || "").replace(/\/$/, "");
+const url = (p) => base + p;
+const esc = (s) =>
+  String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll('"', "&quot;");
+await rm("dist", { recursive: true, force: true });
+await mkdir("dist/assets", { recursive: true });
+await cp("public", "dist", { recursive: true });
+for (const [i, name] of [
+  "guide",
+  "practice",
+  "start-here",
+  "candidates-done",
+].entries())
+  for (const w of [360, 720])
+    await sharp(
+      `sample_covers/ChatGPT Image Sep 9, 2026, 12_36_59 AM (${i + 1}).png`,
+    )
+      .resize(w)
+      .webp({ quality: 85 })
+      .toFile(`dist/assets/${name}-${w}.webp`);
+const mark =
+  '<span class="brand-mark" aria-hidden="true"><span>a</span><span>d</span><span>p</span><span>↗</span></span>';
+const link = (p, t, c = "") => `<a class="${c}" href="${url(p)}">${t}</a>`;
+const arrow = '<span aria-hidden="true">↗</span>';
+function cover(b, hero = false) {
+  return b.cover
+    ? `<img src="${url(`/assets/${b.cover}-720.webp`)}" srcset="${url(`/assets/${b.cover}-360.webp`)} 360w, ${url(`/assets/${b.cover}-720.webp`)} 720w" sizes="${hero ? "(max-width: 650px) 65vw, 330px" : "(max-width: 650px) 75vw, 280px"}" width="1024" height="1536" alt="${esc(b.title)} — concept cover" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'}>`
+    : `<div class="cover-placeholder"><span>THE SUDOKU<br>LEARNER’S LIBRARY</span><strong>MASTERY</strong><b>Hard<br>Sudoku</b><span class="placeholder-grid" aria-hidden="true">◇</span><small>COVER FORTHCOMING</small></div>`;
+}
+function card(b) {
+  const f = families.find((f) => f.id === b.family);
+  return `<article class="book-card"><a class="book-art ${b.family}" href="${url("/books/" + b.slug + "/")}">${cover(b)}</a><div class="book-info"><span class="eyebrow" style="color:${f?.color || "#08797b"}">${f?.name || "The complete course"}</span><h3>${link("/books/" + b.slug + "/", b.title)}</h3><p>${b.description}</p><span class="status">Forthcoming</span></div></article>`;
+}
+function familyGrid() {
+  return `<div class="family-grid">${families.map((f, i) => `<a class="family-card" style="--accent:${f.color}" href="${url("/books/" + f.id + "/")}"><div class="family-top"><span class="family-icon" aria-hidden="true">${f.icon}</span><span class="index">0${i + 1}</span></div><h3>${f.name}</h3><h4>${f.purpose}</h4><p>${f.description}</p><span class="text-link">Explore the series ${arrow}</span></a>`).join("")}</div>`;
+}
+function choose() {
+  return `<section class="section chooser" id="choose"><div class="section-heading"><div><p class="eyebrow">Find your next step</p><h2>Which book is right for you?</h2></div><p>Start where you are.<br>There’s more than one way in.</p></div><div class="choices">${[{ need: "I want to learn how Sudoku works.", name: "The Learner’s Guide", slug: books[0].slug }, ...families.map((f) => ({ ...f, slug: books.find((b) => b.family === f.id).slug }))].map((f) => link("/books/" + f.slug + "/", `<span>${f.need}</span><strong>${f.name} ${arrow}</strong>`, "choice")).join("")}</div></section>`;
+}
+const pages = [];
+async function page(path, title, description, body, schema) {
+  pages.push(path);
+  const canonical = origin + path;
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Anna’s Dad Press",
+    url: origin,
+    description:
+      "An independent Canadian publisher of educational and puzzle books.",
+  };
+  const html = `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} | Anna’s Dad Press</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="${schema ? "book" : "website"}"><meta property="og:site_name" content="Anna’s Dad Press"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${origin}/assets/social.png"><meta property="og:image:alt" content="Anna’s Dad Press — Books for curious minds"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f7f6f0"><link rel="icon" href="${url("/assets/favicon.svg")}" type="image/svg+xml"><link rel="stylesheet" href="${url("/assets/style.css")}"><script type="application/ld+json">${JSON.stringify(schema || organization).replaceAll("<", "\\u003c")}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner">${link("/", `${mark}<span class="brand-name">Anna’s Dad<span>PRESS</span></span>`, "brand")}<nav aria-label="Main navigation">${[
+    ["/books/", "Our books"],
+    ["/sudoku-learners-library/", "The Sudoku Library"],
+    ["/about/", "Our story"],
+  ]
+    .map(
+      ([p, t]) =>
+        `<a href="${url(p)}" ${path.startsWith(p) ? 'aria-current="page"' : ""}>${t}</a>`,
+    )
+    .join(
+      "",
+    )}${link("/next/", "Find your next book " + arrow, "nav-cta")}</nav></div></header><main id="main">${body}</main><footer><div class="wrap footer-main"><div>${link("/", `${mark}<span class="brand-name">Anna’s Dad<span>PRESS</span></span>`, "brand")}<p>Thoughtfully made books.<br>A little more understanding, one page at a time.</p></div><div class="footer-links">${link("/books/", "Our books")}${link("/about/", "Our story")}${link("/next/", "Reader resources")}${link("/privacy/", "Privacy")}</div></div><div class="wrap footer-bottom"><span>© ${new Date().getFullYear()} Anna’s Dad Press</span><span>Independent publishing · Canada</span></div></footer></body></html>`;
+  const file = path === "/404.html" ? "dist/404.html" : `dist${path}index.html`;
+  await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
+  await writeFile(file, html);
+}
+await page(
+  "/",
+  "Books for curious minds",
+  "Thoughtfully designed educational and puzzle books from an independent Canadian publisher. Discover The Sudoku Learner’s Library.",
+  `<section class="hero wrap"><div class="hero-copy"><p class="eyebrow"><span class="tiny-line"></span> Independent minds. Thoughtful books.</p><h1>A little curiosity.<br>A new perspective.<br><em>Your next step.</em></h1><p class="hero-description">Books that make the unfamiliar understandable.<br>Carefully designed to help you learn, practise,<br class="desktop"> and discover what you can do.</p><div class="actions">${link("/books/", "Explore our books " + arrow, "button")}${link("/about/", 'Meet Anna’s Dad <span aria-hidden="true">→</span>', "text-link")}</div><p class="hero-note"><span aria-hidden="true">✳</span> Made for curious minds. At every stage.</p></div><div class="hero-art"><div class="art-grid" aria-hidden="true"></div><span class="art-caption">A NEW CHAPTER IN LEARNING</span><div class="hero-book">${link("/books/" + books[0].slug + "/", cover(books[0], true))}</div><div class="edition-note"><span class="little-star" aria-hidden="true">✳</span><span>Introducing<br><strong>The Sudoku<br>Learner’s Library</strong></span></div><span class="concept-note">Concept cover shown</span></div></section><div class="values-strip"><div class="wrap"><span>Clear explanations</span><span aria-hidden="true">✳</span><span>Purposeful practice</span><span aria-hidden="true">✳</span><span>Real understanding</span><span aria-hidden="true">✳</span><span>The pleasure of progress</span></div></div><section class="section wrap"><div class="section-heading"><div><p class="eyebrow">Our first collection</p><h2>Don’t just fill the grid.<br><em>See the possibilities.</em></h2></div><div><p>The Sudoku Learner’s Library brings together clear<br class="desktop"> teaching and purposeful practice. A collection that<br class="desktop"> grows with you, from your first grid to your next challenge.</p>${link("/sudoku-learners-library/", "Discover the library " + arrow, "text-link")}</div></div><div class="feature"><div class="feature-label"><span class="eyebrow">Start with understanding</span><h3>One guide.<br>A world of<br><em>“now I see it.”</em></h3></div><div><h3>The Sudoku Learner’s Guide</h3><p>A full-colour, step-by-step course that takes you from the very first rule to advanced solving techniques. Learn the logic, see it in action, and make it your own.</p><div class="feature-tags"><span>Visual explanations</span><span>Complete walkthroughs</span><span>Beginner to advanced</span></div>${link("/books/" + books[0].slug + "/", "Inside the guide " + arrow, "text-link")}</div><span class="feature-symbol" aria-hidden="true">↗</span></div><div class="subheading"><h3>Four ways to keep moving forward.</h3><span>Different support. The same thoughtful approach.</span></div>${familyGrid()}</section><section class="latest"><div class="wrap section"><div class="section-heading"><div><p class="eyebrow">On the publishing desk</p><h2>Your next chapter is coming.</h2></div>${link("/books/", "View all books " + arrow, "text-link")}</div><div class="book-grid">${books.slice(0, 3).map(card).join("")}</div></div></section><section class="story-section wrap section"><div class="story-monogram" aria-hidden="true">a<span>↗</span>d<span>p</span></div><div><p class="eyebrow">A daughter’s idea. A dad’s next chapter.</p><h2>It started with Anna.</h2><p>When Anna built her successful <em>Learn Math With Anna</em> publishing project, her dad was paying attention. Watching her create useful educational books inspired him to start making his own.</p><p>That’s the story behind the name. And the spirit behind every book.</p>${link("/about/", "Our story " + arrow, "text-link")}</div></section>`,
+);
+const intro = (eyebrow, title, description) =>
+  `<section class="page-intro wrap"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${description}</p></section>`;
+async function catalog(path, selected) {
+  const f = families.find((f) => f.id === selected);
+  await page(
+    path,
+    f
+      ? f.name + " Sudoku books"
+      : selected === "library"
+        ? "Sudoku book catalog"
+        : "Our books",
+    f?.description ||
+      "Explore forthcoming educational and puzzle books from Anna’s Dad Press.",
+    `${intro("The catalog", f ? f.name : "Good books. New possibilities.", f?.description || "Explore The Sudoku Learner’s Library. Five forthcoming titles, each with a different way to help you move forward.")}<section class="wrap catalog-section"><nav class="filters" aria-label="Filter books">${[["all", "All books", "/books/"], ["library", "Sudoku Learner’s Library", "/books/sudoku/"], ...families.map((f) => [f.id, f.name, "/books/" + f.id + "/"])].map(([id, name, p]) => `<a href="${url(p)}" ${selected === id ? 'aria-current="page"' : ""}>${name}</a>`).join("")}</nav><p class="catalog-note">${f ? "Part of The Sudoku Learner’s Library" : "The Sudoku Learner’s Library"} · ${f ? "1 title" : "5 titles"} · Forthcoming</p><div class="book-grid">${books
+      .filter((b) => !f || b.family === selected)
+      .map(card)
+      .join(
+        "",
+      )}</div><p class="small-note">Concept covers shown. Final artwork and publication details will be added as they become available.</p></section>`,
+  );
+}
+await catalog("/books/", "all");
+await catalog("/books/sudoku/", "library");
+for (const f of families) await catalog("/books/" + f.id + "/", f.id);
+await page(
+  "/sudoku-learners-library/",
+  "The Sudoku Learner’s Library",
+  "Learn, practise, get guidance, and solve independently. Find your way through our complementary Sudoku book families.",
+  `${intro("A collection built around learning", "The Sudoku<br><em>Learner’s Library.</em>", "A good puzzle asks you to think. A good learning book helps you understand how. Find the right balance of explanation, practice, and independence.")}<section class="wrap section top-zero"><div class="progression">${[
+    ["01", "Learn", "Build your foundation with the Guide."],
+    ["02", "Practice", "Get to know a technique through focused drills."],
+    ["03", "Get guidance", "Use hints or supplied candidates for support."],
+    ["04", "Solve independently", "Bring it all together with Mastery."],
+  ]
+    .map(
+      ([n, t, d]) =>
+        `<div><span class="eyebrow">${n} <span aria-hidden="true">→</span></span><h3>${t}</h3><p>${d}</p></div>`,
+    )
+    .join(
+      "",
+    )}</div><div class="section-heading"><div><p class="eyebrow">Different books. Different jobs.</p><h2>A library, not a ladder.</h2></div><p>Use the Guide as your reference. Choose Practice for a specific<br class="desktop"> technique, Start Here for a hint, or Candidates Done to skip<br class="desktop"> setup. Mastery gives you room to solve on your own.</p></div>${familyGrid()}${choose()}</section>`,
+);
+for (const b of books) {
+  const f = families.find((f) => f.id === b.family);
+  const guide = b.family === "guide";
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    name: b.title,
+    ...(b.subtitle ? { alternativeHeadline: b.subtitle } : {}),
+    description: b.description,
+    url: origin + "/books/" + b.slug + "/",
+    inLanguage: "en",
+    isPartOf: { "@type": "CreativeWorkSeries", name: b.collection },
+    publisher: {
+      "@type": "Organization",
+      name: "Anna’s Dad Press",
+      url: origin,
+    },
+    ...(b.isbn ? { isbn: b.isbn } : {}),
+    ...(b.cover ? { image: origin + "/assets/" + b.cover + "-720.webp" } : {}),
+  };
+  await page(
+    "/books/" + b.slug + "/",
+    b.title,
+    b.description,
+    `<div class="wrap"><div class="breadcrumbs">${link("/books/", "Our books")} <span>/</span> ${f ? link("/books/" + f.id + "/", f.name) : "The complete course"}</div><section class="book-detail"><div class="detail-cover"><div class="book-art ${b.family}">${cover(b, true)}</div><p class="small-note">${b.coverStatus}</p></div><div><p class="eyebrow">${b.collection}</p><span class="status">${b.status}</span><h1>${b.title}</h1>${b.subtitle ? `<p class="subtitle">${b.subtitle}</p>` : ""}<p>${b.description}</p><div class="best-for"><span class="eyebrow">A good fit for</span><p>${b.bestFor}</p></div><div class="purchase"><h2>Coming to your bookshelf.</h2><p>Publication date to be announced. Amazon links will appear here when the book is available.</p><div class="marketplaces">${[
+      ["amazonCa", "Amazon.ca"],
+      ["amazonCom", "Amazon.com"],
+    ]
+      .map(([key, label]) =>
+        b[key]
+          ? link(b[key], label + " ↗", "button")
+          : `<span>${label} <small>Coming soon</small></span>`,
+      )
+      .join(
+        "",
+      )}</div><dl><div><dt>ISBN</dt><dd>${b.isbn || "To be announced"}</dd></div><div><dt>ASIN</dt><dd>${b.asin || "To be announced"}</dd></div></dl></div></div></section>${guide ? `<section class="section teaching"><p class="eyebrow">Understanding, step by step</p><h2>Learn it. See it. Make it yours.</h2><div class="teaching-steps">${["Learn", "See", "Walkthrough", "Practice", "Solve"].map((t, i) => `<div><span>0${i + 1}</span><h3>${t}</h3></div>`).join("")}</div><div class="two-col"><div><h3>A complete visual course</h3><p>Planned as a full-colour course of approximately 250 pages, with visual explanations, complete walkthroughs, and practice that increases in difficulty.</p><p>QR codes are planned to provide access to an online solver for the exact puzzle on the page. Reader resources will be available at ${link("/next/", "annasdadpress.com/next")} when the book is released.</p></div><div><h3>From the first rule to advanced logic</h3><p>Full Houses; Naked and Hidden Singles; Naked and Hidden Pairs; Pointing Pairs; Y-Wing; X-Wing; Swordfish; Naked Triples; Simple Colors; XY-Chains; Unique Rectangles; and 3D Medusa.</p></div></div></section>` : ""}<section class="interior section"><p class="eyebrow">A look inside</p><h2>Sample pages are on their way.</h2><p>Interior spreads will be shared here when they’re ready.</p></section><section class="section"><div class="section-heading"><h2>More ways to learn.</h2>${link("/sudoku-learners-library/", "Explore the library " + arrow, "text-link")}</div><div class="book-grid">${books
+      .filter((x) => x.slug !== b.slug)
+      .slice(0, 3)
+      .map(card)
+      .join("")}</div></section></div>`,
+    schema,
+  );
+}
+await page(
+  "/about/",
+  "Our story",
+  "Anna’s successful Learn Math With Anna project inspired her dad to begin publishing. Meet the idea behind Anna’s Dad Press.",
+  `${intro("About Anna’s Dad Press", "The inspiration<br><em>was close to home.</em>", "An independent Canadian publisher, making educational and puzzle books for curious minds.")}<section class="wrap story-body section top-zero"><div class="story-monogram" aria-hidden="true">a<span>↗</span>d<span>p</span></div><div><h2>First Anna. Then her dad.</h2><p>Anna created <em>Learn Math With Anna</em>, a successful self-publishing project focused on educational books. Her dad watched her build something useful—and saw what thoughtful publishing could do.</p><p>That experience inspired him to begin publishing his own line of books. The name Anna’s Dad Press is a small acknowledgement of where the idea began.</p><p>The first collection is <em>The Sudoku Learner’s Library</em>: instruction and practice books that help readers understand the logic, recognise the patterns, and grow into more confident solvers.</p></div></section><section class="latest"><div class="wrap section"><p class="eyebrow">Our publishing philosophy</p><h2>Make the difficult approachable.</h2><div class="progression">${[
+    ["Teach clearly", "Explain the reasoning, not just the answer."],
+    [
+      "Make it visible",
+      "Use visual explanations where they help an idea click.",
+    ],
+    [
+      "Practise with purpose",
+      "Give readers deliberate opportunities to use what they learn.",
+    ],
+    [
+      "Respect the reader",
+      "Make challenging material approachable without oversimplifying it.",
+    ],
+  ]
+    .map(([t, d]) => `<div><h3>${t}</h3><p>${d}</p></div>`)
+    .join(
+      "",
+    )}</div>${link("/books/", "Meet the books " + arrow, "button")}</div></section>`,
+);
+await page(
+  "/next/",
+  "Your next step",
+  "Find the right Sudoku book and check the availability of companion resources from Anna’s Dad Press.",
+  `${intro("For our readers", "Your next step<br><em>starts here.</em>", "Looking for a book, a little guidance, or a resource mentioned on the page? You’re in the right place.")}<div class="wrap"><aside class="resource-note"><h2>Companion resources</h2><p>The Sudoku Learner’s Library is forthcoming. Exact-puzzle solver links and other book resources are not yet available. This page will remain the home for reader resources as the books are released.</p></aside>${choose()}</div>`,
+);
+await page(
+  "/privacy/",
+  "Privacy",
+  "How this simple publisher website handles visitor information.",
+  `${intro("The small print", "Privacy, plainly.", "This website is a catalog for Anna’s Dad Press.")}<section class="wrap prose section top-zero"><h2>What this site collects</h2><p>We do not run analytics, use advertising trackers, set cookies, offer accounts, or collect information through forms on this website.</p><h2>Website hosting</h2><p>The site is hosted by GitHub Pages. Hosting and network providers may process technical information, including IP addresses and request logs, to deliver and protect the website. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s privacy statement</a> for details. When traffic passes through Cloudflare, its <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a> also applies.</p><h2>Book purchases</h2><p>When purchase links become available, they will take you to Amazon. Any information you provide there is handled by Amazon under its own privacy policy. We do not process payments on this website.</p><h2>Changes</h2><p>We will update this page if the website’s use of information changes.</p><p class="small-note">Last updated: September 9, 2026.</p></section>`,
+);
+await page(
+  "/404.html",
+  "Page not found",
+  "Find your way back to Anna’s Dad Press.",
+  `${intro("404 · A small detour", "Let’s find your next page.", "That page isn’t in our library. Browse the books or head back home.")}<div class="wrap section top-zero">${link("/", "Back home →", "button")} ${link("/books/", "Browse our books", "text-link")}</div>`,
+);
+await writeFile(
+  "dist/sitemap.xml",
+  `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages
+    .filter((p) => p != "/404.html")
+    .map((p) => `<url><loc>${origin + p}</loc></url>`)
+    .join("")}</urlset>`,
+);
+await writeFile(
+  "dist/robots.txt",
+  `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`,
+);
+await writeFile("dist/.nojekyll", "");
+if (!base) await writeFile("dist/CNAME", "annasdadpress.com\n");
+await sharp(
+  Buffer.from(
+    `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="630" fill="#f7f6f0"/><rect x="65" y="65" width="90" height="90" fill="#08797b"/><text x="84" y="125" font-family="Georgia" font-size="55" fill="white">a</text><text x="185" y="128" font-family="Georgia" font-size="46" fill="#142e3c">Anna’s Dad Press</text><text x="65" y="300" font-family="Georgia" font-size="76" fill="#142e3c">A little curiosity.</text><text x="65" y="395" font-family="Georgia" font-size="76" fill="#142e3c">A new perspective.</text><text x="65" y="490" font-family="Georgia" font-size="76" font-style="italic" fill="#08797b">Your next step.</text><text x="65" y="580" font-family="sans-serif" font-size="20" fill="#142e3c">INDEPENDENT PUBLISHING · CANADA</text></svg>`,
+  ),
+)
+  .png()
+  .toFile("dist/assets/social.png");
+console.log(`Built ${pages.length} pages.`);

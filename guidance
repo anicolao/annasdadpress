@@ -1,0 +1,220 @@
+Build a complete production-ready website for a small Canadian
+independent publishing imprint called Anna’s Dad Press, using the
+primary domain annasdadpress.com. The owner also controls
+annasdadpress.ca, which should eventually redirect to the .com.
+
+Brand story
+
+Anna’s Dad Press grew out of the publisher’s daughter Anna’s
+successful Learn Math With Anna self-publishing project. Watching
+Anna develop and sell educational books is what inspired her dad
+to begin publishing his own educational and puzzle books.
+
+The name should feel intentional, warm and memorable—not jokey or
+amateurish. The visual identity should communicate:
+
+intelligent approachable carefully designed educational adult-friendly
+independent rather than corporate
+
+Avoid the visual language of a children’s publisher, generic “AI
+startup,” or bargain puzzle-book mill.
+
+Initial publishing program
+
+The first major catalog is The Sudoku Learner’s Library, an umbrella
+collection of Sudoku instruction and practice books.
+
+Initial/forthcoming books:
+
+The Sudoku Learner’s Guide Subtitle: A Step-by-Step Handbook of
+Rules, Techniques, and Practice Grids This is the flagship book: a
+full-color, approximately 250-page course that takes a complete
+beginner through advanced Sudoku techniques including Full Houses,
+Naked and Hidden Singles, Naked and Hidden Pairs, Pointing Pairs,
+Y-Wing, X-Wing, Swordfish, Naked Triples, Simple Colors, XY-Chains,
+Unique Rectangles and 3D Medusa.  Practice: X-Wing Sudoku A
+deliberate-practice workbook that teaches readers to recognize
+X-Wing patterns progressively rather than merely supplying random
+puzzles.  Start Here: Hard Sudoku with Hints Hard Sudoku in which
+hints tell the solver where to look next without simply revealing
+the answer.  Candidates Done: Hard Sudoku Hard Sudoku with
+candidate/pencil marks already supplied so the reader can skip setup
+and start solving the interesting logic.  Mastery: Hard Sudoku A
+conventional but carefully graded independent-solving book.
+
+The four future product families are visually and conceptually:
+
+PRACTICE — deliberate training in one specific technique START HERE
+— guided full-puzzle solving CANDIDATES DONE — candidate notes
+supplied MASTERY — independent puzzle solving
+
+Initially they all belong under the broader Sudoku Learner’s Library
+umbrella. The site architecture should allow each family to grow
+into its own collection later.
+
+Website goals
+
+The site is primarily a publisher/catalog website, not an ecommerce
+store. Purchases will initially go to Amazon.
+
+Its goals are:
+
+establish Anna’s Dad Press as a credible publishing imprint; explain
+the origin/story behind the unusual name; showcase the Sudoku
+Learner’s Library; help readers determine which book is right for
+them; provide stable URLs that can be printed in books and QR codes;
+support future books outside Sudoku without requiring a redesign;
+rank organically for book titles, series names, and relevant
+educational/puzzle searches.  Required pages Home
+
+Strong publisher-level landing page.
+
+Hero should introduce Anna’s Dad Press with a short positioning
+line such as:
+
+“Books that teach you how to see the next step.”
+
+Do not treat that exact wording as mandatory; improve it if you
+can.
+
+Feature the Sudoku Learner’s Library prominently but do not make
+the entire publisher identity permanently Sudoku-specific.
+
+Include:
+
+flagship book short explanation of the learning system the four
+book families latest books short Anna’s Dad Press origin story Books
+/ Catalog
+
+Data-driven catalog with filters/sections for:
+
+Sudoku Learner’s Library Practice Start Here Candidates Done Mastery
+future non-Sudoku books
+
+Each title needs:
+
+cover image title/subtitle short description family/series publication
+status ISBN when available Amazon.ca link Amazon.com link
+
+Never invent ISBNs, ASINs, prices, reviews, ratings or purchase
+URLs. Provide obvious placeholder fields where information has not
+yet been supplied.
+
+The Sudoku Learner’s Library
+
+Explain the progression:
+
+Learn → Practice → Get Guidance → Solve Independently
+
+Explain how the Guide, Practice, Start Here, Candidates Done and
+Mastery books complement rather than duplicate one another.
+
+Include a “Which book should I choose?” visual decision guide.
+
+Individual book pages
+
+Create reusable templates.
+
+For The Sudoku Learner’s Guide, explain that the teaching sequence
+is:
+
+Learn → See → Walkthrough → Practice → Solve
+
+Highlight:
+
+full-color visual explanations complete walkthroughs increasing
+difficulty exact-puzzle online solver access via QR codes techniques
+from beginner through advanced
+
+Include room for sample interior spreads.
+
+About Anna’s Dad Press
+
+Tell the genuine story clearly and briefly:
+
+Anna created the Learn Math With Anna publishing effort. Its success
+and the experience of watching her build useful educational books
+inspired her father to begin publishing too. Hence “Anna’s Dad
+Press.”
+
+The tone should be personal but not sentimental or over-written.
+
+Add a short section explaining the publishing philosophy: teach
+clearly, use visual explanations where they genuinely help, provide
+deliberate practice, and make difficult material approachable without
+oversimplifying it.
+
+Privacy
+
+Provide an appropriate simple privacy page, especially if analytics
+or a contact form are used.
+
+Visual system
+
+Create one coherent publishing identity plus distinct visual languages
+for the Sudoku families.
+
+The family names should be very prominent:
+
+PRACTICE START HERE CANDIDATES DONE MASTERY
+
+They should share:
+
+typography hierarchy spacing/grid family-label position publisher
+identity book-card design
+
+but each should have its own recognizable accent treatment/iconography.
+
+Avoid overly playful exclamation marks in the web identity. The
+formal title style is colon-based, e.g. Practice: X-Wing Sudoku.
+
+The site should visually harmonize with sophisticated Sudoku covers:
+strong typography, crisp geometric grid motifs, restrained use of
+color, generous white space.
+
+Do not use generic stock photographs of people doing puzzles.
+
+See sample_covers/*.png for existing art inspiration.
+
+Technical implementation
+
+Prefer a lightweight static-first architecture built out of pure HTML
+or Svelte. Choose the simplest option that produces an excellent result.
+
+Requirements:
+
+excellent desktop and mobile layouts very fast page loads accessible
+semantic HTML keyboard navigation WCAG-conscious contrast responsive
+images no unnecessary client-side JavaScript data-driven book catalog
+easy addition of new books without redesigning pages clean reusable
+components favicon and simple typographic/logo treatment no paid
+dependencies unless clearly justified SEO
+
+Implement:
+
+unique title/meta description for every page canonical URLs Open
+Graph/social metadata sitemap.xml robots.txt Organization/Publisher
+schema where appropriate Book structured data on individual book
+pages sensible heading hierarchy
+
+Do not keyword-stuff.
+
+Domain/deployment
+
+Use gh to create a github repository, that's public; use cloudflare API keys
+to demonstrate control of the domains, making .ca redirect to .com and .com
+serve the github pages site.
+
+Deliverables
+
+Produce:
+
+complete deployed site; polished responsive site; README
+with local-development and deployment instructions; catalog data
+model with the five initial books; placeholders clearly identified
+for final cover artwork, ISBNs, ASINs and Amazon URLs; stable /next
+page; SEO metadata and structured data; no fake testimonials, reviews, 
+awards, bestseller claims or invented business facts.
+
+Before finishing, run the build, test all internal links, inspect
+the mobile layout, and finally deploy to gh pages.
