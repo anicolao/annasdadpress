@@ -90,25 +90,12 @@ img {
   flex-shrink: 0;
 }
 .brand-mark {
-  display: grid;
-  grid-template-columns: repeat(2, 22px);
-  grid-template-rows: repeat(2, 22px);
-  font-family: var(--serif);
-  font-size: 23px;
-  line-height: 21px;
+  width: 44px;
+  height: 44px;
   color: var(--teal);
+  flex: none;
 }
-.brand-mark span {
-  border-right: 1px solid #8ab1a8;
-  border-bottom: 1px solid #8ab1a8;
-  text-align: center;
-}
-.brand-mark span:nth-child(2n) {
-  border-right: 0;
-}
-.brand-mark span:nth-child(n + 3) {
-  border-bottom: 0;
-}
+
 .brand-name {
   font-family: var(--serif);
   font-size: 24px;
@@ -209,12 +196,7 @@ img {
   margin-top: 44px;
   letter-spacing: 0.3px;
 }
-.hero-note span {
-  color: var(--teal);
-  font-size: 18px;
-  vertical-align: middle;
-  margin-right: 8px;
-}
+
 .hero-art {
   position: relative;
   min-height: 535px;
@@ -284,10 +266,7 @@ img {
   color: var(--ink);
   font-weight: 400;
 }
-.little-star {
-  color: var(--teal);
-  font-size: 39px;
-}
+
 .concept-note {
   position: absolute;
   bottom: -10px;
@@ -305,7 +284,7 @@ img {
   font-size: 10px;
   letter-spacing: 0.6px;
 }
-.values-strip span[aria-hidden] {
+.values-strip .icon {
   color: var(--teal);
 }
 .section {
@@ -513,26 +492,16 @@ img {
   width: 260px;
   height: 260px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  font-family: var(--serif);
-  font-size: 120px;
-  line-height: 1;
-  text-align: center;
+  place-items: center;
+  padding: 44px;
   background: #e5ece2;
   color: var(--teal);
-  transform: rotate(-6deg);
+  border: 1px solid #a9beb0;
+  outline: 1px solid #a9beb0;
+  outline-offset: -9px;
   margin: auto;
 }
-.story-monogram > * {
-  border-left: 1px solid #a9beb0;
-  border-bottom: 1px solid #a9beb0;
-}
-.story-monogram span:nth-child(2) {
-  font-size: 95px;
-}
-.story-monogram span:last-child {
-  border-bottom: 0;
-}
+
 .story-section p {
   font-size: 14px;
 }
@@ -1026,7 +995,7 @@ dd {
     font-size: 9px;
     text-align: center;
   }
-  .values-strip span[aria-hidden] {
+  .values-strip .icon {
     display: none;
   }
   .section {
@@ -1116,11 +1085,9 @@ dd {
   .story-monogram {
     width: 180px;
     height: 180px;
-    font-size: 83px;
+    padding: 30px;
   }
-  .story-monogram span:nth-child(2) {
-    font-size: 70px;
-  }
+
   .footer-main {
     display: block;
     padding-block: 35px;
@@ -1334,5 +1301,72 @@ dd {
   }
   .spread-intro {
     font-size: 13px;
+  }
+}
+
+/* Path-drawn marks keep the imprint independent of platform emoji and fonts. */
+.icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  vertical-align: middle;
+}
+.publisher-mark {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.publisher-mark.brand-mark {
+  width: 44px;
+  height: 44px;
+}
+.nav-cta > .icon {
+  width: 15px;
+  height: 15px;
+  margin-left: 15px;
+}
+.hero-note > .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  color: var(--teal);
+}
+.edition-ornament {
+  width: 36px;
+  height: 36px;
+  color: var(--teal);
+}
+.values-strip .icon {
+  width: 12px;
+  height: 12px;
+  color: var(--teal);
+}
+.family-icon {
+  width: 30px;
+  height: 30px;
+}
+.feature-symbol {
+  width: 64px;
+  height: 64px;
+}
+.placeholder-grid {
+  width: 66px;
+  height: 66px;
+  margin-block: 20px;
+}
+.progression .eyebrow > .icon {
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+}
+.sample-page > span > .icon {
+  width: 15px;
+  height: 15px;
+}
+@media (max-width: 650px) {
+  .values-strip .icon,
+  .feature-symbol {
+    display: none;
   }
 }

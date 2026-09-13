@@ -2,7 +2,7 @@ export const families = [
   {
     id: "practice",
     name: "Practice",
-    icon: "⌖",
+    icon: "practice",
     color: "#1264a3",
     purpose: "Make a technique second nature.",
     description:
@@ -12,7 +12,7 @@ export const families = [
   {
     id: "start-here",
     name: "Start Here",
-    icon: "↗",
+    icon: "guidance",
     color: "#b14b38",
     purpose: "A little direction. Your own discovery.",
     description:
@@ -22,7 +22,7 @@ export const families = [
   {
     id: "candidates-done",
     name: "Candidates Done",
-    icon: "▦",
+    icon: "candidates",
     color: "#327053",
     purpose: "Skip the setup. Find the logic.",
     description:
@@ -32,18 +32,18 @@ export const families = [
   {
     id: "mastery",
     name: "Mastery",
-    icon: "◇",
+    icon: "mastery",
     color: "#756039",
     purpose: "Put your skills to the test.",
     description:
       "Carefully graded puzzles for the satisfaction of working it out on your own.",
-    need: "I’m ready to solve independently.",
+    need: "I'm ready to solve independently.",
   },
 ];
 export const books = [
   {
     slug: "the-sudoku-learners-guide",
-    title: "The Sudoku Learner’s Guide",
+    title: "The Sudoku Learner's Guide",
     subtitle:
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
     family: "guide",
@@ -54,17 +54,17 @@ export const books = [
         description:
           "An X-Wing example from Chapter 3: Advanced Pattern Recognition. Follow the highlighted candidates from the first deduction to the next placement.",
         caption:
-          "Draft interior · Printed pages 82–83 · Layout and content may change before publication.",
+          "Draft interior / Printed pages 82-83 / Layout and content may change before publication.",
         pdf: "/assets/samples/sudoku-learners-guide-x-wing-sample.pdf",
         pages: [
           {
             image: "guide-x-wing-82",
-            label: "Page 82 — Recognise the X-Wing",
+            label: "Page 82: Recognise the X-Wing",
             alt: "Draft page 82: candidate 8 highlighted at the four corners of an X-Wing in rows 3 and 5, columns 5 and 6.",
           },
           {
             image: "guide-x-wing-83",
-            label: "Page 83 — Eliminate and place",
+            label: "Page 83: Eliminate and place",
             alt: "Draft page 83: the X-Wing removes candidate 8 from row 2, column 6, leaving a green-highlighted 1.",
           },
         ],
@@ -106,7 +106,7 @@ export const books = [
   {
     slug: "candidates-done-hard-sudoku",
     title: "Candidates Done: Hard Sudoku",
-    subtitle: "Candidate Notes Already Filled In—Just Start Solving",
+    subtitle: "Candidate Notes Already Filled In: Just Start Solving",
     family: "candidates-done",
     cover: "candidates-done",
     description:
@@ -121,19 +121,19 @@ export const books = [
     family: "mastery",
     cover: null,
     description:
-      "Carefully graded hard Sudoku for independent solving. Bring together what you’ve learned and enjoy the challenge of finding your own way through.",
+      "Carefully graded hard Sudoku for independent solving. Bring together what you've learned and enjoy the challenge of finding your own way through.",
     bestFor: "Confident solvers looking for independent practice.",
   },
 ].map((b) => ({
   ...b,
-  collection: "The Sudoku Learner’s Library",
+  collection: "The Sudoku Learner's Library",
   status: "Forthcoming",
   isbn: null,
   asin: null,
   amazonCa: null,
   amazonCom: null,
   coverStatus: b.cover
-    ? "Concept cover · final artwork forthcoming"
+    ? "Concept cover / final artwork forthcoming"
     : "Cover forthcoming",
   sampleSpreads: [],
   ...b,

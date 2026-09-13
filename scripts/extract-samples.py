@@ -30,6 +30,6 @@ for (const width of [640, 1280]) {
   await sharp(input).resize(width).webp({quality: 92}).toFile(`${output}/guide-x-wing-${page}-${width}.webp`);
 }
 ''', str(png), str(out), str(printed_page)], cwd=root, check=True)
-excerpt.set_metadata({'title': 'The Sudoku Learner’s Guide — Draft sample, pages 82–83', 'author': 'Alex Nicolaou', 'subject': 'X-Wing: recognise the pattern, eliminate a candidate, and place a digit.'})
+excerpt.set_metadata({'title': 'The Sudoku Learner\'s Guide: Draft sample, pages 82-83', 'author': 'Alex Nicolaou', 'subject': 'X-Wing: recognise the pattern, eliminate a candidate, and place a digit.'})
 excerpt.save(out / 'sudoku-learners-guide-x-wing-sample.pdf', garbage=4, deflate=True)
-print('Extracted printed pages 82–83 only; the full manuscript stays local.')
+print('Extracted printed pages 82-83 only; the full manuscript stays local.')

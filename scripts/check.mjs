@@ -18,6 +18,7 @@ const titles = new Set();
 let links = 0;
 for (const file of files) {
   const html = await readFile(file, "utf8");
+  assert(!/[^\x00-\x7F]/.test(html), `Non-ASCII markup in ${file}`);
   const title = html.match(/<title>(.*?)<\/title>/)[1];
   assert(!titles.has(title), `Duplicate title: ${title}`);
   titles.add(title);
@@ -71,6 +72,12 @@ try {
           () => document.documentElement.scrollWidth <= innerWidth,
         ),
         `Horizontal overflow: ${route} @ ${width}`,
+      );
+      assert(
+        await page.evaluate(
+          () => !/[^\x00-\x7F]/.test(document.documentElement.textContent),
+        ),
+        `Non-ASCII text on ${route}`,
       );
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
