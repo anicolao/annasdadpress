@@ -7,13 +7,19 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 
 const args = process.argv.slice(2);
-if (args.length !== 2 || args[0] !== "--source")
+if (
+  ![2, 4].includes(args.length) ||
+  args[0] !== "--source" ||
+  (args.length === 4 &&
+    (args[2] !== "--book" || !["guide", "advent-2026"].includes(args[3])))
+)
   throw new Error(
-    "Usage: npm run covers:sync -- --source ../sudoku-challenges",
+    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026]",
   );
+const book = args[3] || "guide";
 const root = fileURLToPath(new URL("../", import.meta.url));
-const temp = await mkdtemp(resolve(tmpdir(), "guide-cover-"));
-const target = resolve(root, "src/assets/covers/guide");
+const temp = await mkdtemp(resolve(tmpdir(), `${book}-cover-`));
+const target = resolve(root, `src/assets/covers/${book}`);
 try {
   execFileSync(
     "nix",
@@ -21,8 +27,9 @@ try {
       "develop",
       "-c",
       "python",
-      resolve(root, "scripts/export-guide-cover.py"),
+      resolve(root, "scripts/export-cover.py"),
       temp,
+      book,
     ],
     {
       cwd: resolve(args[1]),
@@ -50,7 +57,7 @@ try {
     existing &&
     createHash("sha256").update(existing).digest("hex") === sha256
   ) {
-    console.log("Guide front cover unchanged; keeping existing provenance.");
+    console.log(`${book} front cover unchanged; keeping existing provenance.`);
   } else {
     const source = JSON.parse(
       await readFile(resolve(temp, "source.json"), "utf8"),
@@ -67,7 +74,7 @@ try {
     await writeFile(target + ".png", png);
     await writeFile(target + ".json", JSON.stringify(record, null, 2) + "\n");
     console.log(
-      `Imported Guide front cover: ${width} x ${height}. Review, build, and commit to publish.`,
+      `Imported ${book} front cover: ${width} x ${height}. Review, build, and commit to publish.`,
     );
   }
 } finally {

@@ -1,5 +1,15 @@
 export const families = [
   {
+    id: "discovery",
+    name: "Discovery",
+    icon: "discovery",
+    color: "#a92b36",
+    purpose: "Solve a puzzle. Reveal something new.",
+    description:
+      "Sudoku with something more to discover. Use your solutions to follow drawing clues and watch a picture take shape, one puzzle at a time.",
+    need: "I'd like a puzzle with a creative surprise.",
+  },
+  {
     id: "practice",
     name: "Practice",
     icon: "practice",
@@ -83,6 +93,40 @@ export const books = [
       "A complete course in seeing the logic. Learn the rules, understand the techniques, and build your confidence one well-explained step at a time.",
     bestFor:
       "Learning Sudoku from the beginning, or understanding the techniques behind your next breakthrough.",
+  },
+  {
+    slug: "25-days-of-christmas-sudoku",
+    title: "25 Days of Christmas Sudoku",
+    subtitle:
+      "An Advent Puzzle Book with a Daily Drawing Reveal / December 2026",
+    family: "discovery",
+    cover: "advent-2026",
+    coverSource: "src/assets/covers/advent-2026.png",
+    coverManifest: "src/assets/covers/advent-2026.json",
+    coverWidth: 1800,
+    coverHeight: 2250,
+    coverStatus: "Print cover artwork",
+    description:
+      "A Sudoku Advent calendar for December 2026. Solve one moderate puzzle each day from December 1 to Christmas Day, then use your answers to reveal another part of a festive drawing.",
+    bestFor:
+      "Solvers who enjoy moderate Sudoku and would like a daily puzzle-and-drawing ritual in the run-up to Christmas.",
+    features: [
+      {
+        title: "Solve the day's Sudoku",
+        description:
+          "Settle in with one of 25 moderate puzzles, one for each day from December 1 to 25.",
+      },
+      {
+        title: "Follow the drawing clues",
+        description:
+          "Use your Sudoku answers and the printed lookups to join numbered dots on the day's drawing tile.",
+      },
+      {
+        title: "Bring the scene together",
+        description:
+          "Combine the 6-inch tiles into one large festive picture. Sudoku answers are included in the book.",
+      },
+    ],
   },
   {
     slug: "practice-x-wing-sudoku",

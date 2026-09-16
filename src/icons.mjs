@@ -1,5 +1,7 @@
 // Original path artwork for the imprint. No icon fonts or text glyphs.
 const paths = {
+  discovery:
+    '<path d="m4 17 5-10 6 8 5-11"/><circle cx="4" cy="17" r="2" fill="currentColor" stroke="none"/><circle cx="9" cy="7" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="2" fill="currentColor" stroke="none"/><circle cx="20" cy="4" r="2" fill="currentColor" stroke="none"/><path d="M3 22h18"/>',
   arrow: '<path d="M4 12h15m-6-6 6 6-6 6"/>',
   diagonal: '<path d="m5 19 14-14M6 5h13v13"/>',
   ornament:

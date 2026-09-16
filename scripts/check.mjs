@@ -108,6 +108,27 @@ try {
   await page.getByRole("link", { name: "Practice", exact: true }).click();
   assert(page.url().endsWith("/books/practice/"));
   assert.equal(await page.locator(".book-card").count(), 1);
+  await page.goto("http://127.0.0.1:4173/books/");
+  await page.getByRole("link", { name: "Discovery", exact: true }).click();
+  assert(page.url().endsWith("/books/discovery/"));
+  assert.equal(await page.locator(".book-card").count(), 1);
+  await page
+    .getByRole("heading", { name: "25 Days of Christmas Sudoku", exact: true })
+    .getByRole("link")
+    .click();
+  assert(page.url().endsWith("/books/25-days-of-christmas-sudoku/"));
+  const adventCover = page.locator(".detail-cover img");
+  await adventCover.evaluate((img) => img.decode());
+  assert.equal(await adventCover.getAttribute("width"), "1800");
+  assert.equal(await adventCover.getAttribute("height"), "2250");
+  assert((await adventCover.getAttribute("src")).includes("advent-2026"));
+  assert.equal(
+    await page.locator(".detail-cover .small-note").textContent(),
+    "Print cover artwork",
+  );
+  await page.goto("http://127.0.0.1:4173/next/");
+  await page.getByRole("link", { name: /creative surprise/ }).click();
+  assert(page.url().endsWith("/books/25-days-of-christmas-sudoku/"));
   await page.goto("http://127.0.0.1:4173/next/");
   await page.getByRole("link", { name: /I get stuck/ }).click();
   assert(page.url().endsWith("/books/start-here-hard-sudoku-with-hints/"));

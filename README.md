@@ -19,11 +19,11 @@ npx playwright install chromium
 npm test
 ```
 
-Tests verify internal links/assets, unique titles, one H1 per page, valid structured data, all 17 pages at desktop and two mobile widths, WCAG A/AA automated checks, catalog filtering, book selection, and keyboard navigation. Desktop/mobile screenshots are written to ignored `artifacts/`. Automated accessibility checks are supplemented by visual review; they are not a claim of formal certification.
+Tests verify internal links/assets, unique titles, one H1 per page, valid structured data, all 19 pages at desktop and two mobile widths, WCAG A/AA automated checks, catalog filtering, book selection, and keyboard navigation. Desktop/mobile screenshots are written to ignored `artifacts/`. Automated accessibility checks are supplemented by visual review; they are not a claim of formal certification.
 
 ## Content and artwork
 
-`src/catalog.mjs` holds the five initial books and four families. Add books to this array to generate catalog entries and individual pages. Book fields include stable `slug`, `title`, `subtitle`, `family`, `collection`, `status`, `cover`, `coverStatus`, `description`, `bestFor`, `isbn`, `asin`, `amazonCa`, `amazonCom`, and `sampleSpreads`.
+`src/catalog.mjs` holds six books and five families. Add books to this array to generate catalog entries and individual pages. Book fields include stable `slug`, `title`, `subtitle`, `family`, `collection`, `status`, `cover`, `coverStatus`, `description`, `bestFor`, `isbn`, `asin`, `amazonCa`, `amazonCom`, and `sampleSpreads`.
 
 All titles are forthcoming. ISBNs, ASINs, final publication dates, and Amazon URLs are unknown and intentionally unset. Confirm the status before launch of each book; adjust availability copy in the shared book template when purchase links are supplied. Do not use invented purchase links. The Mastery subtitle is also unconfirmed.
 
@@ -58,12 +58,13 @@ Confirm final covers and interiors, title/subtitle spellings, publication status
 
 `src/icons.mjs` owns the original SVG path artwork: the open-book publisher mark, printers' ornament, navigation arrows, and four series symbols. These are decorative, hidden from assistive technology, and never keyboard targets. The favicon and social image share the publisher mark. Website text and metadata use ASCII punctuation; decorative marks use SVG paths instead of Unicode or icon fonts. Supplied cover artwork and the draft book excerpt remain source publications.
 
-## Updating the Learner's Guide cover
+## Updating print covers
 
 After reviewing a successful MathPub cover build, run from this repository:
 
 ```sh
 npm run covers:sync -- --source ../sudoku-challenges
+npm run covers:sync -- --source ../sudoku-challenges --book advent-2026
 npm run build
 npm test
 ```
@@ -88,3 +89,16 @@ Normal builds require only committed website assets and verify their integrity;
 they cannot detect newer artwork in the separate MathPub repository. Run the sync
 after each cover revision intended for the website. Artwork status is independent
 of book availability: importing a cover does not mark the book as released.
+
+Discovery is the fifth series in The Sudoku Learner's Library. Its first book,
+`25-days-of-christmas-sudoku`, is a forthcoming Advent puzzle book for December
+2026, with 25 moderate Sudoku puzzles and daily drawing reveals. The homepage,
+Discovery catalog page, book chooser, and individual book page promote it using
+its generated 8 x 10 inch cover. No release date or purchase links are assumed.
+
+The default cover sync still imports the Guide. `--book advent-2026` selects
+`build/advent-2026-cover/review/` and imports `src/assets/covers/advent-2026.png`
+plus its JSON record. It validates the successful PDF hash, page geometry,
+interior fingerprint, Day 1 puzzle, prepared artwork, and rendered style before
+cropping. Both imports use `scripts/export-cover.py` and the same image integrity
+checks at website build time. Only the selected book is updated by a sync.

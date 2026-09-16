@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "artworkStatus": "print",
+  "width": 1800,
+  "height": 2250,
+  "sha256": "030f3dd33dc384e8b2d6cd444db78b86e40b3f17351b0203cdcd6433abfeed58",
+  "publication": "advent-2026-cover",
+  "variant": "review",
+  "sourceRevision": "7b3a67733ec97f9cc7ca262f6b1ac0e804922030",
+  "sourceDirty": false,
+  "sourcePdfSha256": "23a0e32c31e7f6c571933683b2e03ebe08db9bb5ac92afe41a2ef7ea70d2122b",
+  "cropPoints": [
+    612.2401920000001,
+    9,
+    1188.240192,
+    729
+  ],
+  "trimInches": [
+    8,
+    10
+  ]
+}

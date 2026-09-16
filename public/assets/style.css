@@ -1370,3 +1370,46 @@ dd {
     display: none;
   }
 }
+
+/* Discovery: a daily drawing, with the book itself doing the illustrating. */
+.family-card.discovery {
+  grid-column: 1 / -1;
+  background: #f0e5df;
+}
+.book-art.discovery {
+  background: #f0e5df;
+}
+.discovery-feature {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 70px;
+  align-items: center;
+  border-top: 1px solid #d6dcd2;
+}
+.discovery-copy .eyebrow {
+  color: #a92b36;
+}
+.discovery-copy p {
+  max-width: 560px;
+}
+.discovery-cover {
+  display: block;
+  padding: 30px;
+  background: #f0e5df;
+}
+.discovery-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-shadow: 6px 8px 13px #21372b25;
+}
+@media (max-width: 650px) {
+  .discovery-feature {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .discovery-cover {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
