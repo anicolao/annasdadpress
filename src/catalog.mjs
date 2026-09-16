@@ -48,6 +48,11 @@ export const books = [
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
     family: "guide",
     cover: "guide",
+    coverSource: "src/assets/covers/guide.png",
+    coverManifest: "src/assets/covers/guide.json",
+    coverWidth: 1800,
+    coverHeight: 2700,
+    coverStatus: "Print cover artwork",
     sampleSpreads: [
       {
         title: "See the pattern. Find the next step.",
@@ -132,6 +137,11 @@ export const books = [
   asin: null,
   amazonCa: null,
   amazonCom: null,
+  coverSource: b.cover
+    ? `sample_covers/ChatGPT Image Sep 9, 2026, 12_36_59 AM (${{ practice: 2, "start-here": 3, "candidates-done": 4 }[b.cover]}).png`
+    : null,
+  coverWidth: 1024,
+  coverHeight: 1536,
   coverStatus: b.cover
     ? "Concept cover / final artwork forthcoming"
     : "Cover forthcoming",

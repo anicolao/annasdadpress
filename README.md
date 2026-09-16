@@ -27,7 +27,7 @@ Tests verify internal links/assets, unique titles, one H1 per page, valid struct
 
 All titles are forthcoming. ISBNs, ASINs, final publication dates, and Amazon URLs are unknown and intentionally unset. Confirm the status before launch of each book; adjust availability copy in the shared book template when purchase links are supplied. Do not use invented purchase links. The Mastery subtitle is also unconfirmed.
 
-The four supplied PNGs in `sample_covers/` are concept artwork. They are converted to 360px and 720px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
+The Learner's Guide uses its generated print cover, imported from MathPub. The other three supplied PNGs in `sample_covers/` remain concept artwork. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
 
 The publisher identity and reusable catalog permit future non-Sudoku collections. Add their collection navigation/landing page and supply their family metadata when the next publishing program is known; do not repurpose existing printed slugs. `/next/` is the stable reader-resource hub. GitHub Pages also serves this route when readers enter `/next`.
 
@@ -57,3 +57,34 @@ Confirm final covers and interiors, title/subtitle spellings, publication status
 ## Illustration and text
 
 `src/icons.mjs` owns the original SVG path artwork: the open-book publisher mark, printers' ornament, navigation arrows, and four series symbols. These are decorative, hidden from assistive technology, and never keyboard targets. The favicon and social image share the publisher mark. Website text and metadata use ASCII punctuation; decorative marks use SVG paths instead of Unicode or icon fonts. Supplied cover artwork and the draft book excerpt remain source publications.
+
+## Updating the Learner's Guide cover
+
+After reviewing a successful MathPub cover build, run from this repository:
+
+```sh
+npm run covers:sync -- --source ../sudoku-challenges
+npm run build
+npm test
+```
+
+The sync requires Nix and uses the source repository's pinned environment (Python,
+pypdf, and Poppler). It reads only `build/learners-guide-cover/review/`, validates
+its PDF against the successful build manifest and the current cover/interior
+sources using MathPub's local cover checker, then crops the front trim panel using
+`covers/learners-guide-cover-sizing.json`. It does not rebuild publications or
+import proof editions. Bleed, spine, and back cover are excluded.
+
+Only `src/assets/covers/guide.png` and `guide.json` are imported. The JSON records
+image dimensions/hash, crop geometry, source publication, build revision, and
+source PDF hash; it contains no manuscript or puzzle data. If the front image is
+unchanged, both files and their original provenance remain unchanged, even if PDF
+metadata or the back cover changed. Validation and rendering finish in a temporary
+directory before imported files are replaced.
+
+Review the new image and desktop/mobile screenshots in `artifacts/`, then commit
+and push the website changes to publish through the existing Pages workflow.
+Normal builds require only committed website assets and verify their integrity;
+they cannot detect newer artwork in the separate MathPub repository. Run the sync
+after each cover revision intended for the website. Artwork status is independent
+of book availability: importing a cover does not mark the book as released.

@@ -1,4 +1,6 @@
-import { mkdir, rm, cp, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import assert from "node:assert/strict";
+import { mkdir, rm, cp, writeFile, readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { icon, publisherMark, publisherPaths } from "../src/icons.mjs";
 import { books, families } from "../src/catalog.mjs";
@@ -13,25 +15,35 @@ const esc = (s) =>
 await rm("dist", { recursive: true, force: true });
 await mkdir("dist/assets", { recursive: true });
 await cp("public", "dist", { recursive: true });
-for (const [i, name] of [
-  "guide",
-  "practice",
-  "start-here",
-  "candidates-done",
-].entries())
-  for (const w of [360, 720])
-    await sharp(
-      `sample_covers/ChatGPT Image Sep 9, 2026, 12_36_59 AM (${i + 1}).png`,
-    )
+for (const b of books.filter((b) => b.cover)) {
+  if (b.coverManifest) {
+    const record = JSON.parse(await readFile(b.coverManifest, "utf8"));
+    const image = await readFile(b.coverSource);
+    const metadata = await sharp(image).metadata();
+    assert.equal(record.schema, 1);
+    assert.equal(record.artworkStatus, "print");
+    assert.equal(
+      createHash("sha256").update(image).digest("hex"),
+      record.sha256,
+      "Cover integrity check failed; run covers:sync",
+    );
+    assert.equal(metadata.width, record.width);
+    assert.equal(metadata.height, record.height);
+    assert.equal(b.coverWidth, record.width);
+    assert.equal(b.coverHeight, record.height);
+  }
+  for (const w of [360, 720, 1440])
+    await sharp(b.coverSource)
       .resize(w)
       .webp({ quality: 85 })
-      .toFile(`dist/assets/${name}-${w}.webp`);
+      .toFile(`dist/assets/${b.cover}-${w}.webp`);
+}
 const mark = publisherMark("brand-mark");
 const link = (p, t, c = "") => `<a class="${c}" href="${url(p)}">${t}</a>`;
 const arrow = icon("diagonal");
 function cover(b, hero = false) {
   return b.cover
-    ? `<img src="${url(`/assets/${b.cover}-720.webp`)}" srcset="${url(`/assets/${b.cover}-360.webp`)} 360w, ${url(`/assets/${b.cover}-720.webp`)} 720w" sizes="${hero ? "(max-width: 650px) 65vw, 330px" : "(max-width: 650px) 75vw, 280px"}" width="1024" height="1536" alt="${esc(b.title)}: concept cover" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'}>`
+    ? `<img src="${url(`/assets/${b.cover}-720.webp`)}" srcset="${url(`/assets/${b.cover}-360.webp`)} 360w, ${url(`/assets/${b.cover}-720.webp`)} 720w, ${url(`/assets/${b.cover}-1440.webp`)} 1440w" sizes="${hero ? "(max-width: 650px) 65vw, 330px" : "(max-width: 650px) 75vw, 280px"}" width="${b.coverWidth}" height="${b.coverHeight}" alt="${esc(b.title)}: ${esc(b.coverStatus)}" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'}>`
     : `<div class="cover-placeholder"><span>THE SUDOKU<br>LEARNER'S LIBRARY</span><strong>MASTERY</strong><b>Hard<br>Sudoku</b>${icon("mastery", "placeholder-grid")}<small>COVER FORTHCOMING</small></div>`;
 }
 function card(b) {
@@ -61,7 +73,7 @@ async function page(path, title, description, body, schema) {
     description:
       "An independent Canadian publisher of educational and puzzle books.",
   };
-  const html = `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} | Anna's Dad Press</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="${schema ? "book" : "website"}"><meta property="og:site_name" content="Anna's Dad Press"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${origin}/assets/social.png"><meta property="og:image:alt" content="Anna's Dad Press: Books for curious minds"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f7f6f0"><link rel="icon" href="${url("/assets/favicon.svg")}" type="image/svg+xml"><link rel="stylesheet" href="${url("/assets/style.css")}"><script type="application/ld+json">${JSON.stringify(schema || organization).replaceAll("<", "\\u003c")}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner">${link("/", `${mark}<span class="brand-name">Anna's Dad<span>PRESS</span></span>`, "brand")}<nav aria-label="Main navigation">${[
+  const html = `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} | Anna's Dad Press</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="${schema ? "book" : "website"}"><meta property="og:site_name" content="Anna's Dad Press"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${schema?.image || origin + "/assets/social.png"}"><meta property="og:image:alt" content="${esc(schema?.name || "Anna's Dad Press: Books for curious minds")}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f7f6f0"><link rel="icon" href="${url("/assets/favicon.svg")}" type="image/svg+xml"><link rel="stylesheet" href="${url("/assets/style.css")}"><script type="application/ld+json">${JSON.stringify(schema || organization).replaceAll("<", "\\u003c")}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner">${link("/", `${mark}<span class="brand-name">Anna's Dad<span>PRESS</span></span>`, "brand")}<nav aria-label="Main navigation">${[
     ["/books/", "Our books"],
     ["/sudoku-learners-library/", "The Sudoku Library"],
     ["/about/", "Our story"],
@@ -81,7 +93,7 @@ await page(
   "/",
   "Books for curious minds",
   "Thoughtfully designed educational and puzzle books from an independent Canadian publisher. Discover The Sudoku Learner's Library.",
-  `<section class="hero wrap"><div class="hero-copy"><p class="eyebrow"><span class="tiny-line"></span> Independent minds. Thoughtful books.</p><h1>A little curiosity.<br>A new perspective.<br><em>Your next step.</em></h1><p class="hero-description">Books that make the unfamiliar understandable.<br>Carefully designed to help you learn, practise,<br class="desktop"> and discover what you can do.</p><div class="actions">${link("/books/", "Explore our books " + arrow, "button")}${link("/about/", `Meet Anna's Dad ${icon("arrow")}`, "text-link")}</div><p class="hero-note">${icon("ornament")} Made for curious minds. At every stage.</p></div><div class="hero-art"><div class="art-grid" aria-hidden="true"></div><span class="art-caption">A NEW CHAPTER IN LEARNING</span><div class="hero-book">${link("/books/" + books[0].slug + "/", cover(books[0], true))}</div><div class="edition-note">${icon("ornament", "edition-ornament")}<span>Introducing<br><strong>The Sudoku<br>Learner's Library</strong></span></div><span class="concept-note">Concept cover shown</span></div></section><div class="values-strip"><div class="wrap"><span>Clear explanations</span>${icon("ornament")}<span>Purposeful practice</span>${icon("ornament")}<span>Real understanding</span>${icon("ornament")}<span>The pleasure of progress</span></div></div><section class="section wrap"><div class="section-heading"><div><p class="eyebrow">Our first collection</p><h2>Don't just fill the grid.<br><em>See the possibilities.</em></h2></div><div><p>The Sudoku Learner's Library brings together clear<br class="desktop"> teaching and purposeful practice. A collection that<br class="desktop"> grows with you, from your first grid to your next challenge.</p>${link("/sudoku-learners-library/", "Discover the library " + arrow, "text-link")}</div></div><div class="feature"><div class="feature-label"><span class="eyebrow">Start with understanding</span><h3>One guide.<br> A world of<br> <em>\"now I see it.\"</em></h3></div><div><h3>The Sudoku Learner's Guide</h3><p>A full-colour, step-by-step course that takes you from the very first rule to advanced solving techniques. Learn the logic, see it in action, and make it your own.</p><div class="feature-tags"><span>Visual explanations</span><span>Complete walkthroughs</span><span>Beginner to advanced</span></div>${link("/books/" + books[0].slug + "/", "Inside the guide " + arrow, "text-link")}</div>${icon("diagonal", "feature-symbol")}</div><div class="subheading"><h3>Four ways to keep moving forward.</h3><span>Different support. The same thoughtful approach.</span></div>${familyGrid()}</section><section class="latest"><div class="wrap section"><div class="section-heading"><div><p class="eyebrow">On the publishing desk</p><h2>Your next chapter is coming.</h2></div>${link("/books/", "View all books " + arrow, "text-link")}</div><div class="book-grid">${books.slice(0, 3).map(card).join("")}</div></div></section><section class="story-section wrap section"><div class="story-monogram" aria-hidden="true">${publisherMark()}</div><div><p class="eyebrow">A daughter's idea. A dad's next chapter.</p><h2>It started with Anna.</h2><p>When Anna built her successful <a class="inline-link" href="https://www.learnmathwithanna.com/"><em>Learn Math with Anna</em></a> publishing project, her dad was paying attention. Watching her create useful educational books inspired him to start making his own.</p><p>That's the story behind the name. And the spirit behind every book.</p>${link("/about/", "Our story " + arrow, "text-link")}</div></section>`,
+  `<section class="hero wrap"><div class="hero-copy"><p class="eyebrow"><span class="tiny-line"></span> Independent minds. Thoughtful books.</p><h1>A little curiosity.<br>A new perspective.<br><em>Your next step.</em></h1><p class="hero-description">Books that make the unfamiliar understandable.<br>Carefully designed to help you learn, practise,<br class="desktop"> and discover what you can do.</p><div class="actions">${link("/books/", "Explore our books " + arrow, "button")}${link("/about/", `Meet Anna's Dad ${icon("arrow")}`, "text-link")}</div><p class="hero-note">${icon("ornament")} Made for curious minds. At every stage.</p></div><div class="hero-art"><div class="art-grid" aria-hidden="true"></div><span class="art-caption">A NEW CHAPTER IN LEARNING</span><div class="hero-book">${link("/books/" + books[0].slug + "/", cover(books[0], true))}</div><div class="edition-note">${icon("ornament", "edition-ornament")}<span>Introducing<br><strong>The Sudoku<br>Learner's Library</strong></span></div><span class="concept-note">${books[0].coverStatus}</span></div></section><div class="values-strip"><div class="wrap"><span>Clear explanations</span>${icon("ornament")}<span>Purposeful practice</span>${icon("ornament")}<span>Real understanding</span>${icon("ornament")}<span>The pleasure of progress</span></div></div><section class="section wrap"><div class="section-heading"><div><p class="eyebrow">Our first collection</p><h2>Don't just fill the grid.<br><em>See the possibilities.</em></h2></div><div><p>The Sudoku Learner's Library brings together clear<br class="desktop"> teaching and purposeful practice. A collection that<br class="desktop"> grows with you, from your first grid to your next challenge.</p>${link("/sudoku-learners-library/", "Discover the library " + arrow, "text-link")}</div></div><div class="feature"><div class="feature-label"><span class="eyebrow">Start with understanding</span><h3>One guide.<br> A world of<br> <em>\"now I see it.\"</em></h3></div><div><h3>The Sudoku Learner's Guide</h3><p>A full-colour, step-by-step course that takes you from the very first rule to advanced solving techniques. Learn the logic, see it in action, and make it your own.</p><div class="feature-tags"><span>Visual explanations</span><span>Complete walkthroughs</span><span>Beginner to advanced</span></div>${link("/books/" + books[0].slug + "/", "Inside the guide " + arrow, "text-link")}</div>${icon("diagonal", "feature-symbol")}</div><div class="subheading"><h3>Four ways to keep moving forward.</h3><span>Different support. The same thoughtful approach.</span></div>${familyGrid()}</section><section class="latest"><div class="wrap section"><div class="section-heading"><div><p class="eyebrow">On the publishing desk</p><h2>Your next chapter is coming.</h2></div>${link("/books/", "View all books " + arrow, "text-link")}</div><div class="book-grid">${books.slice(0, 3).map(card).join("")}</div></div></section><section class="story-section wrap section"><div class="story-monogram" aria-hidden="true">${publisherMark()}</div><div><p class="eyebrow">A daughter's idea. A dad's next chapter.</p><h2>It started with Anna.</h2><p>When Anna built her successful <a class="inline-link" href="https://www.learnmathwithanna.com/"><em>Learn Math with Anna</em></a> publishing project, her dad was paying attention. Watching her create useful educational books inspired him to start making his own.</p><p>That's the story behind the name. And the spirit behind every book.</p>${link("/about/", "Our story " + arrow, "text-link")}</div></section>`,
 );
 const intro = (eyebrow, title, description) =>
   `<section class="page-intro wrap"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${description}</p></section>`;
@@ -101,7 +113,7 @@ async function catalog(path, selected) {
       .map(card)
       .join(
         "",
-      )}</div><p class="small-note">Concept covers shown. Final artwork and publication details will be added as they become available.</p></section>`,
+      )}</div><p class="small-note">Cover artwork status is noted on each book's page. Publication details will be added as they become available.</p></section>`,
   );
 }
 await catalog("/books/", "all");

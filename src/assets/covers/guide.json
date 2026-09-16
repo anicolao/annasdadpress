@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "artworkStatus": "print",
+  "width": 1800,
+  "height": 2700,
+  "sha256": "96c9d8d0b94b10c698059945e026d283bc5a20cf73221c3a6f0c6d9d2e383faa",
+  "publication": "learners-guide-cover",
+  "variant": "review",
+  "sourceRevision": "7b3a67733ec97f9cc7ca262f6b1ac0e804922030",
+  "sourceDirty": false,
+  "sourcePdfSha256": "b7f640933f48cbb765eb65a7f18634fc2c75148efba7704a6a11ed21f9082072",
+  "cropPoints": [
+    482.184576,
+    9,
+    914.184576,
+    657
+  ],
+  "trimInches": [
+    6,
+    9
+  ]
+}
