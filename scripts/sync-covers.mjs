@@ -12,10 +12,12 @@ if (
   args[0] !== "--source" ||
   (args.length === 4 &&
     (args[2] !== "--book" ||
-      !["guide", "advent-2026", "candidates-done"].includes(args[3])))
+      !["guide", "advent-2026", "candidates-done", "start-here"].includes(
+        args[3],
+      )))
 )
   throw new Error(
-    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026|candidates-done]",
+    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026|candidates-done|start-here]",
   );
 const book = args[3] || "guide";
 const root = fileURLToPath(new URL("../", import.meta.url));

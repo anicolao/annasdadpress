@@ -147,6 +147,11 @@ export const books = [
       "Guided Puzzles That Show You Where to Look Without Giving Away the Answer",
     family: "start-here",
     cover: "start-here",
+    coverSource: "src/assets/covers/start-here.png",
+    coverManifest: "src/assets/covers/start-here.json",
+    coverWidth: 1800,
+    coverHeight: 2250,
+    coverStatus: "Print cover artwork",
     description:
       "Take on hard Sudoku with a little direction when you need it. Hints point you towards your next move while leaving the discovery to you.",
     bestFor:

@@ -14,15 +14,15 @@ sys.path.insert(0, str(Path.cwd() / 'tools'))
 
 out = Path(sys.argv[1])
 key = sys.argv[2]
-if key == 'candidates-done':
+if key in ('candidates-done', 'start-here'):
     # Print exports are frozen artifacts; verify the paired export receipt rather
     # than requiring a newer working manuscript to match an approved print file.
     from tools.cover_common import dimensions
-    publication = 'candidates-done-cover'
-    folder = Path('print/candidates-done')
+    publication = f'{key}-cover'
+    folder = Path('print') / key
     manifest = json.loads((folder / 'manifest.json').read_text())
-    pdf = folder / 'candidates-done-cover-print.pdf'
-    interior = folder / 'candidates-done-print.pdf'
+    pdf = folder / f'{key}-cover-print.pdf'
+    interior = folder / f'{key}-print.pdf'
     entries = []
     for path in (pdf, interior):
         entry = next(e for e in manifest['files'] if e['pdf'] == str(path))
@@ -39,7 +39,7 @@ if key == 'candidates-done':
     interior_reader = PdfReader(interior)
     assert all(abs(float(p.mediabox.width)-576)<.01 and abs(float(p.mediabox.height)-720)<.01 for p in interior_reader.pages)
     dims = dimensions(len(interior_reader.pages), 8, 10, 'black-white')
-    recorded = json.loads(Path('candidates_done/cover-dimensions.json').read_text())
+    recorded = json.loads((Path(key.replace('-', '_')) / 'cover-dimensions.json').read_text())
     assert all(recorded[k] == v for k, v in dims.items()), 'Print dimensions do not match sizing record'
     source = {
         'publication': publication,

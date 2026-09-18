@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "artworkStatus": "print",
+  "width": 1800,
+  "height": 2250,
+  "sha256": "8dbe6dcc0c5fd69791c73d3b916fc57b3402f6848df739b2e9d8ce4d490e35d3",
+  "publication": "start-here-cover",
+  "variant": "print",
+  "sourceRevision": "0a90b0c7344d25a3ad9019b8940d7693a9fa9d50",
+  "sourceDirty": false,
+  "sourcePdfSha256": "239bcd2acec970aa3836cb9e79919370394bf42484934a5a1b4e8dd26c7e4211",
+  "sourceExport": "print/start-here/start-here-cover-print.pdf",
+  "cropPoints": [
+    606.07872,
+    9,
+    1182.07872,
+    729
+  ],
+  "trimInches": [
+    8,
+    10
+  ]
+}
