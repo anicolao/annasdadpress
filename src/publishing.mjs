@@ -76,7 +76,7 @@ export function purchaseSection(book, config) {
       : "Purchase links will be added here when confirmed."
     : links.length
       ? "This book is forthcoming. View the listing for details."
-      : "Publication date to be announced. Purchase links will be added when available.";
+      : "Purchase links will be added when available.";
   const identifiers = [
     ["ISBN", book.isbn],
     ["ASIN", book.asin],

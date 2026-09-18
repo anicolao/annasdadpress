@@ -57,7 +57,13 @@ TODO: confirm the monitored publisher contact email. Set `contactEmail` in
 `src/publisher.mjs` to add the footer/About mailto links. No public address is
 inferred from hosting credentials or Git metadata.
 
-All six books use generated print cover artwork imported from MathPub. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
+All six books have real cover artwork and a two-page sample from the print
+manuscript. Samples include responsive images, a downloadable PDF, and a text
+description. Only the selected pages are published; complete manuscripts stay in
+the private book repository. Normal builds need only committed assets, not Python
+or the manuscript repository. The solver is hosted separately at
+https://sudoku.annasdadpress.com/; `/next/` is the stable reader-resource hub.
+
 
 The publisher identity and reusable catalog permit future non-Sudoku collections. Add their collection navigation/landing page and supply their family metadata when the next publishing program is known; do not repurpose existing printed slugs. `/next/` is the stable reader-resource hub. GitHub Pages also serves this route when readers enter `/next`.
 
@@ -86,120 +92,110 @@ Confirm final covers and interiors, title/subtitle spellings, publication status
 
 ## Illustration and text
 
-`src/icons.mjs` owns the original SVG path artwork: the open-book publisher mark, printers' ornament, navigation arrows, and four series symbols. These are decorative, hidden from assistive technology, and never keyboard targets. The favicon and social image share the publisher mark. Website text and metadata use ASCII punctuation; decorative marks use SVG paths instead of Unicode or icon fonts. Supplied cover artwork and the draft book excerpt remain source publications.
+`src/icons.mjs` owns the original SVG path artwork: the open-book publisher mark, printers' ornament, navigation arrows, and four series symbols. These are decorative, hidden from assistive technology, and never keyboard targets. The favicon and social image share the publisher mark. Website text and metadata use ASCII punctuation; decorative marks use SVG paths instead of Unicode or icon fonts. Supplied cover artwork and book excerpts retain their source typography.
 
-## Updating print covers
+## Refreshing books and samples
 
-After reviewing a successful MathPub cover build, run from this repository:
+Use this after MathPub has produced the print interiors and reviewed covers:
 
 ```sh
-npm run covers:sync -- --source ../sudoku-challenges
-npm run covers:sync -- --source ../sudoku-challenges --book advent-2026
+npm run books:refresh -- --source ../sudoku-challenges
+# Or refresh one book:
+npm run books:refresh -- --source ../sudoku-challenges --book mastery
 npm run build
 npm test
 ```
 
-The sync requires Nix and uses the source repository's pinned environment (Python,
-pypdf, and Poppler). It reads only `build/learners-guide-cover/review/`, validates
-its PDF against the successful build manifest and the current cover/interior
-sources using MathPub's local cover checker, then crops the front trim panel using
-`covers/learners-guide-cover-sizing.json`. It does not rebuild publications or
-import proof editions. Bleed, spine, and back cover are excluded.
+Keys: `guide`, `advent-2026`, `practice-xwing`, `start-here`, `candidates-done`,
+`mastery`. Requires Nix, npm dependencies, and Playwright Chromium. Nothing
+rebuilds or edits the manuscripts. Review asset/provenance diffs and screenshots
+before committing and pushing to publish.
 
-Only `src/assets/covers/guide.png` and `guide.json` are imported. The JSON records
-image dimensions/hash, crop geometry, source publication, build revision, and
-source PDF hash; it contains no manuscript or puzzle data. If the front image is
-unchanged, both files and their original provenance remain unchanged, even if PDF
-metadata or the back cover changed. Validation and rendering finish in a temporary
-directory before imported files are replaced.
+The existing `covers:sync -- --source ... [--book KEY] [--review]` command now also
+refreshes that book's sample and the share cards. Its default book is the Guide.
+Use `samples:sync -- --source ... [--book KEY]` for an interior-only refresh;
+without a book it refreshes all six. `social:refresh` renders the landscape share
+images with the site's browser font stack; these PNGs are committed so CI cannot
+silently substitute a different font. Refresh them after title/subtitle changes.
 
-Review the new image and desktop/mobile screenshots in `artifacts/`, then commit
-and push the website changes to publish through the existing Pages workflow.
-Normal builds require only committed website assets and verify their integrity;
-they cannot detect newer artwork in the separate MathPub repository. Run the sync
-after each cover revision intended for the website. Artwork status is independent
-of book availability: importing a cover does not mark the book as released.
+### How sample selection survives repagination
 
-Discovery is the fifth series in The Sudoku Learner's Library. Its first book,
-`25-days-of-christmas-sudoku`, is a forthcoming Advent puzzle book for December
-2026, with 25 moderate Sudoku puzzles and daily drawing reveals. The homepage,
-Discovery catalog page, book chooser, and individual book page promote it using
-its generated 8 x 10 inch cover. No release date or purchase links are assumed.
+`src/samples/selections.json` is the editorial selection contract: explicit print
+path, identifying title fragments, trim dimensions, two sets of semantic anchors,
+and reader-facing descriptions. Each anchor set must resolve to exactly one
+page. The importer checks adjacency, extracts the actual printed page numbers,
+and stops if a heading disappears, duplicates, or ceases to form a spread. It
+never falls back to old page numbers or silently picks the first match. Ordinary
+front-matter additions move the selection without breaking it.
 
-The default cover sync still imports the Guide. `--book advent-2026` selects
-`build/advent-2026-cover/review/` and imports `src/assets/covers/advent-2026.png`
-plus its JSON record. It validates the successful PDF hash, page geometry,
-interior fingerprint, Day 1 puzzle, prepared artwork, and rendered style before
-cropping. Both imports use `scripts/export-cover.py` and the same image integrity
-checks at website build time. Only the selected book is updated by a sync.
+All print PDFs must identify a clean MathPub source revision, have the expected
+trim, and contain no annotations. When the adjacent export receipt includes that
+PDF, its hash, revision, page count, and unchanged-content flag are checked. The
+root receipt currently only covers its latest export batch: Guide and Advent
+therefore record `receiptVerified: false`, their actual PDF hash, and embedded
+source revision. This distinction is explicit, not a claim of receipt validation.
 
-For Candidates Done, import the frozen print export rather than a review build:
+Importing writes two responsive WebPs per page, a two-page PDF, and a manifest in
+`src/samples/KEY.json`. Manifests record the source hash/revision, selection hash,
+PDF/printed page numbers, dimensions, and output hashes. Every requested sample
+is validated and rendered in a temporary directory before any sample is replaced.
+Normal builds verify all sample hashes and reject changed selections until the
+samples have been refreshed. Descriptions intentionally avoid puzzle-specific
+numbers that can change when puzzles are regenerated. Review them if a book's
+teaching method changes. Only excerpts and descriptive metadata are published.
 
-```sh
-npm run covers:sync -- --source ../sudoku-challenges --book candidates-done
-```
-
-This reads `print/candidates-done/candidates-done-cover-print.pdf` and its paired
-interior, verifies their hashes and shared clean source revision against the print
-manifest, and derives the wrap geometry from the 8 x 10 interior page count and
-black-and-white paper specification. The result must match the cover sizing record
-and PDF dimensions. Only the trimmed front image and its provenance record are
-imported into `src/assets/covers/`; neither print PDF is published on the website.
-
-Start Here uses the same print-export validation and cropping workflow:
+The Guide's old PDF URL is retained as an alias to its refreshed excerpt. The
+obsolete fixed-page extractor has been removed. Selection regression tests cover
+inserted pages, ambiguous/missing headings, number-prefix collisions, punctuation,
+and duplicate selections:
 
 ```sh
-npm run covers:sync -- --source ../sudoku-challenges --book start-here
+(cd ../sudoku-challenges && nix develop -c python ../annasdadpress/scripts/check-samples.py)
 ```
 
-The source is `print/start-here/start-here-cover-print.pdf`, validated against
-`print/start-here/manifest.json`, the matching interior, and
-`start_here/cover-dimensions.json`. Its front cover is imported as
-`src/assets/covers/start-here.png` with a matching provenance JSON record.
+### Cover sources and failed refreshes
 
-Practice! X-Wing uses the same print-export workflow:
+Guide and Advent use validated review cover builds, checked against current
+sources. The Guide print wrap still has older coral artwork, so its last verified
+teal cover remains the published cover. Practice, Start Here, and Candidates Done
+use paired print exports and receipts in their respective print subdirectories;
+`--review` selects their checked current review covers instead. Mastery uses
+`print/mastery-cover-print.pdf`, `print/mastery-print.pdf`, and the root receipt;
+it does not support `--review`.
+
+Cover sync validates hashes, dimensions, and source evidence, then crops only the
+front trim panel. Committed PNGs and provenance JSON feed normal build-time WebP
+conversion. If a source checker says a cover is stale, finish that cover build in
+MathPub and rerun; do not bypass the check. An all-books refresh can stop after
+earlier books were imported. Treat a failed run as incomplete and do not publish
+it automatically. Cover and print-interior revisions may differ, and their
+separate manifests preserve that fact. No import changes publication status.
+
+Book URLs remain stable, including `/books/mastery-hard-sudoku/`. The legacy
+`/books/sudoku/` route points its canonical to `/books/` and is no longer a redundant
+catalog filter.
+
+## Publisher email forwarding
+
+`alex@annasdadpress.com` is the requested contact alias. The token initially
+provided in `.env` returns 403 for Email Routing; no mail DNS has been changed.
+Update its permissions for the relevant account and zone: Email Routing Addresses
+Edit, Email Routing Rules Edit, Email Routing Settings Edit, Zone Settings Edit,
+and DNS Edit (retain Zone Read). Do not commit credentials.
 
 ```sh
-npm run covers:sync -- --source ../sudoku-challenges --book practice-xwing
+node --env-file=.env scripts/setup-email.mjs --destination DESTINATION_EMAIL
+node --env-file=.env scripts/setup-email.mjs --destination DESTINATION_EMAIL --apply
 ```
 
-It reads `print/practice-xwing/practice-xwing-cover-print.pdf`, validates the
-paired interior and export manifest plus `practice_xwing/cover-dimensions.json`,
-and imports `src/assets/covers/practice-xwing.png` and its provenance JSON.
-The website's existing `practice` image URLs and book URL remain stable.
+The first command inspects; `--apply` registers the destination if needed, waits
+for its Cloudflare verification, enables routing DNS, and creates the exact alex
+rule. It can be rerun after verification and refuses conflicting MX records or an
+existing alex rule with a different destination. It preserves other routes. The
+script verifies enabled settings/rule before reporting success; inbox delivery
+still needs an actual incoming-message check. Once active, set `contactEmail` in
+`src/publisher.mjs` to `alex@annasdadpress.com`, build, test, and publish. This is
+incoming forwarding, not an outgoing SMTP mailbox.
 
-To refresh a cover from its latest reviewed artwork before the next print export,
-append `--review` to the sync command. For example:
-
-```sh
-npm run covers:sync -- --source ../sudoku-challenges --book start-here --review
-```
-
-For the three workbook covers this verifies the review PDF's build hash, current
-artwork, style-source hashes, and sizing before extraction. The provenance record
-identifies the review build and whether its source had uncommitted changes.
-Guide and Advent already use their validated review builds by default. Omit
-`--review` to use the frozen print exports for the three workbook covers.
-
-
-### Mastery
-
-```sh
-npm run covers:sync -- --source ../sudoku-challenges --book mastery
-```
-
-Imports `print/mastery-cover-print.pdf`, paired with `print/mastery-print.pdf`
-and the root `print/manifest.json` receipt. The importer validates both hashes,
-clean source revision, annotation removal, page counts, 8 x 10 trim, and recorded
-spine dimensions before cropping the front panel. Mastery requires print exports;
-`--review` is not supported. Commit `src/assets/covers/mastery.png` and its JSON
-provenance with any catalog changes.
-
-The first book is `Mastery! Advanced Sudoku`: 120 puzzles in four parts, with
-printed solutions, selected key moves, and QR codes for digital solving and full
-walkthroughs. Its stable URL remains `/books/mastery-hard-sudoku/`. It is still
-forthcoming until availability and purchase links are confirmed.
-
-The September 18 Guide refresh uses the validated current review build's teal
-artwork; `print/learners-guide-cover-print.pdf` still contains the older coral
-cover. The default Guide sync checks the current artwork against its sources.
+API references: [Enable routing DNS](https://developers.cloudflare.com/api/resources/email_routing/subresources/dns/methods/create/),
+[Create forwarding rules](https://developers.cloudflare.com/api/resources/email_routing/subresources/rules/methods/create/).

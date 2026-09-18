@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "print/zero-to-hero-print.pdf",
+  "sourceSha256": "3ab81b32abf944435ad712827b1452c49293a6d7dcf6bfcccfc104c45786939e",
+  "sourceRevision": "5abd1b732b4afbcbbe3b7df4d239f02051434528",
+  "receiptVerified": false,
+  "selectionSha256": "5a02484765929435387e68e2bde466fd51019b6e8633a4ecf68ef88547db4b1a",
+  "spread": {
+    "title": "See the pattern. Find the next step.",
+    "description": "An X-Wing example and its next deduction, taken from the current print manuscript.",
+    "caption": "Print manuscript / Pages 96 and 97 / Content may change before publication.",
+    "pdf": "/assets/samples/guide-sample.pdf",
+    "pages": [
+      {
+        "image": "guide-page-1",
+        "label": "Page 96: Recognise the X-Wing",
+        "alt": "The Sudoku Learner's Guide, printed page 96: Recognise the X-Wing. Read the sample description below for context.",
+        "width": 640,
+        "height": 960,
+        "pdfPage": 104,
+        "printedPage": "96"
+      },
+      {
+        "image": "guide-page-2",
+        "label": "Page 97: Eliminate and place",
+        "alt": "The Sudoku Learner's Guide, printed page 97: Eliminate and place. Read the sample description below for context.",
+        "width": 640,
+        "height": 960,
+        "pdfPage": 105,
+        "printedPage": "97"
+      }
+    ],
+    "explanation": [
+      "The first page identifies an X-Wing: two rows restrict the same candidate to the same two columns. Those columns must receive that digit from the pattern.",
+      "The second page follows an elimination outside the pattern and the single it reveals. The diagrams retain candidate notes so you can follow the deduction."
+    ]
+  },
+  "assets": {
+    "guide-sample.pdf": "368c4191cb72619b254b9baab0af641e7d75992001e99d9f2f14b84b4296dbf1",
+    "guide-page-1-640.webp": "72cbb62444014b933bb2238ee93b52f6f07a253f0748d4cb06c5ce6dd74565f7",
+    "guide-page-1-1280.webp": "9e487277ff2d31e5b94c1fcc4021107ff83628eb15f63d9140551068f2cd22e1",
+    "guide-page-2-640.webp": "f159ae43a467d455603bec39752e8ebbbf191b999b3bd6dfd74f40e70be7e362",
+    "guide-page-2-1280.webp": "a23673ee9cf5664668b3252a499d9d2891dc1cdd4e11fa625f51743dff592196"
+  }
+}

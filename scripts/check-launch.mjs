@@ -158,7 +158,7 @@ try {
       ),
     );
     assert.equal(
-      home.includes("Available now / Print cover artwork"),
+      home.includes('class="concept-note">Available now'),
       name === "available",
     );
     assert.equal(

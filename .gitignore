@@ -8,3 +8,4 @@ artifacts/
 
 # Local manuscript reference; only selected sample pages are published.
 sample_covers/*.pdf
+__pycache__/

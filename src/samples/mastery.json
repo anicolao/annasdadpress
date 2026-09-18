@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "print/mastery-print.pdf",
+  "sourceSha256": "94ad51f22e755b66d91a2674276ec9c96ff83ac68b7bd988cb92dc70c1a91bd4",
+  "sourceRevision": "621993f0dd386600b664c8e4e332071df41b5977",
+  "receiptVerified": true,
+  "selectionSha256": "5a9e3e34d2c482c171a763e9d80bb544c91bac4e7e53a67420d609c936b150b7",
+  "spread": {
+    "title": "The grid is yours.",
+    "description": "Two opening puzzles from Part I: Find Your Rhythm. Choose your own next move.",
+    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "pdf": "/assets/samples/mastery-sample.pdf",
+    "pages": [
+      {
+        "image": "mastery-page-1",
+        "label": "Page 2: Puzzle 1",
+        "alt": "Mastery! Advanced Sudoku, printed page 2: Puzzle 1. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 6,
+        "printedPage": "2"
+      },
+      {
+        "image": "mastery-page-2",
+        "label": "Page 3: Puzzle 2",
+        "alt": "Mastery! Advanced Sudoku, printed page 3: Puzzle 2. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 7,
+        "printedPage": "3"
+      }
+    ],
+    "explanation": [
+      "These pages supply the original givens and space for your own notes. No pattern cells are highlighted and no technique names are supplied beside the puzzles.",
+      "Work from the simpler checks to the harder deductions, keeping candidates current as you go. The complete book includes solutions and QR codes for digital solving."
+    ]
+  },
+  "assets": {
+    "mastery-sample.pdf": "fe3308a8a9296b8470f5241dde9a7608801a3b7e39169613e5c9f891df940f2a",
+    "mastery-page-1-640.webp": "64ddf8dfbe9e57bab94a27e6ea91098a88949500488670065ee6c2f9c5386050",
+    "mastery-page-1-1280.webp": "b06e20a36632c04fa05f3c093cdf2a9a29b65dad97c279ee001c1ad68e79dd3c",
+    "mastery-page-2-640.webp": "f39c23310dc9f1815f26450c5dea5620c296e18fa63378fd81a5de88fe7a2e2e",
+    "mastery-page-2-1280.webp": "8ba78bd2a87ed5aad14471fc9df920f5b2b0df02660a34f7e09b9958a73f09b3"
+  }
+}

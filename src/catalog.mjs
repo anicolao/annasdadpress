@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { publisher } from "./publisher.mjs";
 export const families = [
   {
@@ -58,7 +59,7 @@ export const books = [
     subtitle:
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
     family: "guide",
-    isbn: "978-1-0681462-0-6",
+    isbn: "9781068146206",
     cover: "guide",
     coverSource: "src/assets/covers/guide.png",
     coverManifest: "src/assets/covers/guide.json",
@@ -67,32 +68,6 @@ export const books = [
     coverStatus: "Print cover artwork",
     courseDescription:
       "A full-colour, 6 x 9 inch course with 45 complete puzzles, visual explanations, and walkthroughs that build from the first rules to advanced patterns and chains.",
-    sampleSpreads: [
-      {
-        title: "See the pattern. Find the next step.",
-        description:
-          "An X-Wing example from Chapter 3: Advanced Pattern Recognition. Follow the highlighted candidates from the first deduction to the next placement.",
-        caption:
-          "Draft interior / Printed pages 82-83 / Layout and content may change before publication.",
-        pdf: "/assets/samples/sudoku-learners-guide-x-wing-sample.pdf",
-        pages: [
-          {
-            image: "guide-x-wing-82",
-            label: "Page 82: Recognise the X-Wing",
-            alt: "Draft page 82: candidate 8 highlighted at the four corners of an X-Wing in rows 3 and 5, columns 5 and 6.",
-          },
-          {
-            image: "guide-x-wing-83",
-            label: "Page 83: Eliminate and place",
-            alt: "Draft page 83: the X-Wing removes candidate 8 from row 2, column 6, leaving a green-highlighted 1.",
-          },
-        ],
-        explanation: [
-          "On page 82, candidate 8 has exactly two possible positions in each of rows 3 and 5: columns 5 and 6. These four positions form an X-Wing. The two rows must place their 8s in opposite corners, so each of those columns receives an 8 from the pattern.",
-          "On page 83, that means no other cell in columns 5 and 6 can contain an 8. Remove candidate 8 from row 2, column 6. Its candidates were 1 and 8; now only 1 remains. Place 1, then rescan the crossing row, column, and box.",
-        ],
-      },
-    ],
     description:
       "A complete course in seeing the logic. Learn the rules, understand the techniques, and build your confidence one well-explained step at a time.",
     bestFor:
@@ -133,7 +108,7 @@ export const books = [
       {
         title: "Bring the scene together",
         description:
-          "Combine the 6-inch tiles into one large festive picture. Sudoku answers are included in the book.",
+          "Draw on the blank-backed pages or personal copies. Cut out the 6-inch squares and tape them together from the back to make a 30-inch square picture.",
       },
     ],
   },
@@ -199,7 +174,7 @@ export const books = [
     coverHeight: 2250,
     coverStatus: "Print cover artwork",
     description:
-      "You know the techniques. Now decide when to use them. Solve 120 original Sudoku puzzles, progressing from intermediate patterns to deeper chains and coloring, without hints or technique labels beside the grids.",
+      "You know the techniques. Now decide when to use them. Solve 120 original Sudoku puzzles, progressing from intermediate patterns to deeper chains and colouring, without hints or technique labels beside the grids.",
     bestFor:
       "Solvers ready to choose their own next move and bring a growing toolkit to advanced puzzles.",
     featureIntro: "The first Mastery book",
@@ -247,6 +222,17 @@ export const books = [
   coverStatus: b.cover
     ? "Concept cover / final artwork forthcoming"
     : "Cover forthcoming",
-  sampleSpreads: [],
   ...b,
+  sampleManifest: `src/samples/${b.cover === "practice" ? "practice-xwing" : b.cover}.json`,
+  sampleSpreads: [
+    JSON.parse(
+      readFileSync(
+        new URL(
+          `./samples/${b.cover === "practice" ? "practice-xwing" : b.cover}.json`,
+          import.meta.url,
+        ),
+        "utf8",
+      ),
+    ).spread,
+  ],
 }));

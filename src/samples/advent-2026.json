@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "print/advent-2026-print.pdf",
+  "sourceSha256": "229205d9eb1e33ce7663e49f0913816d5c3a63f7ac885bd2f9a0151476c99df1",
+  "sourceRevision": "0a90b0c7344d25a3ad9019b8940d7693a9fa9d50",
+  "receiptVerified": false,
+  "selectionSha256": "30217d86c2f70e065b9ebf76d654e9e1bf10a22acb29b2674270230b2cd22d0a",
+  "spread": {
+    "title": "From a solved cell to a Christmas picture.",
+    "description": "See how the drawing clues work and how the 25 daily tiles fit together.",
+    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "pdf": "/assets/samples/advent-2026-sample.pdf",
+    "pages": [
+      {
+        "image": "advent-2026-page-1",
+        "label": "Page 2: Follow a drawing clue",
+        "alt": "25 Days of Christmas Sudoku, printed page 2: Follow a drawing clue. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 8,
+        "printedPage": "2"
+      },
+      {
+        "image": "advent-2026-page-2",
+        "label": "Page 3: Assemble the picture",
+        "alt": "25 Days of Christmas Sudoku, printed page 3: Assemble the picture. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 9,
+        "printedPage": "3"
+      }
+    ],
+    "explanation": [
+      "Use a solved Sudoku digit to choose a drawing clue from the lookup table. Follow the numbered dots in that clue, lifting your pencil at its end.",
+      "Each drawing page has a blank back. Draw in the book or make personal copies at actual size, cut along the square borders, and tape the completed tiles together from the back. The full picture measures 30 by 30 inches."
+    ]
+  },
+  "assets": {
+    "advent-2026-sample.pdf": "df15e64a342f97402b49d38b63e2cacefb8c2334c4884d20666e637e5d2bbd42",
+    "advent-2026-page-1-640.webp": "c98bf9ec156e75bef81a98d49112c5191ee7e9b522d7c28e4f9da4e6d594fe51",
+    "advent-2026-page-1-1280.webp": "032f691349fb580fc0f6aac3149d2e44a19b7db4572f33352a12d66d2e0c0c2a",
+    "advent-2026-page-2-640.webp": "f3aea6181ed280eef7edeec86ba053d5268c288a658f50605c5595007b0da84f",
+    "advent-2026-page-2-1280.webp": "96ed2e944b02982f9ef1f23b35ad8df5ac89ee7f12a9ae8cb3888822a36a2272"
+  }
+}

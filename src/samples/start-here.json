@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "print/start-here/start-here-print.pdf",
+  "sourceSha256": "5d913529d80791d5d158b1282bb218b24352f15e17d70cb24aef32ae34333a26",
+  "sourceRevision": "0a90b0c7344d25a3ad9019b8940d7693a9fa9d50",
+  "receiptVerified": true,
+  "selectionSha256": "491a58954f3f75e08f0733ea820fe7724cf976875f2042b226e381150208b70c",
+  "spread": {
+    "title": "A place to look. A pattern to find.",
+    "description": "The opening two puzzles show how shaded cells give you a useful starting point.",
+    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "pdf": "/assets/samples/start-here-sample.pdf",
+    "pages": [
+      {
+        "image": "start-here-page-1",
+        "label": "Page 2: Puzzle 1: X-Wing",
+        "alt": "Start Here: Hard Sudoku with Visual Hints, printed page 2: Puzzle 1: X-Wing. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 6,
+        "printedPage": "2"
+      },
+      {
+        "image": "start-here-page-2",
+        "label": "Page 3: Puzzle 2: Naked Triple",
+        "alt": "Start Here: Hard Sudoku with Visual Hints, printed page 3: Puzzle 2: Naked Triple. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 7,
+        "printedPage": "3"
+      }
+    ],
+    "explanation": [
+      "In Part I, all the cells of the first useful pattern are shaded. Work through the opening singles, add your candidate notes, and see what connects the shaded cells.",
+      "The first puzzle introduces an X-Wing; the second introduces a Naked Triple. Use the pattern, keep solving, and look for another chance to use the same technique without the visual hint."
+    ]
+  },
+  "assets": {
+    "start-here-sample.pdf": "347c6a5357bed683adc666c5fa9915e9640059a00c5ddd8ea1872c1a7139164f",
+    "start-here-page-1-640.webp": "5beda5e983e505e9fecd94146be981e776b57a2d07dcbd9ebaefe1d49cfd75d2",
+    "start-here-page-1-1280.webp": "5efee351ca24fc1e15816d626729a88e67cdc255f2d11c3477195d3b84923ace",
+    "start-here-page-2-640.webp": "efe97362db6ceb054d2b47367ca8e69b432cad3f409d24bd0aa69b633c9e1062",
+    "start-here-page-2-1280.webp": "eda8a04e676f2210b6601f5cd457ffbf6f4dba73a40aecc2b1cae17e8a9aae7d"
+  }
+}

@@ -93,3 +93,22 @@ try {
 } finally {
   await rm(temp, { recursive: true, force: true });
 }
+
+// Cover-only imports are an internal detail; public refreshes also update samples.
+if (!process.env.SKIP_BOOK_COMPANIONS) {
+  execFileSync(
+    process.execPath,
+    [
+      resolve(root, "scripts/sync-samples.mjs"),
+      "--source",
+      args[1],
+      "--book",
+      book,
+    ],
+    { cwd: root, stdio: "inherit" },
+  );
+  execFileSync(process.execPath, [resolve(root, "scripts/render-social.mjs")], {
+    cwd: root,
+    stdio: "inherit",
+  });
+}

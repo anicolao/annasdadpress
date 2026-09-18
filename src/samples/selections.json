@@ -1,0 +1,204 @@
+{
+  "guide": {
+    "source": "print/zero-to-hero-print.pdf",
+    "title": "The Sudoku Learner's Guide",
+    "headings": [
+      [
+        "Example - X-Wing",
+        "four blue corners"
+      ],
+      [
+        "Next Step - Eliminate and Place",
+        "The X-Wing claims"
+      ]
+    ],
+    "heading": "See the pattern. Find the next step.",
+    "description": "An X-Wing example and its next deduction, taken from the current print manuscript.",
+    "labels": [
+      "Recognise the X-Wing",
+      "Eliminate and place"
+    ],
+    "explanation": [
+      "The first page identifies an X-Wing: two rows restrict the same candidate to the same two columns. Those columns must receive that digit from the pattern.",
+      "The second page follows an elimination outside the pattern and the single it reveals. The diagrams retain candidate notes so you can follow the deduction."
+    ],
+    "adjacent": true,
+    "identity": [
+      "The Sudoku Learner's",
+      "Guide"
+    ],
+    "trim": [
+      6,
+      9
+    ]
+  },
+  "advent-2026": {
+    "source": "print/advent-2026-print.pdf",
+    "title": "25 Days of Christmas Sudoku",
+    "headings": [
+      [
+        "How to follow a drawing clue",
+        "One page, one daily tile"
+      ],
+      [
+        "Bring your picture together",
+        "Make your display"
+      ]
+    ],
+    "heading": "From a solved cell to a Christmas picture.",
+    "description": "See how the drawing clues work and how the 25 daily tiles fit together.",
+    "labels": [
+      "Follow a drawing clue",
+      "Assemble the picture"
+    ],
+    "explanation": [
+      "Use a solved Sudoku digit to choose a drawing clue from the lookup table. Follow the numbered dots in that clue, lifting your pencil at its end.",
+      "Each drawing page has a blank back. Draw in the book or make personal copies at actual size, cut along the square borders, and tape the completed tiles together from the back. The full picture measures 30 by 30 inches."
+    ],
+    "adjacent": true,
+    "identity": [
+      "25 Days of",
+      "Christmas Sudoku",
+      "December 2026"
+    ],
+    "trim": [
+      8,
+      10
+    ]
+  },
+  "practice-xwing": {
+    "source": "print/practice-xwing/practice-xwing-print.pdf",
+    "title": "Practice! X-Wing Sudoku",
+    "headings": [
+      [
+        "Exercise I-01",
+        "Name the covers and corners"
+      ],
+      [
+        "Exercise I-02",
+        "Name the covers and corners"
+      ]
+    ],
+    "heading": "Is it an X-Wing? Check the conditions.",
+    "description": "Try the first two exercises in Part I: See the X. The candidate notes are ready for you.",
+    "labels": [
+      "Exercise I-01",
+      "Exercise I-02"
+    ],
+    "explanation": [
+      "Each exercise asks you to examine a candidate digit in named rows or columns. Identify the cover lines and four corners, or explain why the position does not form an X-Wing.",
+      "Check that each base line has exactly two positions for that digit and that the two pairs align. A rectangle alone is not enough. Answers are referenced in the complete book."
+    ],
+    "adjacent": true,
+    "identity": [
+      "PRACTICE!",
+      "X-Wing Sudoku"
+    ],
+    "trim": [
+      8,
+      10
+    ]
+  },
+  "start-here": {
+    "source": "print/start-here/start-here-print.pdf",
+    "title": "Start Here: Hard Sudoku with Visual Hints",
+    "headings": [
+      [
+        "Puzzle 1",
+        "X-Wing.",
+        "Solve on your device"
+      ],
+      [
+        "Puzzle 2",
+        "Naked Triple.",
+        "Solve on your device"
+      ]
+    ],
+    "heading": "A place to look. A pattern to find.",
+    "description": "The opening two puzzles show how shaded cells give you a useful starting point.",
+    "labels": [
+      "Puzzle 1: X-Wing",
+      "Puzzle 2: Naked Triple"
+    ],
+    "explanation": [
+      "In Part I, all the cells of the first useful pattern are shaded. Work through the opening singles, add your candidate notes, and see what connects the shaded cells.",
+      "The first puzzle introduces an X-Wing; the second introduces a Naked Triple. Use the pattern, keep solving, and look for another chance to use the same technique without the visual hint."
+    ],
+    "adjacent": true,
+    "identity": [
+      "START HERE",
+      "Hard Sudoku",
+      "Visual Hints"
+    ],
+    "trim": [
+      8,
+      10
+    ]
+  },
+  "candidates-done": {
+    "source": "print/candidates-done/candidates-done-print.pdf",
+    "title": "Candidates Done: Hard Sudoku",
+    "headings": [
+      [
+        "Puzzle 1",
+        "Solve with notes on your device"
+      ],
+      [
+        "Puzzle 2",
+        "Solve with notes on your device"
+      ]
+    ],
+    "heading": "Your notes are ready. Start with the logic.",
+    "description": "The first two puzzles in Part I: Find Your Flow, with starting candidates already printed.",
+    "labels": [
+      "Puzzle 1 with candidate notes",
+      "Puzzle 2 with candidate notes"
+    ],
+    "explanation": [
+      "Large digits are givens. The smaller digits show every candidate initially allowed by the givens in that cell's row, column, and box.",
+      "Cross out candidates as you rule them out. After placing a digit, update its row, column, and box. There are no shaded hints or technique labels beside these puzzles."
+    ],
+    "adjacent": true,
+    "identity": [
+      "CANDIDATES DONE",
+      "Hard Sudoku"
+    ],
+    "trim": [
+      8,
+      10
+    ]
+  },
+  "mastery": {
+    "source": "print/mastery-print.pdf",
+    "title": "Mastery! Advanced Sudoku",
+    "headings": [
+      [
+        "Puzzle 1",
+        "Solve on your device"
+      ],
+      [
+        "Puzzle 2",
+        "Solve on your device"
+      ]
+    ],
+    "heading": "The grid is yours.",
+    "description": "Two opening puzzles from Part I: Find Your Rhythm. Choose your own next move.",
+    "labels": [
+      "Puzzle 1",
+      "Puzzle 2"
+    ],
+    "explanation": [
+      "These pages supply the original givens and space for your own notes. No pattern cells are highlighted and no technique names are supplied beside the puzzles.",
+      "Work from the simpler checks to the harder deductions, keeping candidates current as you go. The complete book includes solutions and QR codes for digital solving."
+    ],
+    "adjacent": true,
+    "identity": [
+      "MASTERY!",
+      "Advanced Sudoku"
+    ],
+    "trim": [
+      8,
+      10
+    ]
+  }
+}

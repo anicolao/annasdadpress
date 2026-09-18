@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "print/practice-xwing/practice-xwing-print.pdf",
+  "sourceSha256": "2eb78552dfcb1cb8d567fbb8c71aa8f0058dfddeec4a9a33501fc14bdb266a06",
+  "sourceRevision": "1f9d9a74d22312d2a039378c0e95202d85c6ba63",
+  "receiptVerified": true,
+  "selectionSha256": "66462d17ba4acf9ed10ed8a4ace2b0688391b5579a19f57fb9c894bf2c33bed1",
+  "spread": {
+    "title": "Is it an X-Wing? Check the conditions.",
+    "description": "Try the first two exercises in Part I: See the X. The candidate notes are ready for you.",
+    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "pdf": "/assets/samples/practice-xwing-sample.pdf",
+    "pages": [
+      {
+        "image": "practice-xwing-page-1",
+        "label": "Page 2: Exercise I-01",
+        "alt": "Practice! X-Wing Sudoku, printed page 2: Exercise I-01. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 8,
+        "printedPage": "2"
+      },
+      {
+        "image": "practice-xwing-page-2",
+        "label": "Page 3: Exercise I-02",
+        "alt": "Practice! X-Wing Sudoku, printed page 3: Exercise I-02. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 9,
+        "printedPage": "3"
+      }
+    ],
+    "explanation": [
+      "Each exercise asks you to examine a candidate digit in named rows or columns. Identify the cover lines and four corners, or explain why the position does not form an X-Wing.",
+      "Check that each base line has exactly two positions for that digit and that the two pairs align. A rectangle alone is not enough. Answers are referenced in the complete book."
+    ]
+  },
+  "assets": {
+    "practice-xwing-sample.pdf": "16230b9a7c4a4788c2abd46c6f3b44e25965177e3619a812c11ecf9edf0eda03",
+    "practice-xwing-page-1-640.webp": "c7a4bea86e3b608eda7d52f71752d37d10a8f746ebfaeec711aa9a77700fa4ee",
+    "practice-xwing-page-1-1280.webp": "852237eb9f564552a5feb011788a8803da93e661500c86d6877310ae32a5e466",
+    "practice-xwing-page-2-640.webp": "beeb37ca74e522cb33e45ac95b3eb2e03788e97594398e996122adf97e0cb0a5",
+    "practice-xwing-page-2-1280.webp": "76aa5b7985caaf8b3adb9bca6b6a9d87261d9088c20b167254be13f37ea762a0"
+  }
+}

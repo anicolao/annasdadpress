@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "source": "print/candidates-done/candidates-done-print.pdf",
+  "sourceSha256": "4dac8df22da01eb00a74aff6f6fd0088e62bd3fc47cca656249a3c8390e49ae7",
+  "sourceRevision": "3d2d4900c013d8c0b43a87d84da0459b959fdd55",
+  "receiptVerified": true,
+  "selectionSha256": "595e2a8cf7f155724dcff672b896e5d1c2457788c8ebe09b8cb45b64df49b4ba",
+  "spread": {
+    "title": "Your notes are ready. Start with the logic.",
+    "description": "The first two puzzles in Part I: Find Your Flow, with starting candidates already printed.",
+    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "pdf": "/assets/samples/candidates-done-sample.pdf",
+    "pages": [
+      {
+        "image": "candidates-done-page-1",
+        "label": "Page 2: Puzzle 1 with candidate notes",
+        "alt": "Candidates Done: Hard Sudoku, printed page 2: Puzzle 1 with candidate notes. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 6,
+        "printedPage": "2"
+      },
+      {
+        "image": "candidates-done-page-2",
+        "label": "Page 3: Puzzle 2 with candidate notes",
+        "alt": "Candidates Done: Hard Sudoku, printed page 3: Puzzle 2 with candidate notes. Read the sample description below for context.",
+        "width": 640,
+        "height": 800,
+        "pdfPage": 7,
+        "printedPage": "3"
+      }
+    ],
+    "explanation": [
+      "Large digits are givens. The smaller digits show every candidate initially allowed by the givens in that cell's row, column, and box.",
+      "Cross out candidates as you rule them out. After placing a digit, update its row, column, and box. There are no shaded hints or technique labels beside these puzzles."
+    ]
+  },
+  "assets": {
+    "candidates-done-sample.pdf": "be09270cab6f95ea9abc47807145c50a3bcfde17731f0bdfa1d207ba3ff76907",
+    "candidates-done-page-1-640.webp": "932c197b5ea221a0994f5506b1189607b752b4eb61f976c836774923bcef41c3",
+    "candidates-done-page-1-1280.webp": "c75524c16eb485a4ab1a208b0762397fb64b278cbb5ee1703e91d0276300e603",
+    "candidates-done-page-2-640.webp": "44f52028166f83050ac4c1867a755f35f114dba6929b6473822b1094aa35ddba",
+    "candidates-done-page-2-1280.webp": "71ae45d3540519c9d16f4d7b5c9220e1466fee616a5c60ddd68a375ab7b29e17"
+  }
+}

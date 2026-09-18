@@ -36,6 +36,10 @@ for (const file of files) {
     assert.equal(schema.author.name, "Alex Nicolaou");
     assert.equal(schema.publisher.name, "Anna's Dad Press");
     assert(html.includes("by Alex Nicolaou"));
+    assert(html.includes('id="sample-pages"'));
+    assert(!html.includes("Print cover artwork"));
+    assert(!html.includes("Sample pages are on their way"));
+    assert(html.includes("/assets/social/"));
   }
   for (const [, href] of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     if (!href.startsWith("/")) continue;
@@ -138,6 +142,50 @@ try {
       `All ${files.length} pages passed layout and accessibility checks at ${width}px.`,
     );
   }
+  // Reserve the same Discovery cover space even when its image is delayed.
+  const delayed = await context.newPage();
+  await delayed.setViewportSize({ width: 390, height: 900 });
+  let releaseImage;
+  const gate = new Promise((resolve) => {
+    releaseImage = resolve;
+  });
+  await delayed.route("**/assets/advent-2026-*.webp", async (route) => {
+    await gate;
+    await route.continue();
+  });
+  await delayed.goto("http://127.0.0.1:4173/", {
+    waitUntil: "domcontentloaded",
+  });
+  const tile = delayed.locator(".discovery-cover");
+  await tile.scrollIntoViewIfNeeded();
+  const before = await tile.boundingBox();
+  assert(
+    before.width > 250 && before.height > 300,
+    "Unloaded Discovery cover collapsed",
+  );
+  releaseImage();
+  await tile.locator("img").evaluate((img) => img.decode());
+  const after = await tile.boundingBox();
+  assert(
+    Math.abs(before.height - after.height) < 1,
+    "Discovery cover shifts when loaded",
+  );
+  assert(
+    await delayed
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: "Reader resources" })
+      .isVisible(),
+  );
+  await delayed.close();
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("http://127.0.0.1:4173/books/");
+  const heights = await page
+    .locator(".book-card .book-art")
+    .evaluateAll((nodes) => nodes.map((n) => n.getBoundingClientRect().height));
+  assert(
+    Math.max(...heights) - Math.min(...heights) < 1,
+    "Cover card heights differ",
+  );
   await page.goto("http://127.0.0.1:4173/books/");
   await page.getByRole("link", { name: "Practice!", exact: true }).click();
   assert(page.url().endsWith("/books/practice/"));
@@ -156,10 +204,6 @@ try {
   assert.equal(await adventCover.getAttribute("width"), "1800");
   assert.equal(await adventCover.getAttribute("height"), "2250");
   assert((await adventCover.getAttribute("src")).includes("advent-2026"));
-  assert.equal(
-    await page.locator(".detail-cover .small-note").textContent(),
-    "Print cover artwork",
-  );
   await page.goto("http://127.0.0.1:4173/next/");
   await page.getByRole("link", { name: /creative surprise/ }).click();
   assert(page.url().endsWith("/books/25-days-of-christmas-sudoku/"));
