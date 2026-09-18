@@ -18,13 +18,25 @@ const titles = new Set();
 let links = 0;
 for (const file of files) {
   const html = await readFile(file, "utf8");
+  assert(
+    !html.includes("B000TEST00") && !html.includes("publisher@example.com"),
+    `Fixture data leaked into ${file}`,
+  );
   assert(!/[^\x00-\x7F]/.test(html), `Non-ASCII markup in ${file}`);
   const title = html.match(/<title>(.*?)<\/title>/)[1];
   assert(!titles.has(title), `Duplicate title: ${title}`);
   titles.add(title);
   assert.equal((html.match(/<h1[ >]/g) || []).length, 1, file);
   assert(html.includes('rel="canonical"'));
-  JSON.parse(html.match(/application\/ld\+json">(.*?)<\/script>/)[1]);
+  const schema = JSON.parse(
+    html.match(/application\/ld\+json">(.*?)<\/script>/)[1],
+  );
+  if (schema["@type"] === "Book") {
+    assert.equal(schema.author["@type"], "Person");
+    assert.equal(schema.author.name, "Alex Nicolaou");
+    assert.equal(schema.publisher.name, "Anna's Dad Press");
+    assert(html.includes("by Alex Nicolaou"));
+  }
   for (const [, href] of html.matchAll(/(?:href|src)="([^"#]+)"/g)) {
     if (!href.startsWith("/")) continue;
     const target = path.join("dist", href.slice(base.length).split("#")[0]);
@@ -105,7 +117,7 @@ try {
     );
   }
   await page.goto("http://127.0.0.1:4173/books/");
-  await page.getByRole("link", { name: "Practice", exact: true }).click();
+  await page.getByRole("link", { name: "Practice!", exact: true }).click();
   assert(page.url().endsWith("/books/practice/"));
   assert.equal(await page.locator(".book-card").count(), 1);
   await page.goto("http://127.0.0.1:4173/books/");

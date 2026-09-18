@@ -1413,3 +1413,28 @@ dd {
     margin: 0 auto;
   }
 }
+
+/* Publication status and author attribution. */
+.status.available {
+  background: #066568;
+  border-color: #066568;
+  color: #fff;
+}
+.book-detail p.byline {
+  margin: 12px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.marketplaces {
+  flex-wrap: wrap;
+}
+.marketplaces .button {
+  white-space: normal;
+}
+.affiliate-disclosure {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.footer-links a {
+  overflow-wrap: anywhere;
+}

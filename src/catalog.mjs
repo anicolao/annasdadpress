@@ -1,17 +1,8 @@
+import { publisher } from "./publisher.mjs";
 export const families = [
   {
-    id: "discovery",
-    name: "Discovery",
-    icon: "discovery",
-    color: "#a92b36",
-    purpose: "Solve a puzzle. Reveal something new.",
-    description:
-      "Sudoku with something more to discover. Use your solutions to follow drawing clues and watch a picture take shape, one puzzle at a time.",
-    need: "I'd like a puzzle with a creative surprise.",
-  },
-  {
     id: "practice",
-    name: "Practice",
+    name: "Practice!",
     icon: "practice",
     color: "#1264a3",
     purpose: "Make a technique second nature.",
@@ -49,6 +40,16 @@ export const families = [
       "Carefully graded puzzles for the satisfaction of working it out on your own.",
     need: "I'm ready to solve independently.",
   },
+  {
+    id: "discovery",
+    name: "Discovery",
+    icon: "discovery",
+    color: "#a92b36",
+    purpose: "Solve a puzzle. Reveal something new.",
+    description:
+      "Sudoku with something more to discover. Use your solutions to follow drawing clues and watch a picture take shape, one puzzle at a time.",
+    need: "I'd like a puzzle with a creative surprise.",
+  },
 ];
 export const books = [
   {
@@ -57,12 +58,15 @@ export const books = [
     subtitle:
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
     family: "guide",
+    isbn: "978-1-0681462-0-6",
     cover: "guide",
     coverSource: "src/assets/covers/guide.png",
     coverManifest: "src/assets/covers/guide.json",
     coverWidth: 1800,
     coverHeight: 2700,
     coverStatus: "Print cover artwork",
+    courseDescription:
+      "A full-colour, 6 x 9 inch course with 45 complete puzzles, visual explanations, and walkthroughs that build from the first rules to advanced patterns and chains.",
     sampleSpreads: [
       {
         title: "See the pattern. Find the next step.",
@@ -100,6 +104,7 @@ export const books = [
     subtitle:
       "An Advent Puzzle Book with a Daily Drawing Reveal / December 2026",
     family: "discovery",
+    isbn: "9798174365575",
     cover: "advent-2026",
     coverSource: "src/assets/covers/advent-2026.png",
     coverManifest: "src/assets/covers/advent-2026.json",
@@ -130,7 +135,7 @@ export const books = [
   },
   {
     slug: "practice-x-wing-sudoku",
-    title: "Practice: X-Wing Sudoku",
+    title: "Practice! X-Wing Sudoku",
     subtitle:
       "Guided Pattern Training from First Recognition to Independent Solving",
     family: "practice",
@@ -147,9 +152,8 @@ export const books = [
   },
   {
     slug: "start-here-hard-sudoku-with-hints",
-    title: "Start Here: Hard Sudoku with Hints",
-    subtitle:
-      "Guided Puzzles That Show You Where to Look Without Giving Away the Answer",
+    title: "Start Here: Hard Sudoku with Visual Hints",
+    subtitle: "See the Pattern. Use It. Find It Again.",
     family: "start-here",
     cover: "start-here",
     coverSource: "src/assets/covers/start-here.png",
@@ -165,7 +169,8 @@ export const books = [
   {
     slug: "candidates-done-hard-sudoku",
     title: "Candidates Done: Hard Sudoku",
-    subtitle: "Candidate Notes Already Filled In: Just Start Solving",
+    subtitle:
+      "Just Start Solving / Candidate Notes Already Filled In / Focus on Your Next Deduction",
     family: "candidates-done",
     cover: "candidates-done",
     coverSource: "src/assets/covers/candidates-done.png",
@@ -183,6 +188,8 @@ export const books = [
     title: "Mastery: Hard Sudoku",
     subtitle: null,
     family: "mastery",
+    concept: true,
+    placeholderTitle: "Hard Sudoku",
     cover: null,
     description:
       "Carefully graded hard Sudoku for independent solving. Bring together what you've learned and enjoy the challenge of finding your own way through.",
@@ -192,6 +199,8 @@ export const books = [
   ...b,
   collection: "The Sudoku Learner's Library",
   status: "Forthcoming",
+  author: publisher.author,
+  concept: false,
   isbn: null,
   asin: null,
   amazonCa: null,

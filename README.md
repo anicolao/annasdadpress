@@ -19,15 +19,45 @@ npx playwright install chromium
 npm test
 ```
 
-Tests verify internal links/assets, unique titles, one H1 per page, valid structured data, all 19 pages at desktop and two mobile widths, WCAG A/AA automated checks, catalog filtering, book selection, and keyboard navigation. Desktop/mobile screenshots are written to ignored `artifacts/`. Automated accessibility checks are supplemented by visual review; they are not a claim of formal certification.
+Launch tests build isolated all-forthcoming, mixed, and all-available catalogs, verify affiliate URL handling and author metadata, and check mixed-state pages in the browser. These fixtures are never copied to `dist/`; semantic launch tests also run under `STATIC_ONLY=1` in deployment CI. Tests verify internal links/assets, unique titles, one H1 per page, valid structured data, all 19 pages at desktop and two mobile widths, WCAG A/AA automated checks, catalog filtering, book selection, and keyboard navigation. Desktop/mobile screenshots are written to ignored `artifacts/`. Automated accessibility checks are supplemented by visual review; they are not a claim of formal certification.
 
 ## Content and artwork
 
 `src/catalog.mjs` holds six books and five families. Add books to this array to generate catalog entries and individual pages. Book fields include stable `slug`, `title`, `subtitle`, `family`, `collection`, `status`, `cover`, `coverStatus`, `description`, `bestFor`, `isbn`, `asin`, `amazonCa`, `amazonCom`, and `sampleSpreads`.
 
-All titles are forthcoming. ISBNs, ASINs, final publication dates, and Amazon URLs are unknown and intentionally unset. Confirm the status before launch of each book; adjust availability copy in the shared book template when purchase links are supplied. Do not use invented purchase links. The Mastery subtitle is also unconfirmed.
+All titles remain forthcoming until release is confirmed. The Guide and Advent ISBNs
+are recorded from their manuscripts; other ISBNs, ASINs, release dates, and Amazon
+URLs await confirmation. See `LAUNCH_REVIEW_RESULTS.md` for the evidence and pending
+branding decisions. Artwork status is separate from release status.
 
-The Learner's Guide, Advent book, Candidates Done, Start Here, and Practice: X-Wing use generated print covers imported from MathPub. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
+To publish a title, edit only its record in `src/catalog.mjs`:
+
+1. Confirm that the book is available, then set `status: "Available"`.
+2. Add verified ISBN/ASIN values and full HTTPS Amazon.ca/Amazon.com product URLs.
+   Leave missing marketplace URLs null. Do not guess links from identifiers.
+3. Run `npm run build` and `npm test`, review the page, then commit and push.
+4. Verify the live page and marketplace destinations after Pages deployment.
+
+Cards, filtered counts, purchase sections, homepage emphasis, and recommendations
+adapt automatically. No template edits are required for a release. Available
+books sort first without moving the Guide hero. A forthcoming book with a supplied
+listing URL has a neutral "View on" link. An available book without URLs remains
+labelled available and says purchase links are pending. Mastery's concept page
+remains reachable but is excluded from prime recommendations until available.
+
+`src/publisher.mjs` owns author/contact configuration and Associate ID
+`annasdadpress-20`. Marketplace tags remain disabled until account applicability is
+confirmed. Set the confirmed `affiliateTags` entry to the supplied ID (or the
+appropriate separately confirmed marketplace ID). Unconfigured marketplaces keep
+their supplied links unchanged. Affiliate links receive one tag, a visible paid-link
+label, `rel="sponsored"`, and the Associate disclosure. Anna's separate store link
+is not modified. No tracking scripts or cookies are added.
+
+TODO: confirm the monitored publisher contact email. Set `contactEmail` in
+`src/publisher.mjs` to add the footer/About mailto links. No public address is
+inferred from hosting credentials or Git metadata.
+
+The Learner's Guide, Advent book, Candidates Done, Start Here, and Practice! X-Wing use generated print covers imported from MathPub. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
 
 The publisher identity and reusable catalog permit future non-Sudoku collections. Add their collection navigation/landing page and supply their family metadata when the next publishing program is known; do not repurpose existing printed slugs. `/next/` is the stable reader-resource hub. GitHub Pages also serves this route when readers enter `/next`.
 
@@ -127,7 +157,7 @@ The source is `print/start-here/start-here-cover-print.pdf`, validated against
 `start_here/cover-dimensions.json`. Its front cover is imported as
 `src/assets/covers/start-here.png` with a matching provenance JSON record.
 
-Practice: X-Wing uses the same print-export workflow:
+Practice! X-Wing uses the same print-export workflow:
 
 ```sh
 npm run covers:sync -- --source ../sudoku-challenges --book practice-xwing
