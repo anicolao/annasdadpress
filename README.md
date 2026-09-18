@@ -42,8 +42,8 @@ Cards, filtered counts, purchase sections, homepage emphasis, and recommendation
 adapt automatically. No template edits are required for a release. Available
 books sort first without moving the Guide hero. A forthcoming book with a supplied
 listing URL has a neutral "View on" link. An available book without URLs remains
-labelled available and says purchase links are pending. Mastery's concept page
-remains reachable but is excluded from prime recommendations until available.
+labelled available and says purchase links are pending. Books with verified artwork participate in recommendations while forthcoming;
+concept entries remain excluded until available.
 
 `src/publisher.mjs` owns author/contact configuration and Associate ID
 `annasdadpress-20`, confirmed for the Amazon.com (US) account. Amazon.com purchase
@@ -57,7 +57,7 @@ TODO: confirm the monitored publisher contact email. Set `contactEmail` in
 `src/publisher.mjs` to add the footer/About mailto links. No public address is
 inferred from hosting credentials or Git metadata.
 
-The Learner's Guide, Advent book, Candidates Done, Start Here, and Practice! X-Wing use generated print covers imported from MathPub. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
+All six books use generated print cover artwork imported from MathPub. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
 
 The publisher identity and reusable catalog permit future non-Sudoku collections. Add their collection navigation/landing page and supply their family metadata when the next publishing program is known; do not repurpose existing printed slugs. `/next/` is the stable reader-resource hub. GitHub Pages also serves this route when readers enter `/next`.
 
@@ -180,3 +180,26 @@ artwork, style-source hashes, and sizing before extraction. The provenance recor
 identifies the review build and whether its source had uncommitted changes.
 Guide and Advent already use their validated review builds by default. Omit
 `--review` to use the frozen print exports for the three workbook covers.
+
+
+### Mastery
+
+```sh
+npm run covers:sync -- --source ../sudoku-challenges --book mastery
+```
+
+Imports `print/mastery-cover-print.pdf`, paired with `print/mastery-print.pdf`
+and the root `print/manifest.json` receipt. The importer validates both hashes,
+clean source revision, annotation removal, page counts, 8 x 10 trim, and recorded
+spine dimensions before cropping the front panel. Mastery requires print exports;
+`--review` is not supported. Commit `src/assets/covers/mastery.png` and its JSON
+provenance with any catalog changes.
+
+The first book is `Mastery! Advanced Sudoku`: 120 puzzles in four parts, with
+printed solutions, selected key moves, and QR codes for digital solving and full
+walkthroughs. Its stable URL remains `/books/mastery-hard-sudoku/`. It is still
+forthcoming until availability and purchase links are confirmed.
+
+The September 18 Guide refresh uses the validated current review build's teal
+artwork; `print/learners-guide-cover-print.pdf` still contains the older coral
+cover. The default Guide sync checks the current artwork against its sources.

@@ -54,6 +54,25 @@ for (const file of files) {
     links++;
   }
 }
+// The first Mastery publication keeps its established URL and its own content.
+const mastery = await readFile(
+  "dist/books/mastery-hard-sudoku/index.html",
+  "utf8",
+);
+assert(mastery.includes("Mastery! Advanced Sudoku"));
+assert(
+  mastery.includes("120 Carefully Graded Puzzles for Independent Solving"),
+);
+assert(mastery.includes("mastery-720.webp"));
+assert(mastery.includes("Puzzles 91-120"));
+assert(!mastery.includes("One picture to discover"));
+assert(!mastery.includes("COVER FORTHCOMING"));
+const discovery = await readFile(
+  "dist/books/25-days-of-christmas-sudoku/index.html",
+  "utf8",
+);
+assert(discovery.includes("One picture to discover"));
+assert(!discovery.includes("Master the Grid"));
 console.log(
   `Checked ${files.length} pages, unique titles, structured data, and ${links} internal links/assets.`,
 );
@@ -99,7 +118,10 @@ try {
         0,
         `${route} @ ${width}: ${JSON.stringify(results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })))}`,
       );
-      if (route === "/" && width !== 320) {
+      if (
+        ["/", "/books/mastery-hard-sudoku/"].includes(route) &&
+        width !== 320
+      ) {
         await page.evaluate(async () => {
           for (const img of document.images) {
             img.loading = "eager";
@@ -107,7 +129,7 @@ try {
           }
         });
         await page.screenshot({
-          path: `artifacts/home-${width}.png`,
+          path: `artifacts/${route === "/" ? "home" : "mastery"}-${width}.png`,
           fullPage: true,
         });
       }

@@ -166,11 +166,6 @@ try {
       name === "forthcoming",
     );
     assert(
-      !home.includes("mastery-hard-sudoku/") ||
-        name !== "forthcoming" ||
-        !cardTitles(home).includes("Mastery: Hard Sudoku"),
-    );
-    assert(
       (await read(directory, "next")).includes(
         "https://sudoku.annasdadpress.com/",
       ),

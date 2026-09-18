@@ -38,12 +38,12 @@ if len(sys.argv) > 3 and sys.argv[3] == 'review' and key in ('candidates-done', 
         'sourcePdfSha256': output['sha256'],
         'sourceExport': str(pdf),
     }
-elif key in ('candidates-done', 'start-here', 'practice-xwing'):
+elif key in ('candidates-done', 'start-here', 'practice-xwing', 'mastery'):
     # Print exports are frozen artifacts; verify the paired export receipt rather
     # than requiring a newer working manuscript to match an approved print file.
     from tools.cover_common import dimensions
     publication = f'{key}-cover'
-    folder = Path('print') / key
+    folder = Path('print') if key == 'mastery' else Path('print') / key
     manifest = json.loads((folder / 'manifest.json').read_text())
     pdf = folder / f'{key}-cover-print.pdf'
     interior = folder / f'{key}-print.pdf'

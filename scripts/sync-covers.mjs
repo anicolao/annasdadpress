@@ -20,12 +20,15 @@ if (
         "candidates-done",
         "start-here",
         "practice-xwing",
+        "mastery",
       ].includes(args[3])))
 )
   throw new Error(
-    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026|candidates-done|start-here|practice-xwing] [--review]",
+    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026|candidates-done|start-here|practice-xwing|mastery] [--review]",
   );
 const book = args[3] || "guide";
+if (review && book === "mastery")
+  throw new Error("Mastery requires its paired print exports; omit --review.");
 const root = fileURLToPath(new URL("../", import.meta.url));
 const temp = await mkdtemp(resolve(tmpdir(), `${book}-cover-`));
 const target = resolve(root, `src/assets/covers/${book}`);

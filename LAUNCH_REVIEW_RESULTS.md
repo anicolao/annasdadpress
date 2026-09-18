@@ -13,8 +13,7 @@ Implemented September 18, 2026, from `LAUNCH_REVIEW_PLAN.md`.
 - Book pages show an Alex Nicolaou byline and a Person author in Book JSON-LD.
   Anna's Dad Press remains the publisher.
 - Core families precede Discovery. The seasonal Advent feature remains prominent.
-  Mastery's concept page stays accessible but is excluded from prime homepage and
-  related-book recommendations while forthcoming.
+  The initial Mastery concept exclusion was resolved by the cover follow-up below.
 - Publisher contact and affiliate settings have one configuration location.
   Confirming a contact address enables footer and About mailto links.
 - Affiliate purchase links preserve destinations, other query parameters, and
@@ -28,7 +27,7 @@ Implemented September 18, 2026, from `LAUNCH_REVIEW_PLAN.md`.
 
 | Files                                                  | Changes                                                                                                             |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `src/catalog.mjs`                                      | Author defaults, verified titles/subtitles, two ISBNs, Guide facts, family order, and explicit Mastery concept flag |
+| `src/catalog.mjs`                                      | Author defaults, verified titles/subtitles, two ISBNs, Guide facts, family order, and book artwork status |
 | `src/publisher.mjs`                                    | Author, public contact setting, supplied Associate ID, and marketplace tag configuration                            |
 | `src/publishing.mjs`                                   | Availability, ordering, summary, purchase, affiliate URL, escaping, and validation helpers                          |
 | `scripts/build.mjs`                                    | Shared helpers throughout site rendering; isolated output/catalog injection for tests                               |
@@ -55,8 +54,8 @@ Evidence was read from `../sudoku-challenges/` without modifying it:
 - `covers/candidates-done.toml`: subtitle copy now includes `Just Start Solving`,
   `Candidate Notes Already Filled In`, and `Focus on Your Next Deduction`. The
   source does not establish an exclamation mark; no new punctuation is invented.
-- No Mastery publication/cover establishing an Advanced Sudoku title was found.
-  The existing Hard Sudoku title and URL remain until confirmed.
+- Mastery initially lacked verified artwork/title evidence; the September 18
+  follow-up below resolves this while preserving its existing URL.
 - The Guide's current manifest has 45 full-puzzle placements. Its cover config
   specifies standard colour and 6 x 9 trim. These facts are now visible on its page.
 - Guide ISBN `978-1-0681462-0-6` appears in both its print and current review PDFs.
@@ -122,8 +121,7 @@ No template edits are needed to release another book.
 
 - Actual availability and real Amazon.ca/Amazon.com URLs for the first live title.
 - All ASINs; ISBNs other than the two verified manuscript values above.
-- Final KDP title/punctuation reconciliation for Start Here and Candidates Done;
-  confirmation of the proposed Mastery Advanced Sudoku title.
+- Final KDP title/punctuation reconciliation for Start Here and Candidates Done.
 - Canadian affiliate/OneLink applicability and public contact email.
 - Final Guide pagination and a frozen source for a final sample, if desired.
 
@@ -131,3 +129,20 @@ The rendering work is ready. All real books remain forthcoming because no releas
 confirmation or purchase URLs have been provided. Missing launch data blocks
 announcing a live product, not deployment of this readiness update. Contact and
 final sample follow-ups are documented rather than replaced with invented values.
+
+
+## September 18 cover and Mastery follow-up
+
+The paired `print/mastery-print.pdf` and `print/mastery-cover-print.pdf` exports
+now establish `Mastery! Advanced Sudoku` and its subtitle, `120 Carefully Graded
+Puzzles for Independent Solving`. The 162-page, 8 x 10 inch interior has four
+30-puzzle parts, completed solution grids, selected key moves, and QR codes for
+digital solving and full walkthroughs. The website now uses this title, content,
+and verified cover, retaining `/books/mastery-hard-sudoku/`. Its concept flag is
+removed; availability remains forthcoming and no identifiers or sales URLs are
+inferred. Mastery cover updates now use the same receipt-checked import workflow
+as other print exports.
+
+The Guide cover is refreshed from the validated current review build, which has
+the revised teal artwork. The older Guide print export still uses coral. No
+manuscript files or existing draft sample pages were changed.

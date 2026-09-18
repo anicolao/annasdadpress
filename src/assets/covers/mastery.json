@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "artworkStatus": "print",
+  "width": 1800,
+  "height": 2250,
+  "sha256": "3fceec5c1001e8e549616aa6bc61cc5febb4b8a7c97feb3cd225bebbee144d68",
+  "publication": "mastery-cover",
+  "variant": "print",
+  "sourceRevision": "621993f0dd386600b664c8e4e332071df41b5977",
+  "sourceDirty": false,
+  "sourcePdfSha256": "46a28ab2ab6c2e3c7960819f090bea44b9fc9f2ee74e98d57995534277b664dc",
+  "sourceExport": "print/mastery-cover-print.pdf",
+  "cropPoints": [
+    611.267328,
+    9,
+    1187.267328,
+    729
+  ],
+  "trimInches": [
+    8,
+    10
+  ]
+}

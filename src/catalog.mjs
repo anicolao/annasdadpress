@@ -34,10 +34,10 @@ export const families = [
     id: "mastery",
     name: "Mastery",
     icon: "mastery",
-    color: "#756039",
+    color: "#70509a",
     purpose: "Put your skills to the test.",
     description:
-      "Carefully graded puzzles for the satisfaction of working it out on your own.",
+      "Graded puzzles for independent solving. Choose your own techniques, keep your notes current, and bring your skills together.",
     need: "I'm ready to solve independently.",
   },
   {
@@ -115,6 +115,10 @@ export const books = [
       "A Sudoku Advent calendar for December 2026. Solve one moderate puzzle each day from December 1 to Christmas Day, then use your answers to reveal another part of a festive drawing.",
     bestFor:
       "Solvers who enjoy moderate Sudoku and would like a daily puzzle-and-drawing ritual in the run-up to Christmas.",
+    featureIntro: "The first Discovery book",
+    featureHeading: "One puzzle a day. One picture to discover.",
+    featureNote:
+      "Made for pencil and paper, with an 8 x 10 inch page format and printed drawing instructions.",
     features: [
       {
         title: "Solve the day's Sudoku",
@@ -185,15 +189,45 @@ export const books = [
   },
   {
     slug: "mastery-hard-sudoku",
-    title: "Mastery: Hard Sudoku",
-    subtitle: null,
+    title: "Mastery! Advanced Sudoku",
+    subtitle: "120 Carefully Graded Puzzles for Independent Solving",
     family: "mastery",
-    concept: true,
-    placeholderTitle: "Hard Sudoku",
-    cover: null,
+    cover: "mastery",
+    coverSource: "src/assets/covers/mastery.png",
+    coverManifest: "src/assets/covers/mastery.json",
+    coverWidth: 1800,
+    coverHeight: 2250,
+    coverStatus: "Print cover artwork",
     description:
-      "Carefully graded hard Sudoku for independent solving. Bring together what you've learned and enjoy the challenge of finding your own way through.",
-    bestFor: "Confident solvers looking for independent practice.",
+      "You know the techniques. Now decide when to use them. Solve 120 original Sudoku puzzles, progressing from intermediate patterns to deeper chains and coloring, without hints or technique labels beside the grids.",
+    bestFor:
+      "Solvers ready to choose their own next move and bring a growing toolkit to advanced puzzles.",
+    featureIntro: "The first Mastery book",
+    featureHeading: "Trust your toolkit. Find the next move.",
+    featureNote:
+      "Large solving grids and room for notes in an 8 x 10 inch format. Solutions include completed grids and selected key moves. Scan the printed QR codes to solve the same puzzles digitally or follow full solution walkthroughs.",
+    features: [
+      {
+        title: "Find Your Rhythm",
+        description:
+          "Puzzles 1-30: settle into independent solving, keep your notes current, and look for the connection that opens up the grid.",
+      },
+      {
+        title: "Build the Connections",
+        description:
+          "Puzzles 31-60: bring more of your toolkit together as the challenge grows.",
+      },
+      {
+        title: "Go Deeper",
+        description:
+          "Puzzles 61-90: take your time with more demanding logic and find your own route through.",
+      },
+      {
+        title: "Master the Grid",
+        description:
+          "Puzzles 91-120: put your skills to work in the final stretch of the book's graded progression.",
+      },
+    ],
   },
 ].map((b) => ({
   ...b,
