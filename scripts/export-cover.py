@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path.cwd() / 'tools'))
 
 out = Path(sys.argv[1])
 key = sys.argv[2]
-if key in ('candidates-done', 'start-here'):
+if key in ('candidates-done', 'start-here', 'practice-xwing'):
     # Print exports are frozen artifacts; verify the paired export receipt rather
     # than requiring a newer working manuscript to match an approved print file.
     from tools.cover_common import dimensions

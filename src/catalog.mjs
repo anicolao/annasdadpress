@@ -135,6 +135,11 @@ export const books = [
       "Guided Pattern Training from First Recognition to Independent Solving",
     family: "practice",
     cover: "practice",
+    coverSource: "src/assets/covers/practice-xwing.png",
+    coverManifest: "src/assets/covers/practice-xwing.json",
+    coverWidth: 1800,
+    coverHeight: 2250,
+    coverStatus: "Print cover artwork",
     description:
       "Learn to spot X-Wing patterns through progressive, deliberate practice. Turn a technique you understand into one you can recognise.",
     bestFor:
