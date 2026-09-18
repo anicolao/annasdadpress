@@ -158,6 +158,11 @@ export const books = [
     subtitle: "Candidate Notes Already Filled In: Just Start Solving",
     family: "candidates-done",
     cover: "candidates-done",
+    coverSource: "src/assets/covers/candidates-done.png",
+    coverManifest: "src/assets/covers/candidates-done.json",
+    coverWidth: 1800,
+    coverHeight: 2250,
+    coverStatus: "Print cover artwork",
     description:
       "Start with the pencil marks in place. Spend your solving time exploring patterns and making deductions, with the initial setup already done.",
     bestFor:

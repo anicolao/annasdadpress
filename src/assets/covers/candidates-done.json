@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "artworkStatus": "print",
+  "width": 1800,
+  "height": 2250,
+  "sha256": "3ceb02f3fde19cdeaee5eceeafb9aa276bc081ca016f7110b1421d0b7b30211e",
+  "publication": "candidates-done-cover",
+  "variant": "print",
+  "sourceRevision": "3d2d4900c013d8c0b43a87d84da0459b959fdd55",
+  "sourceDirty": false,
+  "sourcePdfSha256": "29706d0e95005cb269d8d60c6f2547800b9dfe45536f7b737b6745b8d4f054cf",
+  "sourceExport": "print/candidates-done/candidates-done-cover-print.pdf",
+  "cropPoints": [
+    609.645888,
+    9,
+    1185.645888,
+    729
+  ],
+  "trimInches": [
+    8,
+    10
+  ]
+}

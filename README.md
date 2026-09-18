@@ -27,7 +27,7 @@ Tests verify internal links/assets, unique titles, one H1 per page, valid struct
 
 All titles are forthcoming. ISBNs, ASINs, final publication dates, and Amazon URLs are unknown and intentionally unset. Confirm the status before launch of each book; adjust availability copy in the shared book template when purchase links are supplied. Do not use invented purchase links. The Mastery subtitle is also unconfirmed.
 
-The Learner's Guide uses its generated print cover, imported from MathPub. The other three supplied PNGs in `sample_covers/` remain concept artwork. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
+The Learner's Guide, Advent book, and Candidates Done use generated print covers imported from MathPub. Practice and Start Here still use concept artwork from `sample_covers/`. Covers are converted to 360px, 720px, and 1440px WebP assets at build time. The Mastery cover is a clearly marked HTML placeholder. Replace concepts with approved artwork before the books launch. `sampleSpreads` drives the interior preview. The Guide includes draft printed pages 82-83 (PDF pages 86-87): responsive X-Wing page images, full-size image links, a two-page PDF, and a text explanation. Pages sit side by side on desktop and stack on mobile. The complete review manuscript is ignored by Git and is never copied into the site. To re-extract the selected excerpt, install PyMuPDF in a local Python environment and run `python scripts/extract-samples.py [path/to/review.pdf]` after `npm ci`; visually inspect the selected pages if pagination changes. Only the resulting files in `public/assets/samples/` are published. Normal builds use these committed assets and need no Python installation. The existing solver is hosted separately at https://sudoku.annasdadpress.com/ (the `anicolao/sudoku` GitHub Pages repository). The book page and `/next/` link to it. Book QR URLs are generated in the private manuscript repository from its shared `SUDOKU_APP_BASE_URL` setting.
 
 The publisher identity and reusable catalog permit future non-Sudoku collections. Add their collection navigation/landing page and supply their family metadata when the next publishing program is known; do not repurpose existing printed slugs. `/next/` is the stable reader-resource hub. GitHub Pages also serves this route when readers enter `/next`.
 
@@ -102,3 +102,16 @@ plus its JSON record. It validates the successful PDF hash, page geometry,
 interior fingerprint, Day 1 puzzle, prepared artwork, and rendered style before
 cropping. Both imports use `scripts/export-cover.py` and the same image integrity
 checks at website build time. Only the selected book is updated by a sync.
+
+For Candidates Done, import the frozen print export rather than a review build:
+
+```sh
+npm run covers:sync -- --source ../sudoku-challenges --book candidates-done
+```
+
+This reads `print/candidates-done/candidates-done-cover-print.pdf` and its paired
+interior, verifies their hashes and shared clean source revision against the print
+manifest, and derives the wrap geometry from the 8 x 10 interior page count and
+black-and-white paper specification. The result must match the cover sizing record
+and PDF dimensions. Only the trimmed front image and its provenance record are
+imported into `src/assets/covers/`; neither print PDF is published on the website.
