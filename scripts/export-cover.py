@@ -14,7 +14,31 @@ sys.path.insert(0, str(Path.cwd() / 'tools'))
 
 out = Path(sys.argv[1])
 key = sys.argv[2]
-if key in ('candidates-done', 'start-here', 'practice-xwing'):
+if len(sys.argv) > 3 and sys.argv[3] == 'review' and key in ('candidates-done', 'start-here', 'practice-xwing'):
+    publication = f'{key}-cover'
+    folder = Path('build') / publication / 'review'
+    pdf = folder / f'{publication}-review-student.pdf'
+    manifest = json.loads((folder / 'manifest.json').read_text())
+    assert manifest['publication_id'] == publication and manifest['variant'] == 'review'
+    output = next(o for o in manifest['outputs'] if o['path'] == pdf.name)
+    assert output['projection'] == 'student' and output['pages'] == 1
+    assert hashlib.sha256(pdf.read_bytes()).hexdigest() == output['sha256'], 'Review PDF does not match build manifest'
+    assert not any(c['id'] == 'cover-dimension-guides' for c in manifest['components'])
+    generated = (folder / 'generated-tex' / (pdf.stem + '.tex')).read_text()
+    component = Path(f'components/examples/{publication}/body.tex').read_text()
+    assert component.strip() in generated, 'Review cover artwork is stale'
+    for path, digest in manifest['source']['style_sources'].items():
+        assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == digest, f'Review cover style is stale: {path}'
+    dims = json.loads((Path(key.replace('-', '_')) / 'cover-dimensions.json').read_text())
+    source = {
+        'publication': publication,
+        'variant': 'review',
+        'sourceRevision': manifest['source']['git_commit'],
+        'sourceDirty': manifest['source']['dirty'],
+        'sourcePdfSha256': output['sha256'],
+        'sourceExport': str(pdf),
+    }
+elif key in ('candidates-done', 'start-here', 'practice-xwing'):
     # Print exports are frozen artifacts; verify the paired export receipt rather
     # than requiring a newer working manuscript to match an approved print file.
     from tools.cover_common import dimensions

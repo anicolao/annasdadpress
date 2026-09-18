@@ -137,3 +137,16 @@ It reads `print/practice-xwing/practice-xwing-cover-print.pdf`, validates the
 paired interior and export manifest plus `practice_xwing/cover-dimensions.json`,
 and imports `src/assets/covers/practice-xwing.png` and its provenance JSON.
 The website's existing `practice` image URLs and book URL remain stable.
+
+To refresh a cover from its latest reviewed artwork before the next print export,
+append `--review` to the sync command. For example:
+
+```sh
+npm run covers:sync -- --source ../sudoku-challenges --book start-here --review
+```
+
+For the three workbook covers this verifies the review PDF's build hash, current
+artwork, style-source hashes, and sizing before extraction. The provenance record
+identifies the review build and whether its source had uncommitted changes.
+Guide and Advent already use their validated review builds by default. Omit
+`--review` to use the frozen print exports for the three workbook covers.

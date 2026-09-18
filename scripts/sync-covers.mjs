@@ -7,6 +7,8 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 
 const args = process.argv.slice(2);
+const review = args.at(-1) === "--review";
+if (review) args.pop();
 if (
   ![2, 4].includes(args.length) ||
   args[0] !== "--source" ||
@@ -21,7 +23,7 @@ if (
       ].includes(args[3])))
 )
   throw new Error(
-    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026|candidates-done|start-here|practice-xwing]",
+    "Usage: npm run covers:sync -- --source ../sudoku-challenges [--book guide|advent-2026|candidates-done|start-here|practice-xwing] [--review]",
   );
 const book = args[3] || "guide";
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -37,6 +39,7 @@ try {
       resolve(root, "scripts/export-cover.py"),
       temp,
       book,
+      ...(review ? ["review"] : []),
     ],
     {
       cwd: resolve(args[1]),
