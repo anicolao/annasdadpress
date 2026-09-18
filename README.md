@@ -46,9 +46,9 @@ labelled available and says purchase links are pending. Mastery's concept page
 remains reachable but is excluded from prime recommendations until available.
 
 `src/publisher.mjs` owns author/contact configuration and Associate ID
-`annasdadpress-20`. Marketplace tags remain disabled until account applicability is
-confirmed. Set the confirmed `affiliateTags` entry to the supplied ID (or the
-appropriate separately confirmed marketplace ID). Unconfigured marketplaces keep
+`annasdadpress-20`, confirmed for the Amazon.com (US) account. Amazon.com purchase
+links use this tag automatically. Amazon.ca remains untagged until Canadian
+affiliate eligibility or applicable OneLink setup is confirmed. Unconfigured marketplaces keep
 their supplied links unchanged. Affiliate links receive one tag, a visible paid-link
 label, `rel="sponsored"`, and the Associate disclosure. Anna's separate store link
 is not modified. No tracking scripts or cookies are added.

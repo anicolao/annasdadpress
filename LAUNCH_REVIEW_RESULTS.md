@@ -72,9 +72,10 @@ These are manuscript-backed website values, not a claim that KDP listings are li
 ## Affiliate and contact configuration
 
 The supplied Associate ID `annasdadpress-20` is stored in `src/publisher.mjs`.
-Marketplace tag mappings are intentionally null pending confirmation of the account
-marketplace and any applicable OneLink setup. The renderer and tests support the
-ID now; no live affiliate purchase links exist because product URLs are not supplied.
+The publisher subsequently confirmed that this is the Amazon.com (US) account.
+Amazon.com tagging is enabled; Amazon.ca remains untagged pending confirmation of
+Canadian affiliate eligibility or applicable OneLink setup. No live affiliate
+purchase links exist yet because product URLs are not supplied.
 
 The implementation follows Amazon's current guidance to disclose links near their
 placement and identify the publisher with: "As an Amazon Associate I earn from
@@ -123,7 +124,7 @@ No template edits are needed to release another book.
 - All ASINs; ISBNs other than the two verified manuscript values above.
 - Final KDP title/punctuation reconciliation for Start Here and Candidates Done;
   confirmation of the proposed Mastery Advanced Sudoku title.
-- Associate account marketplace/OneLink applicability and public contact email.
+- Canadian affiliate/OneLink applicability and public contact email.
 - Final Guide pagination and a frozen source for a final sample, if desired.
 
 The rendering work is ready. All real books remain forthcoming because no release
