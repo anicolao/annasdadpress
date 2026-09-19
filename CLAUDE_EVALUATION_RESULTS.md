@@ -60,16 +60,15 @@ This website task did not modify or rebuild manuscript sources.
 - Conditional affiliate disclosures and privacy wording remain accurate as links
   become available. All books remain forthcoming until release is confirmed.
 
-## Pending: Cloudflare email permissions
+## Resolved: publisher email
 
-The supplied token reads the domain and DNS but returns HTTP 403 authentication
-errors for Email Routing settings, rules, and destination addresses. No mail DNS
-or forwarding rule was changed, and an unconfigured alias is not advertised.
-`scripts/setup-email.mjs` is ready to register/verify the destination, enable mail
-DNS, and create the exact alex route once access is granted. See README for scopes
-and commands. After successful setup, enable `alex@annasdadpress.com` in publisher
-configuration and verify real inbox delivery. The destination stays out of site
-content and committed configuration.
+Cloudflare forwarding for `alex@annasdadpress.com` is now enabled with a verified
+destination. The exact-address rule and Email Routing settings were checked after
+creation. The address is configured on About and in the footer; the destination
+is not exposed in site content. The earlier 403 errors were resolved after adding
+Zone Settings Edit and the missing Zone Email Routing Rules Edit permission.
+Email Sending and Email Security are separate permissions. Actual inbox delivery
+has not been tested with an incoming message.
 
 ## Validation
 

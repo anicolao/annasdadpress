@@ -53,9 +53,9 @@ their supplied links unchanged. Affiliate links receive one tag, a visible paid-
 label, `rel="sponsored"`, and the Associate disclosure. Anna's separate store link
 is not modified. No tracking scripts or cookies are added.
 
-TODO: confirm the monitored publisher contact email. Set `contactEmail` in
-`src/publisher.mjs` to add the footer/About mailto links. No public address is
-inferred from hosting credentials or Git metadata.
+`src/publisher.mjs` sets the public contact to `alex@annasdadpress.com`, shown
+on About and in the footer. Cloudflare forwards it to the publisher's verified
+destination. Credentials and destination configuration remain private.
 
 All six books have real cover artwork and a two-page sample from the print
 manuscript. Samples include responsive images, a downloadable PDF, and a text
@@ -177,11 +177,12 @@ catalog filter.
 
 ## Publisher email forwarding
 
-`alex@annasdadpress.com` is the requested contact alias. The token initially
-provided in `.env` returns 403 for Email Routing; no mail DNS has been changed.
-Update its permissions for the relevant account and zone: Email Routing Addresses
-Edit, Email Routing Rules Edit, Email Routing Settings Edit, Zone Settings Edit,
-and DNS Edit (retain Zone Read). Do not commit credentials.
+`alex@annasdadpress.com` is active through Cloudflare Email Routing with a verified
+forwarding destination. Required token permissions for the relevant account and
+zone are Account > Email Routing Addresses > Edit, Zone > Email Routing Rules >
+Edit, Zone > Zone Settings > Edit, and Zone > DNS > Edit (retain Zone Read).
+Email Sending and Email Security do not replace Email Routing Rules. Do not commit
+credentials.
 
 ```sh
 node --env-file=.env scripts/setup-email.mjs --destination DESTINATION_EMAIL
@@ -193,8 +194,7 @@ for its Cloudflare verification, enables routing DNS, and creates the exact alex
 rule. It can be rerun after verification and refuses conflicting MX records or an
 existing alex rule with a different destination. It preserves other routes. The
 script verifies enabled settings/rule before reporting success; inbox delivery
-still needs an actual incoming-message check. Once active, set `contactEmail` in
-`src/publisher.mjs` to `alex@annasdadpress.com`, build, test, and publish. This is
+still needs an actual incoming-message check. The public alias is configured in `src/publisher.mjs`. This is
 incoming forwarding, not an outgoing SMTP mailbox.
 
 API references: [Enable routing DNS](https://developers.cloudflare.com/api/resources/email_routing/subresources/dns/methods/create/),
