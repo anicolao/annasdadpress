@@ -2,8 +2,8 @@
   "schema": 1,
   "isbn": "9798175488020",
   "source": "print/practice-xwing/interior.pdf",
-  "sourceSha256": "aa9696d4997dfa3bb29b65f564712ac4c34ccf506dd63f6cc1899e413ca80a70",
-  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "sourceSha256": "7c979016151ed54c472aaa0d7cc1dab9c3209985b110260fc08aa81da2fac385",
+  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
   "receiptVerified": true,
   "selectionSha256": "e9b1df6228f874d7076632aa55246c7e55d5bb66a76b948757da471a58debf93",
   "spread": {
@@ -37,7 +37,7 @@
     ]
   },
   "assets": {
-    "practice-xwing-sample.pdf": "cddb5adc3c3791805a4b670db2aa68ef3fc0ca9ef6caba5e90cd2c9cbc0720dc",
+    "practice-xwing-sample.pdf": "8a82c601eee362fe20f14d0b4fb7c8fbed381c91caeca2c7532d80d6dcc8b14a",
     "practice-xwing-page-1-640.webp": "24fa827d36366738bd17e2838e3f2b1a7a9f97c854c29bdb4512b8d479a7c756",
     "practice-xwing-page-1-1280.webp": "3d4bd2fc1c5dd02686cb3712f6c99941e89073e0d36cc7b0cecfa9a75a79f2ed",
     "practice-xwing-page-2-640.webp": "c6fc1a16d8ec790d8fd62f69a0e4fd00e2968107560e74c53fc6864edcedd4ed",

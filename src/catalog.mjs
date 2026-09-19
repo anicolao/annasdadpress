@@ -23,7 +23,7 @@ export const families = [
   },
   {
     id: "candidates-done",
-    name: "Candidates Done",
+    name: "Candidates Done!",
     icon: "candidates",
     color: "#327053",
     purpose: "Skip the setup. Find the logic.",
@@ -145,9 +145,8 @@ export const books = [
   },
   {
     slug: "candidates-done-hard-sudoku",
-    title: "Candidates Done: Hard Sudoku",
-    subtitle:
-      "Just Start Solving / Candidate Notes Already Filled In / Focus on Your Next Deduction",
+    title: "Candidates Done! Hard Sudoku",
+    subtitle: "Just Start Solving",
     family: "candidates-done",
     cover: "candidates-done",
     coverSource: "src/assets/covers/candidates-done.png",

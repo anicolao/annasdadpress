@@ -2,8 +2,8 @@
   "schema": 1,
   "isbn": "9781068146206",
   "source": "print/learners-guide/interior.pdf",
-  "sourceSha256": "04a2450cea384a654cee833fbc382ab859530ec10d50307a2b287976bbcab3f7",
-  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "sourceSha256": "9a46e5f7b2b4d367f8336068f9688a3ecbdc89e86c7d21c9cc2f96472b9e3dd9",
+  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
   "receiptVerified": true,
   "selectionSha256": "fecaa8473f15c5ebc8126603206f7d81335fd04d4618e05b2d50787d3a1e8c40",
   "spread": {
@@ -37,7 +37,7 @@
     ]
   },
   "assets": {
-    "guide-sample.pdf": "d8ccdb9da78e931b37fe2ab1664756cfee5ad3d5b53b910fd1a778437e370740",
+    "guide-sample.pdf": "cad597cfceb3dd993a81b713bee160423748ddfdc38c2c4e497f67cd8b4c6f08",
     "guide-page-1-640.webp": "c2ea9c7e660a9e158071c2dd3af93f60ba63736e9d013810648c8e7a27b2552e",
     "guide-page-1-1280.webp": "d6c39741b248c56227e74d82e29000d8adc1b502c687f20e880013924022ae13",
     "guide-page-2-640.webp": "59ebfb86f1435b7ae05f405848fa13405021086828604d7715a9c99196986a81",

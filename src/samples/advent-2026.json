@@ -2,8 +2,8 @@
   "schema": 1,
   "isbn": "9798174365575",
   "source": "print/advent-2026/interior.pdf",
-  "sourceSha256": "e405b90b46ba343018e56fd848c96d109eab22f9a5e23aa10791383019fbecbb",
-  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "sourceSha256": "ba102b4c801efc34c14b05b28de89ae35d3f996517988e2feecb426742da54a4",
+  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
   "receiptVerified": true,
   "selectionSha256": "6789d7b12a2a76466f2366dba414024bd6e5de02831a46d528607dd5866904cb",
   "spread": {

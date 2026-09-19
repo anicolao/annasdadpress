@@ -2,10 +2,10 @@
   "schema": 1,
   "isbn": "9798175487771",
   "source": "print/candidates-done/interior.pdf",
-  "sourceSha256": "d2fa9ff6f07445649feee89c285d0a41cdc6eaad0679c88fda471b7678e06fef",
-  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "sourceSha256": "ccfe51bbf2b9741d9ac21e464a02a20ce793d887023964e0554fc201d368debc",
+  "sourceRevision": "39faf9ec8d20286cb3705dc811007d6ad41f7919",
   "receiptVerified": true,
-  "selectionSha256": "ee7ba9dfe101bc667090c77b2ef9311e3c1ba81241087d214a252c065d3afad7",
+  "selectionSha256": "e7b3f603e2c06861b5a86a9b2feafcc59fc0c0843c9c9a0dce4c4cf04288785d",
   "spread": {
     "title": "Your notes are ready. Start with the logic.",
     "description": "The first two puzzles in Part I: Find Your Flow, with starting candidates already printed.",
@@ -15,7 +15,7 @@
       {
         "image": "candidates-done-page-1",
         "label": "Page 2: Puzzle 1 with candidate notes",
-        "alt": "Candidates Done: Hard Sudoku, printed page 2: Puzzle 1 with candidate notes. Read the sample description below for context.",
+        "alt": "Candidates Done! Hard Sudoku, printed page 2: Puzzle 1 with candidate notes. Read the sample description below for context.",
         "width": 640,
         "height": 800,
         "pdfPage": 6,
@@ -24,7 +24,7 @@
       {
         "image": "candidates-done-page-2",
         "label": "Page 3: Puzzle 2 with candidate notes",
-        "alt": "Candidates Done: Hard Sudoku, printed page 3: Puzzle 2 with candidate notes. Read the sample description below for context.",
+        "alt": "Candidates Done! Hard Sudoku, printed page 3: Puzzle 2 with candidate notes. Read the sample description below for context.",
         "width": 640,
         "height": 800,
         "pdfPage": 7,
@@ -37,7 +37,7 @@
     ]
   },
   "assets": {
-    "candidates-done-sample.pdf": "665cce7591d418c8157ac73647cfad49d78cc5a5832cd66ec760580bb3a81d9b",
+    "candidates-done-sample.pdf": "46da5a4f03744f6cd7866a154baf361d4d6e6dcd95ec8f7d75e43d90d36bd291",
     "candidates-done-page-1-640.webp": "611a14d92b3434180d7d652c06a339c2f4a43db384776790fd5e6f638adc748b",
     "candidates-done-page-1-1280.webp": "28e828c3463a5c5a2d148b9f78194b524b6801fd2c21f02a6c54494018639913",
     "candidates-done-page-2-640.webp": "ff7206ed45cad27505f1fd23fed02f9a4e8279ebdc18e3d245378136fcddc7e2",

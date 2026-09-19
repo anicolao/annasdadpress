@@ -2,8 +2,8 @@
   "schema": 1,
   "isbn": "9798175487368",
   "source": "print/start-here/interior.pdf",
-  "sourceSha256": "dc8050e358a5704f62ca812263f44b9c48ffe177216ed098ad276457307c16d5",
-  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "sourceSha256": "217f401b6c15f12802f3cc3ee928b0923d92e9fe0ae9f7d62fbb99f052a3a1c4",
+  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
   "receiptVerified": true,
   "selectionSha256": "d0804054a66d3d87c6d0fa226b8fe90960fc092e2e012f12da63cc72d9c810a3",
   "spread": {
@@ -37,7 +37,7 @@
     ]
   },
   "assets": {
-    "start-here-sample.pdf": "55e8aee3a62eda6b6a48d68537d4d17bea3f8b8c1ae92f78764044c816a9729f",
+    "start-here-sample.pdf": "07cfa04e987223a0f4d9c353e7b64ce56351c73e3ea6b73c8e106bbb59c90f4a",
     "start-here-page-1-640.webp": "a72570e5824e94be317accbf8e4c0652d57da7631448e937376ee62817649ee7",
     "start-here-page-1-1280.webp": "ded23a282f10b0e3eead882e4dc2b06d81bdc8247eb1f884e14737d11c29bdf3",
     "start-here-page-2-640.webp": "fac7c251e1d604b7003ca8efeaf7d8224c0322a9203596a05d770a031051994c",

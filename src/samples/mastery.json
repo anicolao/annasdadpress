@@ -2,8 +2,8 @@
   "schema": 1,
   "isbn": "9798175488075",
   "source": "print/mastery/interior.pdf",
-  "sourceSha256": "ad61952e9b0abadcec5b5242dee7d9b4d3b6cee715f93051d7e5b657fc314e0a",
-  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "sourceSha256": "e72fdffa9d2656efafa556f9822b585d3255eff31cde5ed7e256c15fcef4a1c3",
+  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
   "receiptVerified": true,
   "selectionSha256": "82ac47c8680c3314d3c3ffbc1fc43b2d2581800c79b0f77fe1db8a7cad630990",
   "spread": {
@@ -37,7 +37,7 @@
     ]
   },
   "assets": {
-    "mastery-sample.pdf": "91ba98cf789ee503375140f46e0b93046e61aabe9d6e8cdbb41336c0843134e5",
+    "mastery-sample.pdf": "385c1a18c55f4c3c4add3d478217aaf6cb75841d11d2b33da76bc74be368f88a",
     "mastery-page-1-640.webp": "8979c7d0558d6fc61c27aa05773d7be3db71c369f0346ae44ad6c1118e061a21",
     "mastery-page-1-1280.webp": "275763aa7622dc30860dd0651f892667486aaf85e0c24a6a3a5cf6f2378698ba",
     "mastery-page-2-640.webp": "aabdc11414bcf4c424775264814ab4c5fa2b26bfa5cfbb7fa62e51fbefc81bdc",
