@@ -171,7 +171,11 @@ earlier books were imported. Treat a failed run as incomplete and do not publish
 it automatically. Cover and print-interior revisions may differ, and their
 separate manifests preserve that fact. No import changes publication status.
 
-Book URLs remain stable, including `/books/mastery-hard-sudoku/`. The legacy
+Mastery uses `/books/mastery-advanced-sudoku/` to match its title. The former
+`/books/mastery-hard-sudoku/` serves an immediate HTML redirect with a canonical
+and fallback link to the new page; it is excluded from the sitemap. All generated
+book links use the new slug. This works on GitHub Pages without browser JavaScript.
+The legacy
 `/books/sudoku/` route points its canonical to `/books/` and is no longer a redundant
 catalog filter.
 

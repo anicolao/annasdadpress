@@ -52,8 +52,9 @@ This website task did not modify or rebuild manuscript sources.
 
 ## Preserved deliberately
 
-- Existing book URLs, including Mastery's earlier `mastery-hard-sudoku` slug, remain
-  stable for external/book links. Displayed title and metadata use Advanced Sudoku.
+- Mastery now uses `mastery-advanced-sudoku`, matching its title. The former
+  `mastery-hard-sudoku` URL redirects to the new page for existing links. The new
+  URL is used in navigation, structured data, canonicals, and the sitemap.
 - Cover subtitles retain the verified manuscript wording, including Candidates
   Done's three-part subtitle. No KDP metadata is invented.
 - The About monogram remains; no authentic author photograph was supplied.

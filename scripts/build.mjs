@@ -123,9 +123,10 @@ export async function buildSite({
     return `<section class="section chooser" id="choose"><div class="section-heading"><div><p class="eyebrow">Find your next step</p><h2>Which book is right for you?</h2></div><p>Start where you are.<br>There's more than one way in.</p></div><div class="choices">${[{ need: "I want to learn how Sudoku works.", name: "The Learner's Guide", slug: guideBook.slug }, ...families.map((f) => ({ ...f, slug: books.find((b) => b.family === f.id).slug }))].map((f) => link("/books/" + f.slug + "/", `<span>${f.need}</span><strong>${f.name} ${arrow}</strong>`, "choice")).join("")}</div></section>`;
   }
   const pages = [];
-  async function page(path, title, description, body, schema) {
-    pages.push(path);
-    const canonical = origin + (path === "/books/sudoku/" ? "/books/" : path);
+  async function page(path, title, description, body, schema, redirect) {
+    if (!redirect) pages.push(path);
+    const canonical =
+      origin + (redirect || (path === "/books/sudoku/" ? "/books/" : path));
     const organization = {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -134,7 +135,7 @@ export async function buildSite({
       description:
         "An independent Canadian publisher of educational and puzzle books.",
     };
-    const html = `<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} | Anna's Dad Press</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="${schema ? "book" : "website"}"><meta property="og:site_name" content="Anna's Dad Press"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${schema ? origin + "/assets/social/" + books.find((b) => b.title === schema.name).cover + ".png" : origin + "/assets/social.png"}"><meta property="og:image:alt" content="${esc(schema?.name || "Anna's Dad Press: Thoughtfully made books")}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f7f6f0"><link rel="icon" href="${url("/assets/favicon.svg")}" type="image/svg+xml"><link rel="stylesheet" href="${url("/assets/style.css")}"><script type="application/ld+json">${JSON.stringify(schema || organization).replaceAll("<", "\\u003c")}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner">${link("/", `${mark}<span class="brand-name">Anna's Dad<span>PRESS</span></span>`, "brand")}<nav aria-label="Main navigation">${[
+    const html = `<!doctype html><html lang="en-CA"><head><meta charset="utf-8">${redirect ? `<meta http-equiv="refresh" content="0; url=${esc(url(redirect))}">` : ""}<meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} | Anna's Dad Press</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${canonical}"><meta property="og:type" content="${schema ? "book" : "website"}"><meta property="og:site_name" content="Anna's Dad Press"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${schema ? origin + "/assets/social/" + books.find((b) => b.title === schema.name).cover + ".png" : origin + "/assets/social.png"}"><meta property="og:image:alt" content="${esc(schema?.name || "Anna's Dad Press: Thoughtfully made books")}"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#f7f6f0"><link rel="icon" href="${url("/assets/favicon.svg")}" type="image/svg+xml"><link rel="stylesheet" href="${url("/assets/style.css")}"><script type="application/ld+json">${JSON.stringify(schema || organization).replaceAll("<", "\\u003c")}</script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap header-inner">${link("/", `${mark}<span class="brand-name">Anna's Dad<span>PRESS</span></span>`, "brand")}<nav aria-label="Main navigation">${[
       ["/books/", "Our books"],
       ["/sudoku-learners-library/", "The Learner's Library"],
       ["/about/", "Our story"],
@@ -226,6 +227,19 @@ export async function buildSite({
         .join("")}</div></section></div>`,
       schema,
     );
+  }
+  for (const b of books) {
+    for (const oldSlug of b.previousSlugs || []) {
+      const destination = "/books/" + b.slug + "/";
+      await page(
+        "/books/" + oldSlug + "/",
+        b.title + " - new address",
+        "This book has a new page address.",
+        `${intro("The Sudoku Learner's Library", "This book has moved.", `Continue to ${link(destination, esc(b.title), "inline-link")}.`)}`,
+        undefined,
+        destination,
+      );
+    }
   }
   await page(
     "/about/",

@@ -58,12 +58,43 @@ for (const file of files) {
     links++;
   }
 }
-// The first Mastery publication keeps its established URL and its own content.
+// The Mastery title, canonical URL, and legacy redirect agree.
 const mastery = await readFile(
-  "dist/books/mastery-hard-sudoku/index.html",
+  "dist/books/mastery-advanced-sudoku/index.html",
   "utf8",
 );
 assert(mastery.includes("Mastery! Advanced Sudoku"));
+assert(
+  mastery.includes(
+    'rel="canonical" href="https://annasdadpress.com/books/mastery-advanced-sudoku/"',
+  ),
+);
+const oldMastery = await readFile(
+  "dist/books/mastery-hard-sudoku/index.html",
+  "utf8",
+);
+assert(
+  oldMastery.includes(
+    `http-equiv="refresh" content="0; url=${base}/books/mastery-advanced-sudoku/"`,
+  ),
+);
+assert(
+  oldMastery.includes(
+    'rel="canonical" href="https://annasdadpress.com/books/mastery-advanced-sudoku/"',
+  ),
+);
+const sitemap = await readFile("dist/sitemap.xml", "utf8");
+assert(sitemap.includes("/books/mastery-advanced-sudoku/"));
+assert(!sitemap.includes("/books/mastery-hard-sudoku/"));
+for (const file of files) {
+  assert(
+    !(await readFile(file, "utf8")).includes(
+      `href="${base}/books/mastery-hard-sudoku/"`,
+    ),
+    `Old Mastery link in ${file}`,
+  );
+}
+
 assert(
   mastery.includes("120 Carefully Graded Puzzles for Independent Solving"),
 );
@@ -95,6 +126,8 @@ try {
   await mkdir("artifacts", { recursive: true });
   const context = await browser.newContext();
   const page = await context.newPage();
+  await page.goto("http://127.0.0.1:4173/books/mastery-hard-sudoku/");
+  await page.waitForURL("**/books/mastery-advanced-sudoku/");
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   for (const width of [1440, 390, 320]) {
@@ -102,6 +135,8 @@ try {
     for (const file of files) {
       const route = file.replace(/^dist/, "").replace(/index.html$/, "");
       await page.goto("http://127.0.0.1:4173" + route);
+      if (route === "/books/mastery-hard-sudoku/")
+        await page.waitForURL("**/books/mastery-advanced-sudoku/");
       assert(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth,
@@ -123,7 +158,7 @@ try {
         `${route} @ ${width}: ${JSON.stringify(results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })))}`,
       );
       if (
-        ["/", "/books/mastery-hard-sudoku/"].includes(route) &&
+        ["/", "/books/mastery-advanced-sudoku/"].includes(route) &&
         width !== 320
       ) {
         await page.evaluate(async () => {

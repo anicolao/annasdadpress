@@ -163,7 +163,8 @@ export const books = [
       "Solvers who enjoy the logic of hard puzzles and want to skip the candidate setup.",
   },
   {
-    slug: "mastery-hard-sudoku",
+    slug: "mastery-advanced-sudoku",
+    previousSlugs: ["mastery-hard-sudoku"],
     title: "Mastery! Advanced Sudoku",
     subtitle: "120 Carefully Graded Puzzles for Independent Solving",
     family: "mastery",
