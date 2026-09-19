@@ -22,4 +22,12 @@ class SelectionTests(unittest.TestCase):
     def test_no_duplicate_page(self):
         with self.assertRaises(ValueError): module.select_pages(['Puzzle 1'], [['Puzzle 1'],['Puzzle 1']])
 
+class IsbnTests(unittest.TestCase):
+    def test_print_formats(self):
+        self.assertEqual(module.extract_isbn('ISBN: 978-1-0681462-0-6'), '9781068146206')
+        self.assertEqual(module.extract_isbn('ISBN-13: 9798175488075'), '9798175488075')
+    def test_missing_invalid_ambiguous(self):
+        for text in ['No ISBN yet', 'ISBN: 9798175488076', 'ISBN: 9798175488075 ISBN: 9781068146206']:
+            with self.assertRaises(ValueError): module.extract_isbn(text)
+
 if __name__ == '__main__': unittest.main()

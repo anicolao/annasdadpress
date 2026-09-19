@@ -1,10 +1,11 @@
 {
   "schema": 1,
-  "source": "print/candidates-done/candidates-done-print.pdf",
-  "sourceSha256": "4dac8df22da01eb00a74aff6f6fd0088e62bd3fc47cca656249a3c8390e49ae7",
-  "sourceRevision": "3d2d4900c013d8c0b43a87d84da0459b959fdd55",
+  "isbn": "9798175487771",
+  "source": "print/candidates-done/interior.pdf",
+  "sourceSha256": "d2fa9ff6f07445649feee89c285d0a41cdc6eaad0679c88fda471b7678e06fef",
+  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
   "receiptVerified": true,
-  "selectionSha256": "595e2a8cf7f155724dcff672b896e5d1c2457788c8ebe09b8cb45b64df49b4ba",
+  "selectionSha256": "ee7ba9dfe101bc667090c77b2ef9311e3c1ba81241087d214a252c065d3afad7",
   "spread": {
     "title": "Your notes are ready. Start with the logic.",
     "description": "The first two puzzles in Part I: Find Your Flow, with starting candidates already printed.",
@@ -36,10 +37,10 @@
     ]
   },
   "assets": {
-    "candidates-done-sample.pdf": "be09270cab6f95ea9abc47807145c50a3bcfde17731f0bdfa1d207ba3ff76907",
-    "candidates-done-page-1-640.webp": "932c197b5ea221a0994f5506b1189607b752b4eb61f976c836774923bcef41c3",
-    "candidates-done-page-1-1280.webp": "c75524c16eb485a4ab1a208b0762397fb64b278cbb5ee1703e91d0276300e603",
-    "candidates-done-page-2-640.webp": "44f52028166f83050ac4c1867a755f35f114dba6929b6473822b1094aa35ddba",
-    "candidates-done-page-2-1280.webp": "71ae45d3540519c9d16f4d7b5c9220e1466fee616a5c60ddd68a375ab7b29e17"
+    "candidates-done-sample.pdf": "665cce7591d418c8157ac73647cfad49d78cc5a5832cd66ec760580bb3a81d9b",
+    "candidates-done-page-1-640.webp": "611a14d92b3434180d7d652c06a339c2f4a43db384776790fd5e6f638adc748b",
+    "candidates-done-page-1-1280.webp": "28e828c3463a5c5a2d148b9f78194b524b6801fd2c21f02a6c54494018639913",
+    "candidates-done-page-2-640.webp": "ff7206ed45cad27505f1fd23fed02f9a4e8279ebdc18e3d245378136fcddc7e2",
+    "candidates-done-page-2-1280.webp": "8394263849de5965c07967afeb8b6b3e06648c9f22a5d36b2ff9261a918076c2"
   }
 }

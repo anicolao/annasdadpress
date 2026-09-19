@@ -59,7 +59,6 @@ export const books = [
     subtitle:
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
     family: "guide",
-    isbn: "9781068146206",
     cover: "guide",
     coverSource: "src/assets/covers/guide.png",
     coverManifest: "src/assets/covers/guide.json",
@@ -79,7 +78,6 @@ export const books = [
     subtitle:
       "An Advent Puzzle Book with a Daily Drawing Reveal / December 2026",
     family: "discovery",
-    isbn: "9798174365575",
     cover: "advent-2026",
     coverSource: "src/assets/covers/advent-2026.png",
     coverManifest: "src/assets/covers/advent-2026.json",
@@ -205,35 +203,32 @@ export const books = [
       },
     ],
   },
-].map((b) => ({
-  ...b,
-  collection: "The Sudoku Learner's Library",
-  status: "Forthcoming",
-  author: publisher.author,
-  concept: false,
-  isbn: null,
-  asin: null,
-  amazonCa: null,
-  amazonCom: null,
-  coverSource: b.cover
-    ? `sample_covers/ChatGPT Image Sep 9, 2026, 12_36_59 AM (${{ practice: 2, "start-here": 3, "candidates-done": 4 }[b.cover]}).png`
-    : null,
-  coverWidth: 1024,
-  coverHeight: 1536,
-  coverStatus: b.cover
-    ? "Concept cover / final artwork forthcoming"
-    : "Cover forthcoming",
-  ...b,
-  sampleManifest: `src/samples/${b.cover === "practice" ? "practice-xwing" : b.cover}.json`,
-  sampleSpreads: [
-    JSON.parse(
-      readFileSync(
-        new URL(
-          `./samples/${b.cover === "practice" ? "practice-xwing" : b.cover}.json`,
-          import.meta.url,
-        ),
-        "utf8",
-      ),
-    ).spread,
-  ],
-}));
+].map((b) => {
+  const key = b.cover === "practice" ? "practice-xwing" : b.cover;
+  const sample = JSON.parse(
+    readFileSync(new URL(`./samples/${key}.json`, import.meta.url), "utf8"),
+  );
+  return {
+    ...b,
+    collection: "The Sudoku Learner's Library",
+    status: "Forthcoming",
+    author: publisher.author,
+    concept: false,
+    isbn: null,
+    asin: null,
+    amazonCa: null,
+    amazonCom: null,
+    coverSource: b.cover
+      ? `sample_covers/ChatGPT Image Sep 9, 2026, 12_36_59 AM (${{ practice: 2, "start-here": 3, "candidates-done": 4 }[b.cover]}).png`
+      : null,
+    coverWidth: 1024,
+    coverHeight: 1536,
+    coverStatus: b.cover
+      ? "Concept cover / final artwork forthcoming"
+      : "Cover forthcoming",
+    ...b,
+    isbn: sample.isbn,
+    sampleManifest: `src/samples/${key}.json`,
+    sampleSpreads: [sample.spread],
+  };
+});

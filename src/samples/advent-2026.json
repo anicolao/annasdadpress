@@ -1,10 +1,11 @@
 {
   "schema": 1,
-  "source": "print/advent-2026-print.pdf",
-  "sourceSha256": "229205d9eb1e33ce7663e49f0913816d5c3a63f7ac885bd2f9a0151476c99df1",
-  "sourceRevision": "0a90b0c7344d25a3ad9019b8940d7693a9fa9d50",
-  "receiptVerified": false,
-  "selectionSha256": "30217d86c2f70e065b9ebf76d654e9e1bf10a22acb29b2674270230b2cd22d0a",
+  "isbn": "9798174365575",
+  "source": "print/advent-2026/interior.pdf",
+  "sourceSha256": "e405b90b46ba343018e56fd848c96d109eab22f9a5e23aa10791383019fbecbb",
+  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "receiptVerified": true,
+  "selectionSha256": "6789d7b12a2a76466f2366dba414024bd6e5de02831a46d528607dd5866904cb",
   "spread": {
     "title": "From a solved cell to a Christmas picture.",
     "description": "See how the drawing clues work and how the 25 daily tiles fit together.",
@@ -36,7 +37,7 @@
     ]
   },
   "assets": {
-    "advent-2026-sample.pdf": "df15e64a342f97402b49d38b63e2cacefb8c2334c4884d20666e637e5d2bbd42",
+    "advent-2026-sample.pdf": "6ab36340099666d7c7a588e8fa7ae0e022de40ec84ee3f4bcf7d6b603164f27a",
     "advent-2026-page-1-640.webp": "c98bf9ec156e75bef81a98d49112c5191ee7e9b522d7c28e4f9da4e6d594fe51",
     "advent-2026-page-1-1280.webp": "032f691349fb580fc0f6aac3149d2e44a19b7db4572f33352a12d66d2e0c0c2a",
     "advent-2026-page-2-640.webp": "f3aea6181ed280eef7edeec86ba053d5268c288a658f50605c5595007b0da84f",

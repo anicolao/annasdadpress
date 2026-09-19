@@ -27,6 +27,17 @@ def select_pages(texts, headings):
     return selected
 
 
+def extract_isbn(text):
+    matches = re.findall(r'ISBN(?:-13)?\s*:?\s*((?:[0-9][ -]?){12}[0-9])(?![0-9])', normalize(text), re.I)
+    values = {re.sub(r'[^0-9]', '', value) for value in matches}
+    if len(values) != 1:
+        raise ValueError('Expected one ISBN-13 on the copyright page')
+    isbn = values.pop()
+    if not isbn.startswith(('978', '979')) or sum(int(n) * (1 if i % 2 == 0 else 3) for i, n in enumerate(isbn)) % 10:
+        raise ValueError('Invalid ISBN-13 checksum or prefix')
+    return isbn
+
+
 def export(config, key, out):
     spec = config[key]
     source = Path(spec['source'])
@@ -38,14 +49,14 @@ def export(config, key, out):
     assert all(not p.get('/Annots') for p in reader.pages), 'Print export still has annotations'
     receipt = json.loads((source.parent / 'manifest.json').read_text())
     entry = next((e for e in receipt['files'] if e['pdf'] == str(source)), None)
-    if entry:
-        assert entry['sha256'] == digest and entry['pages'] == len(reader.pages), 'Print receipt mismatch'
-        assert entry['source_commit'] == revision[1] and entry['page_content_unchanged']
-    # Some root print receipts cover only the most recent export batch. In that
-    # case record the actual file hash and embedded clean-source revision instead.
+    assert entry, 'Print PDF missing from export receipt'
+    assert entry['sha256'] == digest and entry['pages'] == len(reader.pages), 'Print receipt mismatch'
+    assert entry['source_commit'] == revision[1] and entry['page_content_unchanged']
+    assert entry['annotations'] == 0
     texts = subprocess.check_output(['pdftotext', '-layout', str(source), '-'], text=True).split('\f')[:len(reader.pages)]
     assert all(normalize(t).lower() in normalize(texts[0]).lower() for t in spec['identity']), 'Print title does not match selected book'
     assert all(abs(float(p.mediabox.width)-72*spec['trim'][0]) < .01 and abs(float(p.mediabox.height)-72*spec['trim'][1]) < .01 for p in reader.pages), 'Unexpected print trim dimensions'
+    isbn = extract_isbn(texts[1])
     selected = select_pages(texts, spec['headings'])
     assert not spec.get('adjacent') or selected[1] == selected[0] + 1, 'Spread is no longer adjacent; review selection'
     excerpt = PdfWriter()
@@ -64,7 +75,7 @@ def export(config, key, out):
     excerpt.add_metadata({'/Title': spec['title'] + ': Sample pages', '/Author':'Alex Nicolaou'})
     excerpt.write(out / f'{key}-sample.pdf')
     spread = {'title':spec['heading'], 'description':spec['description'], 'caption':'Print manuscript / Pages ' + ' and '.join(p['printedPage'] for p in pages) + ' / Content may change before publication.', 'pdf':f'/assets/samples/{key}-sample.pdf', 'pages':pages, 'explanation':spec['explanation']}
-    (out / f'{key}.json').write_text(json.dumps({'schema':1,'source':str(source),'sourceSha256':digest,'sourceRevision':revision[1],'receiptVerified':bool(entry),'selectionSha256':hashlib.sha256(json.dumps(spec,sort_keys=True,separators=(',', ':')).encode()).hexdigest(),'spread':spread},indent=2)+'\n')
+    (out / f'{key}.json').write_text(json.dumps({'schema':1,'isbn':isbn,'source':str(source),'sourceSha256':digest,'sourceRevision':revision[1],'receiptVerified':bool(entry),'selectionSha256':hashlib.sha256(json.dumps(spec,sort_keys=True,separators=(',', ':')).encode()).hexdigest(),'spread':spread},indent=2)+'\n')
     print(key + ': selected PDF pages ' + ', '.join(str(i+1) for i in selected))
 
 if __name__ == '__main__':

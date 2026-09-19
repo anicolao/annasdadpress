@@ -1,10 +1,11 @@
 {
   "schema": 1,
-  "source": "print/mastery-print.pdf",
-  "sourceSha256": "94ad51f22e755b66d91a2674276ec9c96ff83ac68b7bd988cb92dc70c1a91bd4",
-  "sourceRevision": "621993f0dd386600b664c8e4e332071df41b5977",
+  "isbn": "9798175488075",
+  "source": "print/mastery/interior.pdf",
+  "sourceSha256": "ad61952e9b0abadcec5b5242dee7d9b4d3b6cee715f93051d7e5b657fc314e0a",
+  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
   "receiptVerified": true,
-  "selectionSha256": "5a9e3e34d2c482c171a763e9d80bb544c91bac4e7e53a67420d609c936b150b7",
+  "selectionSha256": "82ac47c8680c3314d3c3ffbc1fc43b2d2581800c79b0f77fe1db8a7cad630990",
   "spread": {
     "title": "The grid is yours.",
     "description": "Two opening puzzles from Part I: Find Your Rhythm. Choose your own next move.",
@@ -36,10 +37,10 @@
     ]
   },
   "assets": {
-    "mastery-sample.pdf": "fe3308a8a9296b8470f5241dde9a7608801a3b7e39169613e5c9f891df940f2a",
-    "mastery-page-1-640.webp": "64ddf8dfbe9e57bab94a27e6ea91098a88949500488670065ee6c2f9c5386050",
-    "mastery-page-1-1280.webp": "b06e20a36632c04fa05f3c093cdf2a9a29b65dad97c279ee001c1ad68e79dd3c",
-    "mastery-page-2-640.webp": "f39c23310dc9f1815f26450c5dea5620c296e18fa63378fd81a5de88fe7a2e2e",
-    "mastery-page-2-1280.webp": "8ba78bd2a87ed5aad14471fc9df920f5b2b0df02660a34f7e09b9958a73f09b3"
+    "mastery-sample.pdf": "91ba98cf789ee503375140f46e0b93046e61aabe9d6e8cdbb41336c0843134e5",
+    "mastery-page-1-640.webp": "8979c7d0558d6fc61c27aa05773d7be3db71c369f0346ae44ad6c1118e061a21",
+    "mastery-page-1-1280.webp": "275763aa7622dc30860dd0651f892667486aaf85e0c24a6a3a5cf6f2378698ba",
+    "mastery-page-2-640.webp": "aabdc11414bcf4c424775264814ab4c5fa2b26bfa5cfbb7fa62e51fbefc81bdc",
+    "mastery-page-2-1280.webp": "1a075811e9c1314d493b5d66bd487a1bf4e0d3bc82b9c6751315e46be8816105"
   }
 }

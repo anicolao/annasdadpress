@@ -65,16 +65,20 @@ try {
     if (e.code !== "ENOENT") throw e;
     return null;
   });
+  const source = JSON.parse(
+    await readFile(resolve(temp, "source.json"), "utf8"),
+  );
   if (
+    Object.entries(source).every(
+      ([key, value]) =>
+        JSON.stringify(previous?.[key]) === JSON.stringify(value),
+    ) &&
     previous?.sha256 === sha256 &&
     existing &&
     createHash("sha256").update(existing).digest("hex") === sha256
   ) {
     console.log(`${book} front cover unchanged; keeping existing provenance.`);
   } else {
-    const source = JSON.parse(
-      await readFile(resolve(temp, "source.json"), "utf8"),
-    );
     const record = {
       schema: 1,
       artworkStatus: "print",

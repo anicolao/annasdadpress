@@ -1,6 +1,6 @@
 {
   "guide": {
-    "source": "print/zero-to-hero-print.pdf",
+    "source": "print/learners-guide/interior.pdf",
     "title": "The Sudoku Learner's Guide",
     "headings": [
       [
@@ -33,7 +33,7 @@
     ]
   },
   "advent-2026": {
-    "source": "print/advent-2026-print.pdf",
+    "source": "print/advent-2026/interior.pdf",
     "title": "25 Days of Christmas Sudoku",
     "headings": [
       [
@@ -67,7 +67,7 @@
     ]
   },
   "practice-xwing": {
-    "source": "print/practice-xwing/practice-xwing-print.pdf",
+    "source": "print/practice-xwing/interior.pdf",
     "title": "Practice! X-Wing Sudoku",
     "headings": [
       [
@@ -100,7 +100,7 @@
     ]
   },
   "start-here": {
-    "source": "print/start-here/start-here-print.pdf",
+    "source": "print/start-here/interior.pdf",
     "title": "Start Here: Hard Sudoku with Visual Hints",
     "headings": [
       [
@@ -136,7 +136,7 @@
     ]
   },
   "candidates-done": {
-    "source": "print/candidates-done/candidates-done-print.pdf",
+    "source": "print/candidates-done/interior.pdf",
     "title": "Candidates Done: Hard Sudoku",
     "headings": [
       [
@@ -169,7 +169,7 @@
     ]
   },
   "mastery": {
-    "source": "print/mastery-print.pdf",
+    "source": "print/mastery/interior.pdf",
     "title": "Mastery! Advanced Sudoku",
     "headings": [
       [

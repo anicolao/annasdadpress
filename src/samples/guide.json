@@ -1,33 +1,34 @@
 {
   "schema": 1,
-  "source": "print/zero-to-hero-print.pdf",
-  "sourceSha256": "3ab81b32abf944435ad712827b1452c49293a6d7dcf6bfcccfc104c45786939e",
-  "sourceRevision": "5abd1b732b4afbcbbe3b7df4d239f02051434528",
-  "receiptVerified": false,
-  "selectionSha256": "5a02484765929435387e68e2bde466fd51019b6e8633a4ecf68ef88547db4b1a",
+  "isbn": "9781068146206",
+  "source": "print/learners-guide/interior.pdf",
+  "sourceSha256": "04a2450cea384a654cee833fbc382ab859530ec10d50307a2b287976bbcab3f7",
+  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
+  "receiptVerified": true,
+  "selectionSha256": "fecaa8473f15c5ebc8126603206f7d81335fd04d4618e05b2d50787d3a1e8c40",
   "spread": {
     "title": "See the pattern. Find the next step.",
     "description": "An X-Wing example and its next deduction, taken from the current print manuscript.",
-    "caption": "Print manuscript / Pages 96 and 97 / Content may change before publication.",
+    "caption": "Print manuscript / Pages 94 and 95 / Content may change before publication.",
     "pdf": "/assets/samples/guide-sample.pdf",
     "pages": [
       {
         "image": "guide-page-1",
-        "label": "Page 96: Recognise the X-Wing",
-        "alt": "The Sudoku Learner's Guide, printed page 96: Recognise the X-Wing. Read the sample description below for context.",
+        "label": "Page 94: Recognise the X-Wing",
+        "alt": "The Sudoku Learner's Guide, printed page 94: Recognise the X-Wing. Read the sample description below for context.",
         "width": 640,
         "height": 960,
-        "pdfPage": 104,
-        "printedPage": "96"
+        "pdfPage": 102,
+        "printedPage": "94"
       },
       {
         "image": "guide-page-2",
-        "label": "Page 97: Eliminate and place",
-        "alt": "The Sudoku Learner's Guide, printed page 97: Eliminate and place. Read the sample description below for context.",
+        "label": "Page 95: Eliminate and place",
+        "alt": "The Sudoku Learner's Guide, printed page 95: Eliminate and place. Read the sample description below for context.",
         "width": 640,
         "height": 960,
-        "pdfPage": 105,
-        "printedPage": "97"
+        "pdfPage": 103,
+        "printedPage": "95"
       }
     ],
     "explanation": [
@@ -36,10 +37,10 @@
     ]
   },
   "assets": {
-    "guide-sample.pdf": "368c4191cb72619b254b9baab0af641e7d75992001e99d9f2f14b84b4296dbf1",
-    "guide-page-1-640.webp": "72cbb62444014b933bb2238ee93b52f6f07a253f0748d4cb06c5ce6dd74565f7",
-    "guide-page-1-1280.webp": "9e487277ff2d31e5b94c1fcc4021107ff83628eb15f63d9140551068f2cd22e1",
-    "guide-page-2-640.webp": "f159ae43a467d455603bec39752e8ebbbf191b999b3bd6dfd74f40e70be7e362",
-    "guide-page-2-1280.webp": "a23673ee9cf5664668b3252a499d9d2891dc1cdd4e11fa625f51743dff592196"
+    "guide-sample.pdf": "d8ccdb9da78e931b37fe2ab1664756cfee5ad3d5b53b910fd1a778437e370740",
+    "guide-page-1-640.webp": "c2ea9c7e660a9e158071c2dd3af93f60ba63736e9d013810648c8e7a27b2552e",
+    "guide-page-1-1280.webp": "d6c39741b248c56227e74d82e29000d8adc1b502c687f20e880013924022ae13",
+    "guide-page-2-640.webp": "59ebfb86f1435b7ae05f405848fa13405021086828604d7715a9c99196986a81",
+    "guide-page-2-1280.webp": "8ad5d1a2472606b7f4a6034053b6f73e014b7b55a9589bd2867120cec6249052"
   }
 }

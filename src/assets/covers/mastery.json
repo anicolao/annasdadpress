@@ -3,17 +3,17 @@
   "artworkStatus": "print",
   "width": 1800,
   "height": 2250,
-  "sha256": "3fceec5c1001e8e549616aa6bc61cc5febb4b8a7c97feb3cd225bebbee144d68",
+  "sha256": "88f42d7fbc33a172479396974466ec8689a0f0ded6454fd4f4408c532baeb49b",
   "publication": "mastery-cover",
   "variant": "print",
-  "sourceRevision": "621993f0dd386600b664c8e4e332071df41b5977",
+  "sourceRevision": "b774625d442dfa84919d8f1ab45af9dd66e9e25e",
   "sourceDirty": false,
-  "sourcePdfSha256": "46a28ab2ab6c2e3c7960819f090bea44b9fc9f2ee74e98d57995534277b664dc",
-  "sourceExport": "print/mastery-cover-print.pdf",
+  "sourcePdfSha256": "f0257edb94dddfdfa390a11d3e3e5b88e03f3ffb88af2daf8d43611faddec0cc",
+  "sourceExport": "print/mastery/cover.pdf",
   "cropPoints": [
-    611.267328,
+    612.888768,
     9,
-    1187.267328,
+    1188.8887679999998,
     729
   ],
   "trimInches": [

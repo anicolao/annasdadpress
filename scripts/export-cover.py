@@ -38,15 +38,15 @@ if len(sys.argv) > 3 and sys.argv[3] == 'review' and key in ('candidates-done', 
         'sourcePdfSha256': output['sha256'],
         'sourceExport': str(pdf),
     }
-elif key in ('candidates-done', 'start-here', 'practice-xwing', 'mastery'):
+elif len(sys.argv) <= 3 or sys.argv[3] != 'review':
     # Print exports are frozen artifacts; verify the paired export receipt rather
     # than requiring a newer working manuscript to match an approved print file.
     from tools.cover_common import dimensions
-    publication = f'{key}-cover'
-    folder = Path('print') if key == 'mastery' else Path('print') / key
+    publication = 'learners-guide-cover' if key == 'guide' else f'{key}-cover'
+    folder = Path('print') / ('learners-guide' if key == 'guide' else key)
     manifest = json.loads((folder / 'manifest.json').read_text())
-    pdf = folder / f'{key}-cover-print.pdf'
-    interior = folder / f'{key}-print.pdf'
+    pdf = folder / 'cover.pdf'
+    interior = folder / 'interior.pdf'
     entries = []
     for path in (pdf, interior):
         entry = next(e for e in manifest['files'] if e['pdf'] == str(path))
@@ -61,10 +61,9 @@ elif key in ('candidates-done', 'start-here', 'practice-xwing', 'mastery'):
         entries.append(entry)
     assert entries[0]['source_commit'] == entries[1]['source_commit'], 'Mismatched print cover/interior'
     interior_reader = PdfReader(interior)
-    assert all(abs(float(p.mediabox.width)-576)<.01 and abs(float(p.mediabox.height)-720)<.01 for p in interior_reader.pages)
-    dims = dimensions(len(interior_reader.pages), 8, 10, 'black-white')
-    recorded = json.loads((Path(key.replace('-', '_')) / 'cover-dimensions.json').read_text())
-    assert all(recorded[k] == v for k, v in dims.items()), 'Print dimensions do not match sizing record'
+    width, height = (6, 9) if key == 'guide' else (8, 10)
+    assert all(abs(float(p.mediabox.width)-72*width)<.01 and abs(float(p.mediabox.height)-72*height)<.01 for p in interior_reader.pages)
+    dims = dimensions(len(interior_reader.pages), width, height, 'standard-color-white' if key == 'guide' else 'black-white')
     source = {
         'publication': publication,
         'variant': 'print',

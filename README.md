@@ -25,15 +25,15 @@ Launch tests build isolated all-forthcoming, mixed, and all-available catalogs, 
 
 `src/catalog.mjs` holds six books and five families. Add books to this array to generate catalog entries and individual pages. Book fields include stable `slug`, `title`, `subtitle`, `family`, `collection`, `status`, `cover`, `coverStatus`, `description`, `bestFor`, `isbn`, `asin`, `amazonCa`, `amazonCom`, and `sampleSpreads`.
 
-All titles remain forthcoming until release is confirmed. The Guide and Advent ISBNs
-are recorded from their manuscripts; other ISBNs, ASINs, release dates, and Amazon
-URLs await confirmation. See `LAUNCH_REVIEW_RESULTS.md` for the evidence and pending
+All titles remain forthcoming until release is confirmed. ISBNs for all six books
+are imported from their print copyright pages during refresh; ASINs, release dates,
+and Amazon URLs await confirmation. See `LAUNCH_REVIEW_RESULTS.md` for the evidence and pending
 branding decisions. Artwork status is separate from release status.
 
 To publish a title, edit only its record in `src/catalog.mjs`:
 
 1. Confirm that the book is available, then set `status: "Available"`.
-2. Add verified ISBN/ASIN values and full HTTPS Amazon.ca/Amazon.com product URLs.
+2. Refresh the print edition to import its ISBN, then add verified ASIN values and full HTTPS Amazon.ca/Amazon.com product URLs.
    Leave missing marketplace URLs null. Do not guess links from identifiers.
 3. Run `npm run build` and `npm test`, review the page, then commit and push.
 4. Verify the live page and marketplace destinations after Pages deployment.
@@ -96,7 +96,7 @@ Confirm final covers and interiors, title/subtitle spellings, publication status
 
 ## Refreshing books and samples
 
-Use this after MathPub has produced the print interiors and reviewed covers:
+Use this after MathPub has produced the paired print interiors and covers:
 
 ```sh
 npm run books:refresh -- --source ../sudoku-challenges
@@ -129,14 +129,14 @@ never falls back to old page numbers or silently picks the first match. Ordinary
 front-matter additions move the selection without breaking it.
 
 All print PDFs must identify a clean MathPub source revision, have the expected
-trim, and contain no annotations. When the adjacent export receipt includes that
-PDF, its hash, revision, page count, and unchanged-content flag are checked. The
-root receipt currently only covers its latest export batch: Guide and Advent
-therefore record `receiptVerified: false`, their actual PDF hash, and embedded
-source revision. This distinction is explicit, not a claim of receipt validation.
+trim, and contain no annotations. Each book's `print/BOOK/manifest.json` must
+include the PDF; its hash, revision, page count, and unchanged-content flag are
+checked. ISBN-13 is extracted from the copyright page and checksum-validated.
+Missing, ambiguous, or invalid ISBNs stop the refresh. The catalog reads each
+sample manifest's ISBN, keeping visible book details and structured data in sync.
 
 Importing writes two responsive WebPs per page, a two-page PDF, and a manifest in
-`src/samples/KEY.json`. Manifests record the source hash/revision, selection hash,
+`src/samples/KEY.json`. Manifests record the ISBN, source hash/revision, selection hash,
 PDF/printed page numbers, dimensions, and output hashes. Every requested sample
 is validated and rendered in a temporary directory before any sample is replaced.
 Normal builds verify all sample hashes and reject changed selections until the
@@ -147,7 +147,7 @@ teaching method changes. Only excerpts and descriptive metadata are published.
 The Guide's old PDF URL is retained as an alias to its refreshed excerpt. The
 obsolete fixed-page extractor has been removed. Selection regression tests cover
 inserted pages, ambiguous/missing headings, number-prefix collisions, punctuation,
-and duplicate selections:
+duplicate selections, and missing/invalid/ambiguous ISBNs:
 
 ```sh
 (cd ../sudoku-challenges && nix develop -c python ../annasdadpress/scripts/check-samples.py)
@@ -155,21 +155,23 @@ and duplicate selections:
 
 ### Cover sources and failed refreshes
 
-Guide and Advent use validated review cover builds, checked against current
-sources. The Guide print wrap still has older coral artwork, so its last verified
-teal cover remains the published cover. Practice, Start Here, and Candidates Done
-use paired print exports and receipts in their respective print subdirectories;
-`--review` selects their checked current review covers instead. Mastery uses
-`print/mastery-cover-print.pdf`, `print/mastery-print.pdf`, and the root receipt;
-it does not support `--review`.
+All six books use `print/BOOK/cover.pdf` paired with `print/BOOK/interior.pdf`
+and the adjacent export receipt. The Guide folder is `learners-guide`; the other
+folder names match the refresh keys. Proof PDFs are never used as website artwork.
+The importer verifies both files and requires the same clean source revision.
+It derives spine sizing from the paired interior's page count and stock, then
+checks the wrap dimensions before cropping the front trim panel. The Guide is
+6 x 9 inches on standard-color white stock; the workbooks are 8 x 10 inches on
+black-and-white white stock.
 
-Cover sync validates hashes, dimensions, and source evidence, then crops only the
-front trim panel. Committed PNGs and provenance JSON feed normal build-time WebP
-conversion. If a source checker says a cover is stale, finish that cover build in
-MathPub and rerun; do not bypass the check. An all-books refresh can stop after
-earlier books were imported. Treat a failed run as incomplete and do not publish
-it automatically. Cover and print-interior revisions may differ, and their
-separate manifests preserve that fact. No import changes publication status.
+Committed PNGs and provenance JSON feed normal build-time WebP conversion.
+Provenance updates even when a new source export has identical front artwork.
+`--review` remains an explicit alternative for validated review covers except
+Mastery, which requires print exports. Normal refreshes always use the print pair.
+If validation fails, correct the exports in MathPub and rerun; do not bypass the
+check. An all-books refresh can stop after earlier covers were imported. Treat a
+failed run as incomplete and do not publish it automatically. No import changes
+publication status.
 
 Mastery uses `/books/mastery-advanced-sudoku/` to match its title. The former
 `/books/mastery-hard-sudoku/` serves an immediate HTML redirect with a canonical
