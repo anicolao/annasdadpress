@@ -129,6 +129,9 @@ export const books = [
   },
   {
     slug: "start-here-hard-sudoku-with-hints",
+    status: "Available",
+    asin: "B0HKSJXRGT",
+    amazonCom: "https://www.amazon.com/dp/B0HKSJXRGT",
     title: "Start Here: Hard Sudoku with Visual Hints",
     subtitle: "See the Pattern. Use It. Find It Again.",
     family: "start-here",

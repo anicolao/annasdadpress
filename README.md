@@ -25,9 +25,11 @@ Launch tests build isolated all-forthcoming, mixed, and all-available catalogs, 
 
 `src/catalog.mjs` holds six books and five families. Add books to this array to generate catalog entries and individual pages. Book fields include stable `slug`, `title`, `subtitle`, `family`, `collection`, `status`, `cover`, `coverStatus`, `description`, `bestFor`, `isbn`, `asin`, `amazonCa`, `amazonCom`, and `sampleSpreads`.
 
-All titles remain forthcoming until release is confirmed. ISBNs for all six books
-are imported from their print copyright pages during refresh; ASINs, release dates,
-and Amazon URLs await confirmation. See `LAUNCH_REVIEW_RESULTS.md` for the evidence and pending
+Start Here is available (ASIN `B0HKSJXRGT`), confirmed by the publisher on
+September 23, 2026. Its purchase button uses Amazon.com with the US affiliate tag,
+as requested by the publisher. Other titles remain forthcoming until release is confirmed.
+ISBNs for all six books are imported from their print copyright pages during refresh;
+other ASINs, release dates, and Amazon URLs await confirmation. See `LAUNCH_REVIEW_RESULTS.md` for the evidence and pending
 branding decisions. Artwork status is separate from release status.
 
 To publish a title, edit only its record in `src/catalog.mjs`:
