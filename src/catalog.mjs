@@ -74,6 +74,9 @@ export const books = [
   },
   {
     slug: "25-days-of-christmas-sudoku",
+    status: "Available",
+    asin: "B0HKTQF78G",
+    amazonCom: "https://www.amazon.com/dp/B0HKTQF78G",
     title: "25 Days of Christmas Sudoku",
     subtitle:
       "An Advent Puzzle Book with a Daily Drawing Reveal / December 2026",
