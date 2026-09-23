@@ -269,7 +269,7 @@ export async function buildSite({
     "/next/",
     "Your next step",
     "Find the right Sudoku book and check the availability of companion resources from Anna's Dad Press.",
-    `${intro("For our readers", "Your next step<br><em>starts here.</em>", "Looking for a book, a little guidance, or a resource mentioned on the page? You're in the right place.")}<div class="wrap"><aside class="resource-note"><h2>Companion resources</h2><p>The online Sudoku solver is ready to use. Scan a puzzle QR code in any book to open that exact puzzle. Practice! opens prepared exercises with their notes; Start Here keeps the visual hints; Candidates Done includes starting candidates. Mastery starts with the givens. Solution codes open walkthroughs, and the Advent drawing-page codes open printable grids.</p><div class="actions">${link("https://sudoku.annasdadpress.com/", "Open the Sudoku solver " + arrow, "button")}</div></aside>${choose()}</div>`,
+    `${intro("For our readers", "Your next step<br><em>starts here.</em>", "Looking for a book, a little guidance, or a resource mentioned on the page? You're in the right place.")}<div class="wrap reader-resources">${choose()}<aside class="resource-note"><h2>Companion resources</h2><p>The online Sudoku solver is ready to use. Scan a puzzle QR code in any book to open that exact puzzle. Practice! opens prepared exercises with their notes; Start Here keeps the visual hints; Candidates Done includes starting candidates. Mastery starts with the givens. Solution codes open walkthroughs, and the Advent drawing-page codes open printable grids.</p><div class="actions">${link("https://sudoku.annasdadpress.com/", "Open the Sudoku solver " + arrow, "button")}</div></aside></div>`,
   );
   await page(
     "/privacy/",

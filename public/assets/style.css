@@ -805,6 +805,12 @@ dd {
 .story-body p {
   font-size: 17px;
 }
+.reader-resources .chooser {
+  padding-top: 0;
+}
+.reader-resources .resource-note {
+  margin-block: 50px;
+}
 .resource-note {
   padding: 30px;
   border: 1px solid var(--line);
