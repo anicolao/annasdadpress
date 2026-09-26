@@ -55,6 +55,9 @@ export const families = [
 export const books = [
   {
     slug: "the-sudoku-learners-guide",
+    status: "Available",
+    asin: "1068146206",
+    amazonCom: "https://www.amazon.com/dp/1068146206",
     title: "The Sudoku Learner's Guide",
     subtitle:
       "A Step-by-Step Handbook of Rules, Techniques, and Practice Grids",
@@ -115,6 +118,9 @@ export const books = [
   },
   {
     slug: "practice-x-wing-sudoku",
+    status: "Available",
+    asin: "B0HL56GS2Z",
+    amazonCom: "https://www.amazon.com/dp/B0HL56GS2Z",
     title: "Practice! X-Wing Sudoku",
     subtitle:
       "Guided Pattern Training from First Recognition to Independent Solving",
@@ -151,6 +157,9 @@ export const books = [
   },
   {
     slug: "candidates-done-hard-sudoku",
+    status: "Available",
+    asin: "B0HL53KC3M",
+    amazonCom: "https://www.amazon.com/dp/B0HL53KC3M",
     title: "Candidates Done! Hard Sudoku",
     subtitle: "Just Start Solving",
     family: "candidates-done",
@@ -167,6 +176,7 @@ export const books = [
   },
   {
     slug: "mastery-advanced-sudoku",
+    status: "Available",
     previousSlugs: ["mastery-hard-sudoku"],
     title: "Mastery! Advanced Sudoku",
     subtitle: "120 Carefully Graded Puzzles for Independent Solving",

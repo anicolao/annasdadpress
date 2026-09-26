@@ -3,17 +3,17 @@
   "artworkStatus": "print",
   "width": 1800,
   "height": 2700,
-  "sha256": "6ce8833f898412c7c3f6286eb6d3b0cf09ec8b74fa2b217de08d8ea7bf2a9318",
+  "sha256": "31cf850a087d5c22325d1df8ef426c7f936625ffb2d86efbbf5574ca34e4e95d",
   "publication": "learners-guide-cover",
   "variant": "print",
-  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
+  "sourceRevision": "d02bbd5f6332048bc4850cac140fa9bfef5b1c3e",
   "sourceDirty": false,
-  "sourcePdfSha256": "24df294987291da7a273cefec687a68bce89fa2450fc58068803212f416981bf",
+  "sourcePdfSha256": "11c69acc4b03a4c67d497e32f55e98e8c14c15213b1af9f29a18b9fc3d70be5e",
   "sourceExport": "print/learners-guide/cover.pdf",
   "cropPoints": [
-    486.40032,
+    488.02176000000003,
     9,
-    918.40032,
+    920.02176,
     657
   ],
   "trimInches": [

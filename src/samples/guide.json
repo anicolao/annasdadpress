@@ -2,14 +2,14 @@
   "schema": 1,
   "isbn": "9781068146206",
   "source": "print/learners-guide/interior.pdf",
-  "sourceSha256": "9a46e5f7b2b4d367f8336068f9688a3ecbdc89e86c7d21c9cc2f96472b9e3dd9",
-  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
+  "sourceSha256": "3d203d1dc891b3f641a26e612a97e677e56ada884c2fc79e81a0533809f1304e",
+  "sourceRevision": "d02bbd5f6332048bc4850cac140fa9bfef5b1c3e",
   "receiptVerified": true,
-  "selectionSha256": "fecaa8473f15c5ebc8126603206f7d81335fd04d4618e05b2d50787d3a1e8c40",
+  "selectionSha256": "0da3b34570a57aa79c723453861b235dfc31a1bc6b69ab37dfa8e17180cf667e",
   "spread": {
     "title": "See the pattern. Find the next step.",
-    "description": "An X-Wing example and its next deduction, taken from the current print manuscript.",
-    "caption": "Print manuscript / Pages 94 and 95 / Content may change before publication.",
+    "description": "An X-Wing example and its next deduction, taken from the current print edition.",
+    "caption": "Print edition / Pages 94 and 95",
     "pdf": "/assets/samples/guide-sample.pdf",
     "pages": [
       {
@@ -37,10 +37,10 @@
     ]
   },
   "assets": {
-    "guide-sample.pdf": "cad597cfceb3dd993a81b713bee160423748ddfdc38c2c4e497f67cd8b4c6f08",
-    "guide-page-1-640.webp": "c2ea9c7e660a9e158071c2dd3af93f60ba63736e9d013810648c8e7a27b2552e",
-    "guide-page-1-1280.webp": "d6c39741b248c56227e74d82e29000d8adc1b502c687f20e880013924022ae13",
-    "guide-page-2-640.webp": "59ebfb86f1435b7ae05f405848fa13405021086828604d7715a9c99196986a81",
-    "guide-page-2-1280.webp": "8ad5d1a2472606b7f4a6034053b6f73e014b7b55a9589bd2867120cec6249052"
+    "guide-sample.pdf": "a88ea912fa41f7c1cf42c4dbd33ace24c7e6bbb6335ea21cfc5a08cea827e326",
+    "guide-page-1-640.webp": "ee48d615787e68dc87ca2bcadcc1ad9d65b234726560a3f609269a0921bdee83",
+    "guide-page-1-1280.webp": "f7f6270db0bdde89681a622e4bea6fe83de8c1ccf51fedc4e2f42d73633c7137",
+    "guide-page-2-640.webp": "883db18e0c2e001f9714455d43563b8975f1fcb3922f798b48c4ce04cbf2ba53",
+    "guide-page-2-1280.webp": "88f22e2d93e0d3d7b71d036ffd29cb8b98a7f1b8c5f00cfcac51b6cea475362a"
   }
 }

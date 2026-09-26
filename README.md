@@ -25,12 +25,12 @@ Launch tests build isolated all-forthcoming, mixed, and all-available catalogs, 
 
 `src/catalog.mjs` holds six books and five families. Add books to this array to generate catalog entries and individual pages. Book fields include stable `slug`, `title`, `subtitle`, `family`, `collection`, `status`, `cover`, `coverStatus`, `description`, `bestFor`, `isbn`, `asin`, `amazonCa`, `amazonCom`, and `sampleSpreads`.
 
-Start Here (ASIN `B0HKSJXRGT`) and 25 Days of Christmas Sudoku (ASIN
-`B0HKTQF78G`) are available, confirmed by the publisher. Their purchase buttons
-use the supplied Amazon.com product links with the US affiliate tag. Other titles remain forthcoming until release is confirmed.
-ISBNs for all six books are imported from their print copyright pages during refresh;
-other ASINs, release dates, and Amazon URLs await confirmation. See `LAUNCH_REVIEW_RESULTS.md` for the evidence and pending
-branding decisions. Artwork status is separate from release status.
+All six paperbacks are available, confirmed by the publisher on September 26, 2026.
+ISBNs are imported from the print copyright pages during refresh. Amazon.com
+purchase links use the US affiliate tag. Publication identifiers are recorded in
+`src/catalog.mjs`; the source repository's `PUBLICATION_REVIEW.md` provides the
+September 26 KDP audit, supplemented by the publisher's later release confirmation.
+Artwork and sample provenance remain recorded separately from release status.
 
 To publish a title, edit only its record in `src/catalog.mjs`:
 

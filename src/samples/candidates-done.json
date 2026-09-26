@@ -2,14 +2,14 @@
   "schema": 1,
   "isbn": "9798175487771",
   "source": "print/candidates-done/interior.pdf",
-  "sourceSha256": "ccfe51bbf2b9741d9ac21e464a02a20ce793d887023964e0554fc201d368debc",
-  "sourceRevision": "39faf9ec8d20286cb3705dc811007d6ad41f7919",
+  "sourceSha256": "e740ba2ba6636aeac1e60d15ffa824cf3c232904e185ec01753861b5d63b654b",
+  "sourceRevision": "672c0260eb6a56eb3027fd6b620297ba8af1296a",
   "receiptVerified": true,
   "selectionSha256": "e7b3f603e2c06861b5a86a9b2feafcc59fc0c0843c9c9a0dce4c4cf04288785d",
   "spread": {
     "title": "Your notes are ready. Start with the logic.",
     "description": "The first two puzzles in Part I: Find Your Flow, with starting candidates already printed.",
-    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "caption": "Print edition / Pages 2 and 3",
     "pdf": "/assets/samples/candidates-done-sample.pdf",
     "pages": [
       {
@@ -37,10 +37,10 @@
     ]
   },
   "assets": {
-    "candidates-done-sample.pdf": "46da5a4f03744f6cd7866a154baf361d4d6e6dcd95ec8f7d75e43d90d36bd291",
-    "candidates-done-page-1-640.webp": "611a14d92b3434180d7d652c06a339c2f4a43db384776790fd5e6f638adc748b",
-    "candidates-done-page-1-1280.webp": "28e828c3463a5c5a2d148b9f78194b524b6801fd2c21f02a6c54494018639913",
-    "candidates-done-page-2-640.webp": "ff7206ed45cad27505f1fd23fed02f9a4e8279ebdc18e3d245378136fcddc7e2",
-    "candidates-done-page-2-1280.webp": "8394263849de5965c07967afeb8b6b3e06648c9f22a5d36b2ff9261a918076c2"
+    "candidates-done-sample.pdf": "727120c4e4a518d1787d15d22b6c1ce7c8a8e5a6b77522e2c7bba56690593eae",
+    "candidates-done-page-1-640.webp": "6d09a001eba1f43d1e5c24cd39631283e1e9c6b395b6ac923cefa2a687d04842",
+    "candidates-done-page-1-1280.webp": "3b9b1a7d1b02bd604b30b07777d2826e6e0a66da5c56cf10050450a313a98609",
+    "candidates-done-page-2-640.webp": "26da3e05b924a56c6ef3942a92ae17572963d99a656ee2bdb25637fe83929d16",
+    "candidates-done-page-2-1280.webp": "3bef963fee382ecf62226fd2cd6798a397fd47e88960c6ef49dc7796455f89d0"
   }
 }

@@ -74,7 +74,7 @@ def export(config, key, out):
         pages.append({'image':f'{key}-page-{n}', 'label': f'Page {printed}: {spec["labels"][n-1]}', 'alt': f'{spec["title"]}, printed page {printed}: {spec["labels"][n-1]}. Read the sample description below for context.', 'width':640, 'height':round(640*float(page.mediabox.height)/float(page.mediabox.width)), 'pdfPage':index+1, 'printedPage':printed})
     excerpt.add_metadata({'/Title': spec['title'] + ': Sample pages', '/Author':'Alex Nicolaou'})
     excerpt.write(out / f'{key}-sample.pdf')
-    spread = {'title':spec['heading'], 'description':spec['description'], 'caption':'Print manuscript / Pages ' + ' and '.join(p['printedPage'] for p in pages) + ' / Content may change before publication.', 'pdf':f'/assets/samples/{key}-sample.pdf', 'pages':pages, 'explanation':spec['explanation']}
+    spread = {'title':spec['heading'], 'description':spec['description'], 'caption':'Print edition / Pages ' + ' and '.join(p['printedPage'] for p in pages), 'pdf':f'/assets/samples/{key}-sample.pdf', 'pages':pages, 'explanation':spec['explanation']}
     (out / f'{key}.json').write_text(json.dumps({'schema':1,'isbn':isbn,'source':str(source),'sourceSha256':digest,'sourceRevision':revision[1],'receiptVerified':bool(entry),'selectionSha256':hashlib.sha256(json.dumps(spec,sort_keys=True,separators=(',', ':')).encode()).hexdigest(),'spread':spread},indent=2)+'\n')
     print(key + ': selected PDF pages ' + ', '.join(str(i+1) for i in selected))
 

@@ -4,16 +4,16 @@
     "title": "The Sudoku Learner's Guide",
     "headings": [
       [
-        "Example - X-Wing",
+        "Example: X-Wing",
         "four blue corners"
       ],
       [
-        "Next Step - Eliminate and Place",
+        "Next Step: Eliminate and Place",
         "The X-Wing claims"
       ]
     ],
     "heading": "See the pattern. Find the next step.",
-    "description": "An X-Wing example and its next deduction, taken from the current print manuscript.",
+    "description": "An X-Wing example and its next deduction, taken from the current print edition.",
     "labels": [
       "Recognise the X-Wing",
       "Eliminate and place"

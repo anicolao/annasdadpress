@@ -2,14 +2,14 @@
   "schema": 1,
   "isbn": "9798175487368",
   "source": "print/start-here/interior.pdf",
-  "sourceSha256": "217f401b6c15f12802f3cc3ee928b0923d92e9fe0ae9f7d62fbb99f052a3a1c4",
-  "sourceRevision": "2e64d80b254614e4447bb82efc6885b635866631",
+  "sourceSha256": "2ae8ee1a9f635a84cc47c66b4a879ffc3f497b105a9dc59200fb0cc4f0e376b7",
+  "sourceRevision": "89b4ae542e1ed912816eebe71b326bdec0dd0256",
   "receiptVerified": true,
   "selectionSha256": "d0804054a66d3d87c6d0fa226b8fe90960fc092e2e012f12da63cc72d9c810a3",
   "spread": {
     "title": "A place to look. A pattern to find.",
     "description": "The opening two puzzles show how shaded cells give you a useful starting point.",
-    "caption": "Print manuscript / Pages 2 and 3 / Content may change before publication.",
+    "caption": "Print edition / Pages 2 and 3",
     "pdf": "/assets/samples/start-here-sample.pdf",
     "pages": [
       {
@@ -37,10 +37,10 @@
     ]
   },
   "assets": {
-    "start-here-sample.pdf": "07cfa04e987223a0f4d9c353e7b64ce56351c73e3ea6b73c8e106bbb59c90f4a",
-    "start-here-page-1-640.webp": "a72570e5824e94be317accbf8e4c0652d57da7631448e937376ee62817649ee7",
-    "start-here-page-1-1280.webp": "ded23a282f10b0e3eead882e4dc2b06d81bdc8247eb1f884e14737d11c29bdf3",
-    "start-here-page-2-640.webp": "fac7c251e1d604b7003ca8efeaf7d8224c0322a9203596a05d770a031051994c",
-    "start-here-page-2-1280.webp": "ecb5e61f5fdbce7f5ebd14ec797eff64c6d6c378c0a411a06e3b906018a73a0e"
+    "start-here-sample.pdf": "ddcad585ffa537f36d6e10e7d05b07dee57e5177e7feb356a10a92135eb90031",
+    "start-here-page-1-640.webp": "1f274fc6dd4f7ba532ce69da8f346ea00252fbafdd135e5ab1f7aa7a5d094100",
+    "start-here-page-1-1280.webp": "ff07ff78cb8eb33e67ee62a177f023c73c2b4d4385e4c0dac603d2dae8c82cda",
+    "start-here-page-2-640.webp": "3de99bc135c9d05cceb070088518850d7255fc3d428916db5538f213756deac9",
+    "start-here-page-2-1280.webp": "df5992d3f0f66cfc931c0c0ce0437693bb53e5dc85990208d69097bbd76f9520"
   }
 }
