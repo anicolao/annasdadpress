@@ -177,6 +177,8 @@ export const books = [
   {
     slug: "mastery-advanced-sudoku",
     status: "Available",
+    asin: "B0HL3RXRY2",
+    amazonCom: "https://www.amazon.com/dp/B0HL3RXRY2",
     previousSlugs: ["mastery-hard-sudoku"],
     title: "Mastery! Advanced Sudoku",
     subtitle: "120 Carefully Graded Puzzles for Independent Solving",

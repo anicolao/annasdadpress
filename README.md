@@ -29,7 +29,10 @@ All six paperbacks are available, confirmed by the publisher on September 26, 20
 ISBNs are imported from the print copyright pages during refresh. Amazon.com
 purchase links use the US affiliate tag. Publication identifiers are recorded in
 `src/catalog.mjs`; the source repository's `PUBLICATION_REVIEW.md` provides the
-September 26 KDP audit, supplemented by the publisher's later release confirmation.
+September 26 KDP audit. For future handoffs, use the current
+`catalog/publication-status.json` in the source repository for observed ASINs,
+Amazon URLs, ISBNs, and KDP states. All six purchase links match its September 27
+00:11 UTC capture, with availability confirmed by the publisher.
 Artwork and sample provenance remain recorded separately from release status.
 
 To publish a title, edit only its record in `src/catalog.mjs`:
